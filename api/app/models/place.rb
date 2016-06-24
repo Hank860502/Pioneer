@@ -1,3 +1,4 @@
 class Place < ActiveRecord::Base
-  has_and_belongs_to_many :wishlists
+  has_many :places_wishlists
+  has_many :wishlists, through: :places_wishlists
 end

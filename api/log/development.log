@@ -72,3 +72,163 @@ ORDER BY c.conname
 
   [1m[36mUser Load (0.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
   [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "tim"], ["password_digest", "$2a$10$s5KKJIrouv4oxpKJeWWtAOT20R89XYB0acSLaYLSfvoR23WwBHOJS"], ["email", "tim@tim.com"], ["created_at", "2016-06-24 22:06:03.460184"], ["updated_at", "2016-06-24 22:06:03.460184"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1 AND "wishlists"."id" = $2 LIMIT 1  [["user_id", 1], ["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "dbc"], ["description", "devbootcamp"], ["image_url", "https://billdevcode.github.io/imgs/dev-bootcamp.jpg"], ["suggested_time", 1.0], ["price", 10.0], ["longitude", 120.12], ["latitude", 14.34], ["created_at", "2016-06-24 22:11:24.292759"], ["updated_at", "2016-06-24 22:11:24.292759"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["description", "My wishlist"], ["created_at", "2016-06-24 22:12:09.668456"], ["updated_at", "2016-06-24 22:12:09.668456"]]
+  [1m[35m (30.5ms)[0m  COMMIT
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1  [["user_id", 1]]
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 1], ["wishlist_id", 1], ["liked", "t"], ["created_at", "2016-06-24 22:17:51.308487"], ["updated_at", "2016-06-24 22:17:51.308487"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.4ms)[0m  SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1  [["wishlist_id", 1]]
+
+
+Started GET "/" for ::1 at 2016-06-24 15:20:25 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PlacesController#index as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2016-06-24 15:20:26 -0700
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (9.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (95.8ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:20:35 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 34ms (ActiveRecord: 4.8ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Wishlist with 'id'=):
+  app/controllers/wishlists_controller.rb:7:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (56.7ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:21:02 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 5.7ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column places.liked does not exist
+LINE 1: ..." WHERE "places_wishlists"."wishlist_id" = $1 AND "places"."...
+                                                             ^
+: SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1 AND "places"."liked" = 't'):
+  app/controllers/wishlists_controller.rb:10:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (59.0ms)
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.5ms)[0m  SELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (1.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlace Load (0.8ms)[0m  SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1  [["wishlist_id", 1]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1[0m  [["wishlist_id", 1]]
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mPlacesWishlist Load (0.5ms)[0m  SELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.4ms)[0m  [1mSELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.2ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1[0m  [["id", 1]]
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:44:44 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 4.6ms)
+
+NameError (undefined local variable or method `places_ids' for #<WishlistsController:0x007f97977a4fa0>):
+  app/controllers/wishlists_controller.rb:9:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (58.1ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:44:58 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 40ms (Views: 0.1ms | ActiveRecord: 5.6ms)
