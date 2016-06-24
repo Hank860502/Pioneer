@@ -27,9 +27,7 @@ Rails.application.routes.draw do
   #   end
 
   resources :users do
-    resources :wishlists do
-      get '/places', to: 'wishlists#places'
-    end
+    resources :wishlists
   end
 
   resources :places
