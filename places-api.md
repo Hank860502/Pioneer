@@ -16,3 +16,7 @@
   * Zoo
 * Additional types
   * Point Of Interest
+
+
+## Requirements
+* [Logo Requirements](https://developers.google.com/places/supported_types#table1)
