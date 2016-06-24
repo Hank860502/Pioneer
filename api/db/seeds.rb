@@ -7,7 +7,7 @@ end
 end
 
 20.times do
-  Place.create(name: Faker::University.name, description: Faker::Lorem.sentence, image_url: Faker::Avatar.image, suggest_time: rand(5), price: rand * 100, longitude: rand * 100, latitude: rand * 100)
+  Place.create(name: Faker::University.name, description: Faker::Lorem.sentence, image_url: Faker::Avatar.image, suggested_time: rand(5), price: rand * 100, longitude: rand * 100, latitude: rand * 100)
 
 end
 
