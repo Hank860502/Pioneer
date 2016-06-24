@@ -1,7 +1,7 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
-  include Bcrypt
+  include BCrypt
   has_many :wishlists
 
   has_secure_password
