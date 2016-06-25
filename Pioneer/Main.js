@@ -9,6 +9,8 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import api from './api.js'
+
 // import api from './api.js'
 // import Card from './Card.js'
 
@@ -18,16 +20,23 @@ class Main extends Component {
     this.state = {
       isLoading: false,
       error: false,
-      travelLocation: '',
+      travelLocationName: '',
+      travelLocationLng: '-33.867591',
+      travelLocationLat: '151.201196',
     }
   }
 
   handleByLocationSubmit(){
+    api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
+    .then((response) => {
+      console.log(response.results);
+    })
     // update indicator spinner
     // Make API call to Google Geocode Service based on address
-    // Make Google Places API call
+    // Set lng/lat
+    // OK Make Google Places API call
     // reroute to the cards passing the Google Places information
-    console.log(this.state.travelLocation);
+    console.log(this.state.travelLocationName);
     console.log("Logic for search by location");
   }
 
@@ -47,7 +56,7 @@ class Main extends Component {
         <TextInput
           style={styles.searchInput}
           value={this.state.travelLocation}
-          onChangeText={(text) => this.setState({travelLocation: text})}
+          onChangeText={(text) => this.setState({travelLocationName: text})}
         />
         <TouchableHighlight
           style={styles.button}
