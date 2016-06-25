@@ -22,14 +22,25 @@ class Main extends Component {
     }
   }
 
-  handleSubmit(){
-    // update indicatorIOS spinner
-    // fetch data from Github
-    // reroute to the next passing the Github information
-    console.log('button clicked')
+  handleByLocationSubmit(){
+    // update indicator spinner
+    // Make API call to Google Geocode Service based on address
+    // Make Google Places API call
+    // reroute to the cards passing the Google Places information
+    console.log(this.state.travelLocation);
+    console.log("Logic for search by location");
+  }
+
+  handleAroundMeSubmit(){
+    // update indicator spinner
+    // Access current location to get lng lat information
+    // Make Google Places API call
+    // reroute to the cards passing the Google Places information
+    console.log('Logic for search around me');
   }
 
   render() {
+
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Find your next destination ! </Text>
@@ -40,16 +51,17 @@ class Main extends Component {
         />
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
+          onPress={this.handleByLocationSubmit.bind(this)}
           underlayColor='white'>
             <Text style={styles.buttonText}> By location </Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
+          onPress={this.handleAroundMeSubmit.bind(this)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Around me </Text>
         </TouchableHighlight>
+
       </View>
     )
   }
