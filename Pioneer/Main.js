@@ -21,36 +21,36 @@ class Main extends Component {
       isLoading: false,
       error: false,
       travelLocationName: '',
-      travelLocationLng: '-33.867591',
-      travelLocationLat: '151.201196',
+      travelLocationLng: '37.774444',
+      travelLocationLat: '-122.412203',
     }
   }
 
   handleByLocationSubmit(){
-    // this.setState({
-    //   isLoading: true
-    // });
+    this.setState({
+      isLoading: true
+    });
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
-      // if(response.message === 'Not Found'){
-      //   this.setState({
-      //     error: 'No places found',
-      //     isLoading: false
-      //   })
-      // } else {
+      if(response.message === 'Not Found'){
+        this.setState({
+          error: 'No places found',
+          isLoading: false
+        })
+      } else {
         console.log(response.results);
-        // this.props.navigator.push({
-        //   title: 'Card',
-        //   passProps: {locationsSet: response.results}
-        // });
-        // this.setState({
-        //   isLoading: false,
-        //   error: false,
-        //   travelLocationName: '',
-        //   travelLocationLng: '-33.867591',
-        //   travelLocationLat: '151.201196',
-        // })
-      // }
+        this.props.navigator.push({
+          title: 'Card',
+          passProps: {locationsSet: response.results}
+        });
+        this.setState({
+          isLoading: false,
+          error: false,
+          travelLocationName: '',
+          travelLocationLng: '37.774444',
+          travelLocationLat: '-122.412203',
+        })
+      }
     })
     // update indicator spinner
     // Make API call to Google Geocode Service based on address

@@ -42,3 +42,4 @@ android/keystores/debug.keystore
 
 android/
 ios/
+.api_key.js
