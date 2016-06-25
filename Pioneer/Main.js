@@ -27,9 +27,30 @@ class Main extends Component {
   }
 
   handleByLocationSubmit(){
+    // this.setState({
+    //   isLoading: true
+    // });
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
-      console.log(response.results);
+      // if(response.message === 'Not Found'){
+      //   this.setState({
+      //     error: 'No places found',
+      //     isLoading: false
+      //   })
+      // } else {
+        console.log(response.results);
+        // this.props.navigator.push({
+        //   title: 'Card',
+        //   passProps: {locationsSet: response.results}
+        // });
+        // this.setState({
+        //   isLoading: false,
+        //   error: false,
+        //   travelLocationName: '',
+        //   travelLocationLng: '-33.867591',
+        //   travelLocationLat: '151.201196',
+        // })
+      // }
     })
     // update indicator spinner
     // Make API call to Google Geocode Service based on address
