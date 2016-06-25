@@ -8,11 +8,13 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+
 class Card extends Component {
 
   render(){
-    var referenceLink = 'CoQBcwAAAFb7DYQA-km0R3UYSfoaOTcBnU9_9LUEK827vULnJhXXjstFxxn5esL4p7ipJgYV43eJ_iiHFvDb-nIX_Z9mMaK3pGPJ8Ts9sdQ1M2kmBkNcpQViRt4TCvnXOzIRreMoV_aeldOznpQEtcaitvBpz920D-j-moST9jHbqj_MOIRCEhBr4BD8Cl-5D-T7kblRxAHXGhT8jVx0oxTo3-5xeIwejudfI9G9cg&key=AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8'
-    var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}`
+    var referenceLink = this.props.locationsSet[0].photos[0].photo_reference
+    var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
 
     return(
       <View style={styles.container}>

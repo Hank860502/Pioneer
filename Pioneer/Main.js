@@ -21,8 +21,8 @@ class Main extends Component {
       isLoading: false,
       error: false,
       travelLocationName: '',
-      travelLocationLng: '-33.867591',
-      travelLocationLat: '151.201196',
+      travelLocationLng: '37.774444',
+      travelLocationLat: '-122.412203',
     }
   }
 
@@ -47,8 +47,8 @@ class Main extends Component {
           isLoading: false,
           error: false,
           travelLocationName: '',
-          travelLocationLng: '-33.867591',
-          travelLocationLat: '151.201196',
+          travelLocationLng: '37.774444',
+          travelLocationLat: '-122.412203',
         })
       }
     })
