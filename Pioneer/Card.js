@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
      flex: 1,
      justifyContent: 'center',
      alignItems: 'center',
-     backgroundColor: '#F5FCFF',
+     backgroundColor: 'white',
    },
    welcome: {
      fontSize: 20,
@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
      margin: 10,
    },
    image:{
-     height:300,
-     width:300,
+     height:380,
+     width:360,
      borderRadius:50,
-     marginTop:5,
+     marginTop:100,
      alignSelf: 'center'
    },
 });
