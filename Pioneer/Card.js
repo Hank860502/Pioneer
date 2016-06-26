@@ -28,12 +28,20 @@ class Card extends Component {
 }
 
   _goToNextCard(){
-    console.log('Show');
-    this.props.navigator.push({
-      title: 'Card',
-      collection: this.props.collection,
-      index: this.props.index += 1
-    });
+    console.log(this.props.index);
+    console.log(this.props.collection.length);
+    if(this.props.index < (this.props.collection.length - 1)){
+      console.log('Show');
+      this.props.navigator.push({
+        title: 'Card',
+        collection: this.props.collection,
+        index: this.props.index += 1
+      });
+    } else {
+      this.props.navigator.push({
+        title: 'Pioneer'
+      });
+    }
   }
 
   componentDidMount() {
@@ -63,23 +71,21 @@ class Card extends Component {
         } else if (vx < 0) {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
-
             // let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
-
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-          if (this.state.pan.x._value < 0){
-            console.log('Left-swipe');
-            this.handleDislike();
-            //this.handleDislike.bind(this)
-          }else{
-            console.log('right-swipe');
-            this.handleLike();
-            //this.handleLike.bind(this)
-          }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
           }).start(this._resetState.bind(this))
+            if (this.state.pan.x._value < 0){
+              console.log('Left-swipe');
+              this.handleDislike();
+              //this.handleDislike.bind(this)
+            }else{
+              console.log('right-swipe');
+              this.handleLike();
+              //this.handleLike.bind(this)
+            }
         } else {
           Animated.spring(this.state.pan, {
             toValue: {x: 0, y: 0},
@@ -93,7 +99,7 @@ class Card extends Component {
   _resetState() {
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
-    this._goToNextCard();
+    // this._goToNextCard();
     this._animateEntrance();
   }
 
@@ -106,10 +112,12 @@ class Card extends Component {
 
   handleLike(){
     console.log('like')
+    this._goToNextCard();
   }
 
   handleDislike(){
     console.log('dislike')
+    this._goToNextCard();
   }
 
   render(){
@@ -141,6 +149,8 @@ class Card extends Component {
 
     const { collection, index } = this.props;
     const currentCard = collection[index];
+    console.log(collection.length)
+    console.log(index)
 
     var referenceLink = currentCard.photos ? currentCard.photos[0].photo_reference : null
     var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
