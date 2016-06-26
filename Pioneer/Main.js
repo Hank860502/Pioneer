@@ -25,8 +25,8 @@ class Main extends Component {
       isLoading: false,
       error: false,
       travelLocationName: '',
-      travelLocationLng: '37.774444',
-      travelLocationLat: '-122.412203',
+      // travelLocationLng: '37.774444',
+      // travelLocationLat: '-122.412203',
     }
   }
 
@@ -51,8 +51,8 @@ class Main extends Component {
           isLoading: false,
           error: false,
           travelLocationName: '',
-          travelLocationLng: '37.774444',
-          travelLocationLat: '-122.412203',
+          // travelLocationLng: '37.774444',
+          // travelLocationLat: '-122.412203',
         })
       }
     })
@@ -72,7 +72,12 @@ class Main extends Component {
     // reroute to the cards passing the Google Places information
     console.log('Logic for search around me');
   }
-
+  updateCoordinates(lng,lat){
+    this.setState({
+      travelLocationLat: lat,
+      travelLocationLng: lng,
+    });
+  }
   render() {
 
     return (
@@ -85,9 +90,12 @@ class Main extends Component {
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
           console.log(data);
-          console.log(details.geometry.location);
-          updateCoordinates();
-          handleByLocationSubmit();
+          lat = details.geometry.location.lat;
+          lng = details.geometry.location.lng;
+          desc = data.description;
+          // description
+          this.updateCoordinates(lng,lat);
+          console.log(this.state);
         }}
         getDefaultValue={() => {
           return ''; // text input default value
