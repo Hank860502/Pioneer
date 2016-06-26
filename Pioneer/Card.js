@@ -21,11 +21,9 @@ class Card extends Component {
 
   constructor(props) {
   super(props);
-
   this.state = {
     pan: new Animated.ValueXY(),
     enter: new Animated.Value(0.5),
-    // person: People[0],
   }
 }
 
@@ -66,7 +64,18 @@ class Card extends Component {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
 
+            // let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
+
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
+          if (this.state.pan.x._value < 0){
+            console.log('Left-swipe');
+            this.handleDislike();
+            //this.handleDislike.bind(this)
+          }else{
+            console.log('right-swipe');
+            this.handleLike();
+            //this.handleLike.bind(this)
+          }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
