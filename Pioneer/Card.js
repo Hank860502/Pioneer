@@ -165,11 +165,12 @@ class Card extends Component {
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Text style={styles.nopeText}>Nope!</Text>
+          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Text style={styles.yupText}>Yup!</Text>
+          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+
         </Animated.View>
         <TouchableHighlight
           style={styles.buttonLike}
