@@ -175,13 +175,13 @@ class Card extends Component {
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-            <Text style={styles.buttonText}> Like </Text>
+              <Image source={require('./tinder-like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-            <Text style={styles.buttonText}> Dislike </Text>
+          <Image source={require('./tinder-nope.png')}/>
         </TouchableHighlight>
       </View>
 
@@ -213,34 +213,15 @@ const styles = StyleSheet.create({
      marginTop:5,
      alignSelf: 'center'
    },
-   buttonText: {
-     fontSize: 18,
-     color: '#111',
-     alignSelf: 'center',
-   },
    buttonLike: {
-     height: 45,
-     flexDirection: 'row',
-     backgroundColor: 'green',
-     borderColor: 'white',
-     borderWidth: 1,
-     borderRadius: 8,
-     marginBottom: 10,
-     marginTop: 10,
-     alignSelf: 'stretch',
-     justifyContent: 'center',
+     position: 'absolute',
+     top: 543,
+     left: 210,
    },
    buttonDislike: {
-     height: 45,
-     flexDirection: 'row',
-     backgroundColor: 'red',
-     borderColor: 'white',
-     borderWidth: 1,
-     borderRadius: 8,
-     marginBottom: 10,
-     marginTop: 10,
-     alignSelf: 'stretch',
-     justifyContent: 'center',
+    position: 'absolute',
+    top: 520,
+    left: 80,
    },
 });
 
