@@ -65,7 +65,7 @@ class Main extends Component {
   constructor(){
     super();
     this.state = {
-      isLoading: false,
+      currentLocationLoaded: false,
       error: false,
       travelLocationName: '',
       travelLocationLng: '',
@@ -75,20 +75,15 @@ class Main extends Component {
   }
 
   handleByLocationSubmit(){
-    this.setState({
-      isLoading: true
-    });
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
       if(response.message === 'Not Found'){
         this.setState({
           error: 'No places found',
-          isLoading: false
         })
       } else {
         this.setState({
           cards: response.results,
-          isLoading: false,
           error: false,
           travelLocationName: '',
           travelLocationLng: '',
@@ -109,21 +104,15 @@ class Main extends Component {
   }
 
   handleAroundMeSubmit(){
-    this.getCurrentLocation()
-    this.setState({
-      isLoading: true
-    });
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
       if(response.message === 'Not Found'){
         this.setState({
           error: 'No places found',
-          isLoading: false
         })
       } else {
         this.setState({
           cards: response.results,
-          isLoading: false,
           error: false,
           travelLocationName: '',
           travelLocationLng: '',
@@ -136,6 +125,7 @@ class Main extends Component {
         });
       }
     })
+
   }
   updateCoordinates(lng,lat){
     this.setState({
@@ -145,17 +135,15 @@ class Main extends Component {
   }
 
   getCurrentLocation() {
-    console.log("getting location")
-    console.log(this)
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("position")
         this.setState({
-          travelLocationLat: 33,
-          travelLocationLng: -123});
+          travelLocationLat: position.coords.latitude,
+          travelLocationLng: position.coords.longitude,
+        });
+        this.handleAroundMeSubmit()
       },
       (error) => {
-        console.log("error")
 
         // this._disableRowLoaders();
         alert(error.message);
@@ -177,13 +165,11 @@ class Main extends Component {
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log(data);
           lat = details.geometry.location.lat;
           lng = details.geometry.location.lng;
           desc = data.description;
           // description
           this.updateCoordinates(lng,lat);
-          console.log(this.state);
         }}
         getDefaultValue={() => {
           return ''; // text input default value
@@ -234,7 +220,7 @@ class Main extends Component {
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleAroundMeSubmit.bind(this)}
+          onPress={this.getCurrentLocation.bind(this)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Around me </Text>
         </TouchableHighlight>
