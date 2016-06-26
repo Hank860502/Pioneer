@@ -120,6 +120,7 @@ class Main extends Component {
         });
         this.props.navigator.push({
           title: 'CardContainer',
+          index: 0,
           collection: this.state.cards
         });
       }
