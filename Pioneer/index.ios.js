@@ -27,7 +27,10 @@ var NavigationBarRouteMapper = {
         <TouchableHighlight
         	 underlayColor="transparent"
            onPress={() => { if (index > 0) { navigator.pop() } }}>
-          <Text style={ styles.leftNavButtonText }>Back</Text>
+           <View>
+             <Image source={require('./wishlist.png')}/>
+           </View>
+          {/*<Text style={ styles.leftNavButtonText }>Back</Text>*/}
         </TouchableHighlight>
   	)}
   	else { return null }

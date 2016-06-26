@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
      flex: 1,
      justifyContent: 'center',
      alignItems: 'center',
-     backgroundColor: '#F5FCFF',
+     backgroundColor: 'white',
    },
    welcome: {
      fontSize: 20,
@@ -207,21 +207,21 @@ const styles = StyleSheet.create({
      marginBottom: 5,
    },
    image:{
-     height:300,
-     width:300,
+     height:380,
+     width:360,
      borderRadius:50,
-     marginTop:5,
+     marginTop:2,
      alignSelf: 'center'
    },
    buttonLike: {
      position: 'absolute',
-     top: 543,
-     left: 210,
+     top: 564,
+     left: 230,
    },
    buttonDislike: {
     position: 'absolute',
-    top: 520,
-    left: 80,
+    top: 540,
+    left: 75,
    },
 });
 
