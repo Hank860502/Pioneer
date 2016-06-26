@@ -1,0 +1,679 @@
+  [1m[36m (34.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (1.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20160624001700)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (4.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160624001700"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateWishlists (20160624002043)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "wishlists" ("id" serial primary key, "user_id" integer, "description" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160624002043"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePlaces (20160624002259)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "places" ("id" serial primary key, "name" character varying, "description" character varying, "image_url" character varying, "suggested_time" float, "price" float, "longitude" float, "latitude" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160624002259"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePlacesWishlists (20160624002833)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "places_wishlists" ("id" serial primary key, "place_id" integer, "wishlist_id" integer, "liked" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160624002833"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'places'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'places_wishlists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.8ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'wishlists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "tim"], ["password_digest", "$2a$10$s5KKJIrouv4oxpKJeWWtAOT20R89XYB0acSLaYLSfvoR23WwBHOJS"], ["email", "tim@tim.com"], ["created_at", "2016-06-24 22:06:03.460184"], ["updated_at", "2016-06-24 22:06:03.460184"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1 AND "wishlists"."id" = $2 LIMIT 1  [["user_id", 1], ["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "dbc"], ["description", "devbootcamp"], ["image_url", "https://billdevcode.github.io/imgs/dev-bootcamp.jpg"], ["suggested_time", 1.0], ["price", 10.0], ["longitude", 120.12], ["latitude", 14.34], ["created_at", "2016-06-24 22:11:24.292759"], ["updated_at", "2016-06-24 22:11:24.292759"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["description", "My wishlist"], ["created_at", "2016-06-24 22:12:09.668456"], ["updated_at", "2016-06-24 22:12:09.668456"]]
+  [1m[35m (30.5ms)[0m  COMMIT
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT "wishlists".* FROM "wishlists" WHERE "wishlists"."user_id" = $1  [["user_id", 1]]
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 1], ["wishlist_id", 1], ["liked", "t"], ["created_at", "2016-06-24 22:17:51.308487"], ["updated_at", "2016-06-24 22:17:51.308487"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.4ms)[0m  SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1  [["wishlist_id", 1]]
+
+
+Started GET "/" for ::1 at 2016-06-24 15:20:25 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PlacesController#index as HTML
+Completed 200 OK in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2016-06-24 15:20:26 -0700
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (4.2.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.5) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.5) lib/action_dispatch/middleware/static.rb:116:in `call'
+  railties (4.2.5) lib/rails/engine.rb:518:in `call'
+  railties (4.2.5) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (9.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (95.8ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:20:35 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 34ms (ActiveRecord: 4.8ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Wishlist with 'id'=):
+  app/controllers/wishlists_controller.rb:7:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (56.7ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:21:02 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 5.7ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column places.liked does not exist
+LINE 1: ..." WHERE "places_wishlists"."wishlist_id" = $1 AND "places"."...
+                                                             ^
+: SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1 AND "places"."liked" = 't'):
+  app/controllers/wishlists_controller.rb:10:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (59.0ms)
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.5ms)[0m  SELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (1.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlace Load (0.8ms)[0m  SELECT "places".* FROM "places" INNER JOIN "places_wishlists" ON "places"."id" = "places_wishlists"."place_id" WHERE "places_wishlists"."wishlist_id" = $1  [["wishlist_id", 1]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1[0m  [["wishlist_id", 1]]
+  [1m[35mWishlist Load (0.4ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.2ms)[0m  [1mSELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mPlacesWishlist Load (0.5ms)[0m  SELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1
+  [1m[36mPlacesWishlist Load (0.4ms)[0m  [1mSELECT  "places_wishlists".* FROM "places_wishlists"  ORDER BY "places_wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.2ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.5ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35mPlacesWishlist Load (0.3ms)[0m  SELECT "places_wishlists".* FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mWishlist Load (0.4ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists"  ORDER BY "wishlists"."id" ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1[0m  [["id", 1]]
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:44:44 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 4.6ms)
+
+NameError (undefined local variable or method `places_ids' for #<WishlistsController:0x007f97977a4fa0>):
+  app/controllers/wishlists_controller.rb:9:in `show'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.2.5/lib/ruby/gems/2.2.0/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (58.1ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 15:44:58 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2[0m  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[35mPlace Load (0.5ms)[0m  SELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 40ms (Views: 0.1ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 16:01:08 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.7ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mPlace Load (0.6ms)[0m  [1mSELECT  "places".* FROM "places" WHERE "places"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 77ms (Views: 0.2ms | ActiveRecord: 9.7ms)
+  [1m[36mPlace Load (0.7ms)[0m  [1mSELECT  "places".* FROM "places"  ORDER BY "places"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "alexanne"], ["password_digest", "$2a$10$BIcBfWP4TykLDiTYFipAs.f82XDhhd2JA0APbGMI7GejwYB/xhoVi"], ["email", "eino@mraz.io"], ["created_at", "2016-06-24 23:19:10.640251"], ["updated_at", "2016-06-24 23:19:10.640251"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["username", "kristoffer"], ["password_digest", "$2a$10$IiOSwIro3aUBTeL8LJsxBOsruwvk5AwD18nh.5lJO.ZGz/eM/sGI6"], ["email", "katrine.steuber@leannon.biz"], ["created_at", "2016-06-24 23:19:10.717284"], ["updated_at", "2016-06-24 23:19:10.717284"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "ella"], ["password_digest", "$2a$10$OCVIOYCVX/vui154wjNs9.jpU2owQa.aqdQ.2lzTPN2Y4akwQoypu"], ["email", "mellie.stiedemann@greenholt.net"], ["created_at", "2016-06-24 23:19:10.789661"], ["updated_at", "2016-06-24 23:19:10.789661"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["username", "ansel_hodkiewicz"], ["password_digest", "$2a$10$xFlgznNczWYXTbm1VF9QXeOItslzYRI1Nb.0EWqgqE71xBP7T/iGm"], ["email", "coby@haley.io"], ["created_at", "2016-06-24 23:19:10.861094"], ["updated_at", "2016-06-24 23:19:10.861094"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "serenity"], ["password_digest", "$2a$10$doiK1EIRDVmGnv.pfiSNaud6X7AWKa8iT5vvTJwmheE4yrTmu7oBa"], ["email", "olen@kshlerinkonopelski.co"], ["created_at", "2016-06-24 23:19:10.937918"], ["updated_at", "2016-06-24 23:19:10.937918"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 6], ["description", "Tempora quis molestiae veniam tempore facilis voluptatem."], ["created_at", "2016-06-24 23:19:10.951089"], ["updated_at", "2016-06-24 23:19:10.951089"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 4], ["description", "Aspernatur et officiis facilis repellendus saepe."], ["created_at", "2016-06-24 23:19:10.955870"], ["updated_at", "2016-06-24 23:19:10.955870"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["description", "Maxime consequuntur debitis qui aperiam."], ["created_at", "2016-06-24 23:19:10.959229"], ["updated_at", "2016-06-24 23:19:10.959229"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 6], ["description", "Perspiciatis eaque exercitationem eius autem."], ["created_at", "2016-06-24 23:19:10.962522"], ["updated_at", "2016-06-24 23:19:10.962522"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 3], ["description", "Similique ab blanditiis doloribus explicabo laborum perferendis."], ["created_at", "2016-06-24 23:19:10.965528"], ["updated_at", "2016-06-24 23:19:10.965528"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 4], ["description", "Animi corporis atque ratione odio at."], ["created_at", "2016-06-24 23:19:10.969293"], ["updated_at", "2016-06-24 23:19:10.969293"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 2], ["description", "Dolor saepe dolor delectus eum."], ["created_at", "2016-06-24 23:19:10.972196"], ["updated_at", "2016-06-24 23:19:10.972196"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 5], ["description", "Excepturi occaecati voluptatibus omnis iure."], ["created_at", "2016-06-24 23:19:10.974945"], ["updated_at", "2016-06-24 23:19:10.974945"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["description", "In porro et quis inventore."], ["created_at", "2016-06-24 23:19:10.977809"], ["updated_at", "2016-06-24 23:19:10.977809"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 6], ["description", "Ipsum inventore aut occaecati."], ["created_at", "2016-06-24 23:19:10.980538"], ["updated_at", "2016-06-24 23:19:10.980538"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "genesis"], ["password_digest", "$2a$10$oBp4BdvUDBvmbjQeDcr3a.81iWNEH5GJcodLWSlQjYRylgctRNxCi"], ["email", "joyce_hegmann@gaylordwilderman.name"], ["created_at", "2016-06-24 23:19:22.427244"], ["updated_at", "2016-06-24 23:19:22.427244"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["username", "andre"], ["password_digest", "$2a$10$XCCVRxQ/KE4oJp4ABNxXFOpYizN86QueuaVFSKxL/BBsTp1J7tsK6"], ["email", "lance.hane@krajcik.name"], ["created_at", "2016-06-24 23:19:22.505124"], ["updated_at", "2016-06-24 23:19:22.505124"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "noe"], ["password_digest", "$2a$10$ta52ZRQ.Nshs49nW/LoacurTlqjzYuyoffDCs/KHFNJksZPYnEh/e"], ["email", "hanna.rogahn@corkery.co"], ["created_at", "2016-06-24 23:19:22.576411"], ["updated_at", "2016-06-24 23:19:22.576411"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["username", "olga"], ["password_digest", "$2a$10$XxVjNSE0NpWDoJNoYrc2o.wotPU5zozh3cT960YZJc5932FZ92VWK"], ["email", "diamond@wuckertokon.org"], ["created_at", "2016-06-24 23:19:22.650204"], ["updated_at", "2016-06-24 23:19:22.650204"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "crystal_stroman"], ["password_digest", "$2a$10$tQC4HQ7S.nMCH.DyJZ05wuyE.ky4fgABmco86xZgzw2d9YNGfRCdy"], ["email", "ettie_renner@reingerschneider.net"], ["created_at", "2016-06-24 23:19:22.722148"], ["updated_at", "2016-06-24 23:19:22.722148"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 3], ["description", "Veniam recusandae assumenda quos aliquam."], ["created_at", "2016-06-24 23:19:22.737122"], ["updated_at", "2016-06-24 23:19:22.737122"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 11], ["description", "Omnis vero est quam quod sit."], ["created_at", "2016-06-24 23:19:22.740714"], ["updated_at", "2016-06-24 23:19:22.740714"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 10], ["description", "Qui praesentium eos est impedit illo doloribus."], ["created_at", "2016-06-24 23:19:22.743924"], ["updated_at", "2016-06-24 23:19:22.743924"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 4], ["description", "Sunt voluptate harum ratione minus inventore."], ["created_at", "2016-06-24 23:19:22.747047"], ["updated_at", "2016-06-24 23:19:22.747047"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 10], ["description", "Ad at itaque accusantium."], ["created_at", "2016-06-24 23:19:22.750141"], ["updated_at", "2016-06-24 23:19:22.750141"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["description", "Hic aperiam cum dolores sunt aliquid quasi."], ["created_at", "2016-06-24 23:19:22.754092"], ["updated_at", "2016-06-24 23:19:22.754092"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 5], ["description", "Fugiat ut sequi delectus."], ["created_at", "2016-06-24 23:19:22.756996"], ["updated_at", "2016-06-24 23:19:22.756996"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 11], ["description", "Id est ipsa voluptatum consequatur ut non."], ["created_at", "2016-06-24 23:19:22.759919"], ["updated_at", "2016-06-24 23:19:22.759919"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 5], ["description", "Molestias odio sequi rerum officia."], ["created_at", "2016-06-24 23:19:22.762724"], ["updated_at", "2016-06-24 23:19:22.762724"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "wishlists" ("user_id", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 9], ["description", "Velit sed quia officiis corrupti soluta impedit maiores nemo."], ["created_at", "2016-06-24 23:19:22.765628"], ["updated_at", "2016-06-24 23:19:22.765628"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "South Alaska Institute"], ["description", "Qui et eaque voluptatem ut et rem sequi inventore."], ["image_url", "https://robohash.org/etaliquidest.png?size=300x300&set=set1"], ["suggested_time", 0.0], ["price", 18.319196457066045], ["longitude", 36.04544224404695], ["latitude", 98.08770340737843], ["created_at", "2016-06-24 23:19:22.778324"], ["updated_at", "2016-06-24 23:19:22.778324"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Hoppe College"], ["description", "Sed quo aut sapiente."], ["image_url", "https://robohash.org/nonsapientequi.png?size=300x300&set=set1"], ["suggested_time", 1.0], ["price", 86.15260580270578], ["longitude", 56.29830781384746], ["latitude", 42.753819777226184], ["created_at", "2016-06-24 23:19:22.782082"], ["updated_at", "2016-06-24 23:19:22.782082"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "North New Mexico University"], ["description", "Consectetur amet at id occaecati asperiores voluptas enim voluptatem."], ["image_url", "https://robohash.org/repudiandaesitearum.png?size=300x300&set=set1"], ["suggested_time", 0.0], ["price", 64.19820521192344], ["longitude", 87.38255344316212], ["latitude", 76.51943126570248], ["created_at", "2016-06-24 23:19:22.784772"], ["updated_at", "2016-06-24 23:19:22.784772"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "South Klein"], ["description", "Quam eius alias dicta ab modi."], ["image_url", "https://robohash.org/rationelaborumreprehenderit.png?size=300x300&set=set1"], ["suggested_time", 2.0], ["price", 92.97681904362679], ["longitude", 47.03938725819936], ["latitude", 93.94937353904243], ["created_at", "2016-06-24 23:19:22.787454"], ["updated_at", "2016-06-24 23:19:22.787454"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "East Stanton"], ["description", "Sed eos qui iure."], ["image_url", "https://robohash.org/autdelenitidelectus.png?size=300x300&set=set1"], ["suggested_time", 1.0], ["price", 59.59334639022919], ["longitude", 82.15601334740413], ["latitude", 57.87459195162609], ["created_at", "2016-06-24 23:19:22.790196"], ["updated_at", "2016-06-24 23:19:22.790196"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Northern Cronin Academy"], ["description", "Et dolore libero a quam quas in."], ["image_url", "https://robohash.org/possimusperspiciatisincidunt.png?size=300x300&set=set1"], ["suggested_time", 3.0], ["price", 27.011888873607738], ["longitude", 91.294683913348], ["latitude", 39.514046049644904], ["created_at", "2016-06-24 23:19:22.797434"], ["updated_at", "2016-06-24 23:19:22.797434"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Eastern Gorczany"], ["description", "Et doloribus molestiae non dolor voluptatem omnis."], ["image_url", "https://robohash.org/enimiurevel.png?size=300x300&set=set1"], ["suggested_time", 4.0], ["price", 54.40025536530957], ["longitude", 65.89153613477], ["latitude", 55.443543179387255], ["created_at", "2016-06-24 23:19:22.799973"], ["updated_at", "2016-06-24 23:19:22.799973"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Lebsack College"], ["description", "Ut sunt cum aliquid."], ["image_url", "https://robohash.org/aliquamestvitae.png?size=300x300&set=set1"], ["suggested_time", 3.0], ["price", 2.540529507243161], ["longitude", 15.275164643296113], ["latitude", 10.103013776417558], ["created_at", "2016-06-24 23:19:22.802864"], ["updated_at", "2016-06-24 23:19:22.802864"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Schmidt Institute"], ["description", "Laborum dignissimos nam qui."], ["image_url", "https://robohash.org/enimetarchitecto.png?size=300x300&set=set1"], ["suggested_time", 3.0], ["price", 78.49192207428551], ["longitude", 48.17694468829296], ["latitude", 5.221837877490709], ["created_at", "2016-06-24 23:19:22.805276"], ["updated_at", "2016-06-24 23:19:22.805276"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "East Dooley Academy"], ["description", "Corrupti sed soluta ratione omnis atque ut veniam est."], ["image_url", "https://robohash.org/remmaximequidem.png?size=300x300&set=set1"], ["suggested_time", 2.0], ["price", 19.997314966991674], ["longitude", 68.19682531291103], ["latitude", 40.03703735071079], ["created_at", "2016-06-24 23:19:22.807708"], ["updated_at", "2016-06-24 23:19:22.807708"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "The Lemke Academy"], ["description", "Nam ut et accusantium itaque."], ["image_url", "https://robohash.org/estenimnobis.png?size=300x300&set=set1"], ["suggested_time", 1.0], ["price", 49.243075228873465], ["longitude", 57.19222047470293], ["latitude", 36.31246228540296], ["created_at", "2016-06-24 23:19:22.810193"], ["updated_at", "2016-06-24 23:19:22.810193"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "East Schowalter"], ["description", "Et et dolores ut."], ["image_url", "https://robohash.org/quodoloremqueaut.png?size=300x300&set=set1"], ["suggested_time", 4.0], ["price", 43.062996152188916], ["longitude", 70.13240822845484], ["latitude", 79.4751232013089], ["created_at", "2016-06-24 23:19:22.812764"], ["updated_at", "2016-06-24 23:19:22.812764"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Schuppe Academy"], ["description", "Ullam veniam est ea cum ut doloremque sequi qui."], ["image_url", "https://robohash.org/culpareprehenderitaspernatur.png?size=300x300&set=set1"], ["suggested_time", 1.0], ["price", 23.920377997188837], ["longitude", 36.141871172063986], ["latitude", 34.632727874860336], ["created_at", "2016-06-24 23:19:22.815493"], ["updated_at", "2016-06-24 23:19:22.815493"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "East Hettinger"], ["description", "Deserunt voluptatem dolorem qui explicabo dicta mollitia veritatis et."], ["image_url", "https://robohash.org/reiciendisullameius.png?size=300x300&set=set1"], ["suggested_time", 4.0], ["price", 52.93627969043961], ["longitude", 42.31304676591493], ["latitude", 79.48586767952555], ["created_at", "2016-06-24 23:19:22.819087"], ["updated_at", "2016-06-24 23:19:22.819087"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Northern Florida Academy"], ["description", "Illum atque illo placeat enim sed quia tempore ea."], ["image_url", "https://robohash.org/autnatusaspernatur.png?size=300x300&set=set1"], ["suggested_time", 2.0], ["price", 7.848635415612493], ["longitude", 16.183059122010146], ["latitude", 81.34399614342789], ["created_at", "2016-06-24 23:19:22.822066"], ["updated_at", "2016-06-24 23:19:22.822066"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "The Maine Institute"], ["description", "Quasi quam minus quaerat nobis."], ["image_url", "https://robohash.org/optioquodaliquid.png?size=300x300&set=set1"], ["suggested_time", 3.0], ["price", 54.49498636565281], ["longitude", 34.03669869018221], ["latitude", 81.78084799383917], ["created_at", "2016-06-24 23:19:22.824742"], ["updated_at", "2016-06-24 23:19:22.824742"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "North Keeling Institute"], ["description", "Sit itaque et quo eum omnis et non."], ["image_url", "https://robohash.org/eadolordeleniti.png?size=300x300&set=set1"], ["suggested_time", 0.0], ["price", 90.99571507145022], ["longitude", 71.61577277309723], ["latitude", 5.880655040700433], ["created_at", "2016-06-24 23:19:22.827262"], ["updated_at", "2016-06-24 23:19:22.827262"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Southern South Carolina College"], ["description", "Voluptatum magni corrupti veritatis odit illo."], ["image_url", "https://robohash.org/exautemnumquam.png?size=300x300&set=set1"], ["suggested_time", 0.0], ["price", 26.568420080994414], ["longitude", 38.35822771843348], ["latitude", 9.774971604775828], ["created_at", "2016-06-24 23:19:22.829795"], ["updated_at", "2016-06-24 23:19:22.829795"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"  [["name", "Southern Luettgen"], ["description", "Officia asperiores quasi pariatur placeat consequuntur voluptas."], ["image_url", "https://robohash.org/eosvoluptateest.png?size=300x300&set=set1"], ["suggested_time", 4.0], ["price", 39.49190778903107], ["longitude", 90.81709236035576], ["latitude", 4.421136313997476], ["created_at", "2016-06-24 23:19:22.832290"], ["updated_at", "2016-06-24 23:19:22.832290"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places" ("name", "description", "image_url", "suggested_time", "price", "longitude", "latitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Eastern Barrows"], ["description", "Et et veritatis ut."], ["image_url", "https://robohash.org/porroerrornulla.png?size=300x300&set=set1"], ["suggested_time", 1.0], ["price", 67.77140169346045], ["longitude", 42.215451184285136], ["latitude", 98.6280157629803], ["created_at", "2016-06-24 23:19:22.835578"], ["updated_at", "2016-06-24 23:19:22.835578"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.3ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 15], ["wishlist_id", 7], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.848359"], ["updated_at", "2016-06-24 23:19:22.848359"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.6ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 16], ["wishlist_id", 17], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.854376"], ["updated_at", "2016-06-24 23:19:22.854376"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.3ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 2], ["wishlist_id", 15], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.858939"], ["updated_at", "2016-06-24 23:19:22.858939"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 16], ["wishlist_id", 21], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.863430"], ["updated_at", "2016-06-24 23:19:22.863430"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 13], ["wishlist_id", 15], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.867489"], ["updated_at", "2016-06-24 23:19:22.867489"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 7], ["wishlist_id", 3], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.871699"], ["updated_at", "2016-06-24 23:19:22.871699"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 20], ["wishlist_id", 17], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.875821"], ["updated_at", "2016-06-24 23:19:22.875821"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.4ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 3], ["wishlist_id", 14], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.880276"], ["updated_at", "2016-06-24 23:19:22.880276"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.3ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 1], ["wishlist_id", 18], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.884622"], ["updated_at", "2016-06-24 23:19:22.884622"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 15], ["wishlist_id", 4], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.888933"], ["updated_at", "2016-06-24 23:19:22.888933"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 1], ["wishlist_id", 19], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.893059"], ["updated_at", "2016-06-24 23:19:22.893059"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 7], ["wishlist_id", 4], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.897263"], ["updated_at", "2016-06-24 23:19:22.897263"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 8], ["wishlist_id", 4], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.901579"], ["updated_at", "2016-06-24 23:19:22.901579"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 13], ["wishlist_id", 1], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.905974"], ["updated_at", "2016-06-24 23:19:22.905974"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 10], ["wishlist_id", 13], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.910424"], ["updated_at", "2016-06-24 23:19:22.910424"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 2], ["wishlist_id", 18], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.916444"], ["updated_at", "2016-06-24 23:19:22.916444"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 1], ["wishlist_id", 18], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.922184"], ["updated_at", "2016-06-24 23:19:22.922184"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 16], ["wishlist_id", 5], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.927806"], ["updated_at", "2016-06-24 23:19:22.927806"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.5ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 19], ["wishlist_id", 15], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.933297"], ["updated_at", "2016-06-24 23:19:22.933297"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 13], ["wishlist_id", 9], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.937982"], ["updated_at", "2016-06-24 23:19:22.937982"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 20], ["wishlist_id", 18], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.942246"], ["updated_at", "2016-06-24 23:19:22.942246"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 2], ["wishlist_id", 17], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.946527"], ["updated_at", "2016-06-24 23:19:22.946527"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 21], ["wishlist_id", 3], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.950573"], ["updated_at", "2016-06-24 23:19:22.950573"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 18], ["wishlist_id", 7], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.954597"], ["updated_at", "2016-06-24 23:19:22.954597"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 11], ["wishlist_id", 6], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.958552"], ["updated_at", "2016-06-24 23:19:22.958552"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 20], ["wishlist_id", 14], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.962352"], ["updated_at", "2016-06-24 23:19:22.962352"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 11], ["wishlist_id", 6], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.966381"], ["updated_at", "2016-06-24 23:19:22.966381"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 1], ["wishlist_id", 15], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.970792"], ["updated_at", "2016-06-24 23:19:22.970792"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 4], ["wishlist_id", 2], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.976551"], ["updated_at", "2016-06-24 23:19:22.976551"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 19], ["wishlist_id", 10], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.981361"], ["updated_at", "2016-06-24 23:19:22.981361"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 6], ["wishlist_id", 20], ["liked", "f"], ["created_at", "2016-06-24 23:19:22.986908"], ["updated_at", "2016-06-24 23:19:22.986908"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 15], ["wishlist_id", 10], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.991181"], ["updated_at", "2016-06-24 23:19:22.991181"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 3], ["wishlist_id", 1], ["liked", "t"], ["created_at", "2016-06-24 23:19:22.995722"], ["updated_at", "2016-06-24 23:19:22.995722"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 11], ["wishlist_id", 6], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.000154"], ["updated_at", "2016-06-24 23:19:23.000154"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.3ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 8], ["wishlist_id", 3], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.005505"], ["updated_at", "2016-06-24 23:19:23.005505"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 16], ["wishlist_id", 11], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.010707"], ["updated_at", "2016-06-24 23:19:23.010707"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 16], ["wishlist_id", 21], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.016335"], ["updated_at", "2016-06-24 23:19:23.016335"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 4], ["wishlist_id", 1], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.021797"], ["updated_at", "2016-06-24 23:19:23.021797"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 21], ["wishlist_id", 19], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.027212"], ["updated_at", "2016-06-24 23:19:23.027212"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 5], ["wishlist_id", 21], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.032177"], ["updated_at", "2016-06-24 23:19:23.032177"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 7], ["wishlist_id", 8], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.046239"], ["updated_at", "2016-06-24 23:19:23.046239"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.6ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 20], ["wishlist_id", 14], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.050888"], ["updated_at", "2016-06-24 23:19:23.050888"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.3ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 10], ["wishlist_id", 2], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.056439"], ["updated_at", "2016-06-24 23:19:23.056439"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.4ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 12], ["wishlist_id", 5], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.060574"], ["updated_at", "2016-06-24 23:19:23.060574"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.4ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 14], ["wishlist_id", 18], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.064474"], ["updated_at", "2016-06-24 23:19:23.064474"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 11], ["wishlist_id", 16], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.068273"], ["updated_at", "2016-06-24 23:19:23.068273"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 18], ["wishlist_id", 21], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.072149"], ["updated_at", "2016-06-24 23:19:23.072149"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 20], ["wishlist_id", 18], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.075965"], ["updated_at", "2016-06-24 23:19:23.075965"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mPlace Load (0.3ms)[0m  [1mSELECT "places".* FROM "places"[0m
+  [1m[35mWishlist Load (0.2ms)[0m  SELECT "wishlists".* FROM "wishlists"
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["place_id", 20], ["wishlist_id", 2], ["liked", "f"], ["created_at", "2016-06-24 23:19:23.079720"], ["updated_at", "2016-06-24 23:19:23.079720"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPlace Load (0.3ms)[0m  SELECT "places".* FROM "places"
+  [1m[36mWishlist Load (0.2ms)[0m  [1mSELECT "wishlists".* FROM "wishlists"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "places_wishlists" ("place_id", "wishlist_id", "liked", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["place_id", 13], ["wishlist_id", 11], ["liked", "t"], ["created_at", "2016-06-24 23:19:23.083495"], ["updated_at", "2016-06-24 23:19:23.083495"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+
+
+Started GET "/users/1/wishlists/1" for ::1 at 2016-06-24 16:19:28 -0700
+Processing by WishlistsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mWishlist Load (0.3ms)[0m  [1mSELECT  "wishlists".* FROM "wishlists" WHERE "wishlists"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT "places_wishlists"."place_id" FROM "places_wishlists" WHERE "places_wishlists"."wishlist_id" = $1 AND "places_wishlists"."liked" = $2  [["wishlist_id", 1], ["liked", "t"]]
+  [1m[36mPlace Load (0.5ms)[0m  [1mSELECT "places".* FROM "places" WHERE "places"."id" IN (1, 3, 4)[0m
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.3ms)
