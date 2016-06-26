@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomplete';
+import api from './api.js'　　　
 
 import {
   StyleSheet,
@@ -8,12 +9,54 @@ import {
   Navigator,
   TextInput,
   TouchableHighlight,
-  ActivityIndicator
+  ActivityIndicator,
+  Geolocation
 } from 'react-native';
 
-import api from './api.js'
 var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
-
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    padding: 30,
+    marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#48BBEC',
+  },
+  title: {
+    marginBottom: 20,
+    fontSize: 25,
+    textAlign: 'center',
+    color: '#fff',
+  },
+  searchInput: {
+    height: 50,
+    padding: 4,
+    marginRight: 5,
+    fontSize: 23,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    color: 'white',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#111',
+    alignSelf: 'center',
+  },
+  button: {
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+  },
+});
 // import api from './api.js'
 // import Card from './Card.js'
 // const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
@@ -66,8 +109,33 @@ class Main extends Component {
   }
 
   handleAroundMeSubmit(){
-
-    console.log('Logic for search around me');
+    this.getCurrentLocation()
+    this.setState({
+      isLoading: true
+    });
+    api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
+    .then((response) => {
+      if(response.message === 'Not Found'){
+        this.setState({
+          error: 'No places found',
+          isLoading: false
+        })
+      } else {
+        this.setState({
+          cards: response.results,
+          isLoading: false,
+          error: false,
+          travelLocationName: '',
+          travelLocationLng: '',
+          travelLocationLat: '',
+        });
+        this.props.navigator.push({
+          title: 'Card',
+          index: 0,
+          collection: this.state.cards
+        });
+      }
+    })
   }
   updateCoordinates(lng,lat){
     this.setState({
@@ -77,14 +145,19 @@ class Main extends Component {
   }
 
   getCurrentLocation() {
+    console.log("getting location")
+    console.log(this)
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        console.log("position")
         this.setState({
-          travelLocationLat: position.coords.latitude,
-          travelLocationLng: position.coords.longitude});
+          travelLocationLat: 33,
+          travelLocationLng: -123});
       },
       (error) => {
-        this._disableRowLoaders();
+        console.log("error")
+
+        // this._disableRowLoaders();
         alert(error.message);
       },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -171,48 +244,6 @@ class Main extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    padding: 30,
-    marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#48BBEC',
-  },
-  title: {
-    marginBottom: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#fff',
-  },
-  searchInput: {
-    height: 50,
-    padding: 4,
-    marginRight: 5,
-    fontSize: 23,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    color: 'white',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#111',
-    alignSelf: 'center',
-  },
-  button: {
-    height: 45,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-});
+
 
 export default Main;
