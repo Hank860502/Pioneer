@@ -6,8 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "clamp": "^1.0.1",
     "react": "15.1.0",
     "react-native": "0.28.0",
-    "react-native-google-places-autocomplete": "^1.1.7"
+    "react-native-google-places-autocomplete": "^1.1.7",
+    "react-native-swipe-cards": "0.0.7"
   }
 }
