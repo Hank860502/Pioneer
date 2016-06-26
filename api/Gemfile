@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+gem 'rails', '4.2.5'
+gem 'rails-api'
+gem 'pg'
+gem 'rack-cors'
+gem 'bcrypt'
+gem 'faker'
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'byebug'
+end
