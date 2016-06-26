@@ -87,10 +87,10 @@ class Main extends Component {
           error: false,
           travelLocationName: '',
           travelLocationLng: '',
-          travelLocationLat: '',
+          travelLocationLat: ''
         });
         this.props.navigator.push({
-          title: 'Card',
+          title: 'CardContainer',
           index: 0,
           collection: this.state.cards
         });
@@ -119,8 +119,7 @@ class Main extends Component {
           travelLocationLat: '',
         });
         this.props.navigator.push({
-          title: 'Card',
-          index: 0,
+          title: 'CardContainer',
           collection: this.state.cards
         });
       }
