@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 
 import Main from './Main.js';
-import Card from './Card.js';
+import CardContainer from './CardContainer.js';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -55,8 +55,8 @@ class Pioneer extends Component {
   renderScene(route, navigator){
     if(route.title === 'Pioneer'){
       return <Main navigator={navigator} />
-    } else if (route.title === 'Card') {
-      return <Card navigator={navigator} index={route.index} collection={route.collection}/>
+    } else if (route.title === 'CardContainer') {
+      return <CardContainer navigator={navigator} index={route.index} collection={route.collection}/>
     }
   }
 
