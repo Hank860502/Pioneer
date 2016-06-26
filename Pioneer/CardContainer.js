@@ -153,23 +153,24 @@ class CardContainer extends Component {
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Text style={styles.nopeText}>Nope!</Text>
+          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Text style={styles.yupText}>Yup!</Text>
+          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+
         </Animated.View>
         <TouchableHighlight
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-            <Text style={styles.buttonText}> Like </Text>
+              <Image source={require('./tinder-like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-            <Text style={styles.buttonText}> Dislike </Text>
+          <Image source={require('./tinder-nope.png')}/>
         </TouchableHighlight>
       </View>
 
@@ -182,53 +183,17 @@ const styles = StyleSheet.create({
      flex: 1,
      justifyContent: 'center',
      alignItems: 'center',
-     backgroundColor: '#F5FCFF',
-   },
-   welcome: {
-     fontSize: 20,
-     textAlign: 'center',
-     margin: 10,
-   },
-   instructions: {
-     textAlign: 'center',
-     color: '#333333',
-     marginBottom: 5,
-   },
-   image:{
-     height:300,
-     width:300,
-     borderRadius:50,
-     marginTop:5,
-     alignSelf: 'center'
-   },
-   buttonText: {
-     fontSize: 18,
-     color: '#111',
-     alignSelf: 'center',
+     backgroundColor: 'white',
    },
    buttonLike: {
-     height: 45,
-     flexDirection: 'row',
-     backgroundColor: 'green',
-     borderColor: 'white',
-     borderWidth: 1,
-     borderRadius: 8,
-     marginBottom: 10,
-     marginTop: 10,
-     alignSelf: 'stretch',
-     justifyContent: 'center',
+     position: 'absolute',
+     top: 564,
+     left: 230,
    },
    buttonDislike: {
-     height: 45,
-     flexDirection: 'row',
-     backgroundColor: 'red',
-     borderColor: 'white',
-     borderWidth: 1,
-     borderRadius: 8,
-     marginBottom: 10,
-     marginTop: 10,
-     alignSelf: 'stretch',
-     justifyContent: 'center',
+    position: 'absolute',
+    top: 540,
+    left: 75,
    },
 });
 
