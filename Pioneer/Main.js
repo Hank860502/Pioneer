@@ -16,8 +16,8 @@ var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
 
 // import api from './api.js'
 // import Card from './Card.js'
-const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
+// const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
+// const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 class Main extends Component {
   constructor(){
     super();
@@ -63,8 +63,6 @@ class Main extends Component {
     // Set lng/lat
     // OK Make Google Places API call
     // reroute to the cards passing the Google Places information
-    console.log(this.state.travelLocationName);
-    console.log("Logic for search by location");
   }
 
   handleAroundMeSubmit(){
@@ -86,6 +84,7 @@ class Main extends Component {
 
       <View style={styles.mainContainer}>
       <GooglePlacesAutocomplete
+        enableEmptySections = {true}
         placeholder='Discover places'
         minLength={2} // minimum length of text to search
         autoFocus={false}
@@ -117,7 +116,7 @@ class Main extends Component {
           },
         }}
 
-        currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+        currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
         currentLocationLabel="Current location"
         nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
         GoogleReverseGeocodingQuery={{
@@ -132,19 +131,19 @@ class Main extends Component {
 
         filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
-        predefinedPlaces={[homePlace, workPlace]}
+        predefinedPlaces={[]}
       />
-        <Text style={styles.title}> Find your next destination ! </Text>
-        <TextInput
+        {/*<Text style={styles.title}> Find your next destination ! </Text>*/}
+        {/*<TextInput
           style={styles.searchInput}
           value={this.state.travelLocation}
           onChangeText={(text) => this.setState({travelLocationName: text})}
-        />
+        />*/}
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleByLocationSubmit.bind(this)}
           underlayColor='white'>
-            <Text style={styles.buttonText}> By location </Text>
+            <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 30,
-    marginTop: 65,
+    marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#48BBEC',
