@@ -23,6 +23,7 @@ class Main extends Component {
       travelLocationName: '',
       travelLocationLng: '37.774444',
       travelLocationLat: '-122.412203',
+      cards: []
     }
   }
 
@@ -38,18 +39,19 @@ class Main extends Component {
           isLoading: false
         })
       } else {
-        console.log(response.results);
-        this.props.navigator.push({
-          title: 'Card',
-          passProps: {locationsSet: response.results}
-        });
         this.setState({
+          cards: response.results,
           isLoading: false,
           error: false,
           travelLocationName: '',
           travelLocationLng: '37.774444',
           travelLocationLat: '-122.412203',
-        })
+        });
+        this.props.navigator.push({
+          title: 'Card',
+          index: 0,
+          collection: this.state.cards
+        });
       }
     })
     // update indicator spinner

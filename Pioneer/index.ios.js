@@ -51,7 +51,7 @@ class Pioneer extends Component {
     if(route.title === 'Pioneer'){
       return <Main navigator={navigator} />
     } else if (route.title === 'Card') {
-      return <Card navigator={navigator} {...route.passProps} />
+      return <Card navigator={navigator} index={route.index} collection={route.collection}/>
     }
   }
 
