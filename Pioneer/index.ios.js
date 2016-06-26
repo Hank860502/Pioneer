@@ -5,11 +5,13 @@
  */
 
 import React, { Component } from 'react';
+
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
+  Image,
   Navigator,
   TouchableHighlight,
   TouchableOpacity,
@@ -39,7 +41,10 @@ var NavigationBarRouteMapper = {
                               </TouchableHighlight> )
   },
   Title(route, navigator, index, navState) {
-    return <Text style={ styles.title }>Pioneer</Text>
+    return <Image
+        style = {styles.image}
+        source={require('./Pioneer.png')}
+      />
   }
 };
 
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
     },
     nav: {
     	height: 60,
-      backgroundColor: '#efefef'
+      backgroundColor: 'white'
     },
     title: {
     	marginTop:4,
@@ -106,6 +111,9 @@ const styles = StyleSheet.create({
     buttonText: {
     	fontSize:18
     },
+    image: {
+      top: -5
+    }
 });
 
 AppRegistry.registerComponent('Pioneer', () => Pioneer);
