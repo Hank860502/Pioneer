@@ -79,13 +79,15 @@ class Main extends Component {
 
       <View style={styles.mainContainer}>
       <GooglePlacesAutocomplete
-        placeholder='Search'
+        placeholder='Discover places'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
           console.log(data);
           console.log(details.geometry.location);
+          updateCoordinates();
+          handleByLocationSubmit();
         }}
         getDefaultValue={() => {
           return ''; // text input default value
