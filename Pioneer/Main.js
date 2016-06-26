@@ -66,10 +66,7 @@ class Main extends Component {
   }
 
   handleAroundMeSubmit(){
-    // update indicator spinner
-    // Access current location to get lng lat information
-    // Make Google Places API call
-    // reroute to the cards passing the Google Places information
+
     console.log('Logic for search around me');
   }
   updateCoordinates(lng,lat){
@@ -78,6 +75,23 @@ class Main extends Component {
       travelLocationLng: lng,
     });
   }
+
+  getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          travelLocationLat: position.coords.latitude,
+          travelLocationLng: position.coords.longitude});
+      },
+      (error) => {
+        this._disableRowLoaders();
+        alert(error.message);
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+  }
+
+
   render() {
 
     return (
@@ -85,7 +99,7 @@ class Main extends Component {
       <View style={styles.mainContainer}>
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
-        placeholder='Discover places'
+        placeholder='Search'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
