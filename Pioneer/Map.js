@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   map: {
     height: 300,
     margin: 10,
+    marginTop:80,
     borderWidth: 1,
     borderColor: '#000000',
   },

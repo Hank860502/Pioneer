@@ -34,15 +34,12 @@ class WishList extends Component {
     });
 
     return(
-      <ScrollView style={styles.containerWishList}>
-        <Text style={styles.welcome}>
-          Your Wishlist
-
-        </Text>
-
-        <MyMap />
+      <View>
+      <MyMap />
+      <ScrollView  horizontal={true} style={styles.containerWishList}>
         {list}
       </ScrollView>
+      </View>
     )
   }
 };
