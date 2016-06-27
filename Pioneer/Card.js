@@ -6,16 +6,28 @@ import {
   View,
   Image,
   Navigator,
+  TouchableHighlight,
 } from 'react-native';
 
 class Card extends Component {
+
+  clickOnImage(){
+    console.log("clicked")
+  }
+
   render(){
     var imageLink = this.props.cardInfo.photos[0]
+
 
     return(
 
       <View style={styles.container}>
+      <TouchableHighlight
+          onPress={this.clickOnImage}
+          underlayColor='white'
+        >
         <Image style={styles.image} source={{uri: imageLink}}/>
+      </TouchableHighlight>
         <Text style={styles.welcome}>
           {this.props.cardInfo.name}
         </Text>
