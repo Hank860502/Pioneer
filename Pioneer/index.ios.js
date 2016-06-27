@@ -65,7 +65,7 @@ class Pioneer extends Component {
     } else if (route.title === 'CardContainer') {
       return <CardContainer navigator={navigator} index={route.index} collection={route.collection}/>
     } else if (route.title === 'Wishlist') {
-      return <WishList navigator={navigator}/>
+      return <WishList navigator={navigator} likeCollection={route.likeCollection} dislikeCollection={route.dislikeCollection}/>
     }
   }
 

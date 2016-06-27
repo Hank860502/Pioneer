@@ -14,7 +14,7 @@ import {
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
 var SWIPE_THRESHOLD = 120;
 
@@ -39,9 +39,10 @@ class CardContainer extends Component {
         index: this.state.index + 1,
       })
     } else {
-      debugger;
       this.props.navigator.push({
-        title: 'Pioneer'
+        title: 'Wishlist',
+        likeCollection: this.state.likeCollection,
+        dislikeCollection: this.state.dislikeCollection
       });
     }
   }
