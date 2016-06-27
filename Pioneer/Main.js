@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -74,7 +75,7 @@ class Main extends Component {
     }
   }
 
-  handleByLocationSubmit(){
+  handleDiscoverSubmit(){
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
       if(response.message === 'Not Found'){
@@ -82,37 +83,24 @@ class Main extends Component {
           error: 'No places found',
         })
       } else {
-        this.setState({
-          cards: response.results,
-          error: false,
-          travelLocationName: '',
-          travelLocationLng: '',
-          travelLocationLat: ''
+        var formattedCollection = response.results.map(function(location){
+          var rLocation = {};
+          rLocation['name'] = location.name;
+          if (location.photos){
+            rLocation['photos'] = location.photos.map(function(photo){
+              return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+              });
+          } else {
+             rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+          };
+          location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
+          location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
+          location.types ? rLocation['types'] = location.types : rLocation['types'] = []
+          return rLocation;
         });
-        this.props.navigator.push({
-          title: 'CardContainer',
-          index: 0,
-          collection: this.state.cards
-        });
-      }
-    })
-    // update indicator spinner
-    // Make API call to Google Geocode Service based on address
-    // Set lng/lat
-    // OK Make Google Places API call
-    // reroute to the cards passing the Google Places information
-  }
 
-  handleAroundMeSubmit(){
-    api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
-    .then((response) => {
-      if(response.message === 'Not Found'){
         this.setState({
-          error: 'No places found',
-        })
-      } else {
-        this.setState({
-          cards: response.results,
+          cards: formattedCollection,
           error: false,
           travelLocationName: '',
           travelLocationLng: '',
@@ -144,7 +132,7 @@ class Main extends Component {
           travelLocationLat: position.coords.latitude,
           travelLocationLng: position.coords.longitude,
           // currentLocationLoaded: false
-        }, () => {this.handleAroundMeSubmit()});
+        }, () => {this.handleDiscoverSubmit()});
       },
       (error) => {
 
@@ -217,7 +205,7 @@ class Main extends Component {
         />*/}
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleByLocationSubmit.bind(this)}
+          onPress={this.handleDiscoverSubmit.bind(this)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>
@@ -232,7 +220,5 @@ class Main extends Component {
     )
   }
 }
-
-
 
 export default Main;
