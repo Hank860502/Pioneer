@@ -31,7 +31,6 @@ class WishList extends Component {
       )
     });
 
-
     return(
       <ScrollView style={styles.containerWishList}>
         <Text style={styles.welcome}>

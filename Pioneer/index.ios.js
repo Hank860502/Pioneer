@@ -37,9 +37,13 @@ var NavigationBarRouteMapper = {
     return (
       <TouchableHighlight
          underlayColor="transparent"
+        // onPress={this.goToWishList.bind(this)}
          onPress={() => { navigator.push({
-           title: 'Wishlist'
-         }) }}
+           title: 'Wishlist',
+           likeCollection: [],
+           dislikeCollection: []
+           })
+         }}
          >
          <View>
            <Image source={require('./wishlist.png')}/>
@@ -52,7 +56,7 @@ var NavigationBarRouteMapper = {
         style = {styles.image}
         source={require('./Pioneer.png')}
       />
-  }
+  },
 };
 
 
@@ -65,7 +69,7 @@ class Pioneer extends Component {
     } else if (route.title === 'CardContainer') {
       return <CardContainer navigator={navigator} index={route.index} collection={route.collection}/>
     } else if (route.title === 'Wishlist') {
-      return <WishList navigator={navigator} likeCollection={route.likeCollection} dislikeCollection={route.dislikeCollection}/>
+      return <WishList navigator={navigator} likeCollection={route.likeCollection}/>
     }
   }
 
