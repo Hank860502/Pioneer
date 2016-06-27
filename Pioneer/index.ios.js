@@ -19,6 +19,7 @@ import {
 
 import Main from './Main.js';
 import CardContainer from './CardContainer.js';
+import WishList from './WishList.js';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -27,28 +28,35 @@ var NavigationBarRouteMapper = {
         <TouchableHighlight
         	 underlayColor="transparent"
            onPress={() => { if (index > 0) { navigator.pop() } }}>
-           <View>
-             <Image source={require('./wishlist.png')}/>
-           </View>
-          {/*<Text style={ styles.leftNavButtonText }>Back</Text>*/}
+          <Text style={ styles.leftNavButtonText }> Back </Text>
         </TouchableHighlight>
   	)}
   	else { return null }
   },
   RightButton(route, navigator, index, navState) {
-    if (route.onPress) return ( <TouchableHighlight
-    														onPress={ () => route.onPress() }>
-                                <Text style={ styles.rightNavButtonText }>
-                                  	{ route.rightText || 'Right Button' }
-                                </Text>
-                              </TouchableHighlight> )
-  },
+    return (
+      <TouchableHighlight
+         underlayColor="transparent"
+        // onPress={this.goToWishList.bind(this)}
+         onPress={() => { navigator.push({
+           title: 'Wishlist',
+           likeCollection: [],
+           dislikeCollection: []
+           })
+         }}
+         >
+         <View>
+           <Image source={require('./wishlist.png')}/>
+         </View>
+        {/*<Text style={ styles.leftNavButtonText }>Back</Text>*/}
+      </TouchableHighlight>
+  )},
   Title(route, navigator, index, navState) {
     return <Image
         style = {styles.image}
         source={require('./Pioneer.png')}
       />
-  }
+  },
 };
 
 
@@ -60,6 +68,8 @@ class Pioneer extends Component {
       return <Main navigator={navigator} />
     } else if (route.title === 'CardContainer') {
       return <CardContainer navigator={navigator} index={route.index} collection={route.collection}/>
+    } else if (route.title === 'Wishlist') {
+      return <WishList navigator={navigator} likeCollection={route.likeCollection}/>
     }
   }
 
