@@ -6,6 +6,7 @@ import {
   View,
   Image,
   Navigator,
+  TouchableOpacity,
 } from 'react-native';
 
 class Card extends Component {
@@ -13,14 +14,12 @@ class Card extends Component {
     var imageLink = this.props.cardInfo.photos[0]
 
     return(
-
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: imageLink}}/>
         <Text style={styles.welcome}>
           {this.props.cardInfo.title}
         </Text>
       </View>
-
     )
   }
 };
