@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Separator from './Separator.js';
+import MyMap from './Map.js';
+
 
 import {
   StyleSheet,
@@ -9,7 +12,6 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Separator from './Separator.js'
 
 var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
@@ -32,12 +34,12 @@ class WishList extends Component {
     });
 
     return(
-      <ScrollView style={styles.containerWishList}>
-        <Text style={styles.welcome}>
-          Your Wishlist
-        </Text>
+      <View>
+      <MyMap />
+      <ScrollView  horizontal={true} style={styles.containerWishList}>
         {list}
       </ScrollView>
+      </View>
     )
   }
 };
@@ -47,7 +49,6 @@ const styles = StyleSheet.create({
     flex: 1,
     //  justifyContent: 'center',
     //  alignItems: 'center',
-    marginTop: 50,
     backgroundColor: 'white',
    },
   welcome: {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     height:190,
     width:180,
     borderRadius:50,
-    marginTop:100,
+    marginTop: 10,
     alignSelf: 'center'
   },
   rowContainer: {
