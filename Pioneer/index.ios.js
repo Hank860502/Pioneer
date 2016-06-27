@@ -82,6 +82,7 @@ class Pioneer extends Component {
           index={route.index}
           collection={route.collection}
           updateLikeCollection={this.updateLikeCollection.bind(this)}
+          
         />
       );
     } else if (route.title === 'Wishlist') {

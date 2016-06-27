@@ -20,6 +20,10 @@ class MyMap extends Component {
         latitude: 37.7824,
         longitude: -122.3995,
         title: 'learn surfing'
+      },{
+        latitude: 33.7824,
+        longitude: -120.3995,
+        title: 'learn something'
       }]
     };
   }
@@ -27,11 +31,14 @@ class MyMap extends Component {
   render(){
     return(
       <View>
+      <Text>
+      {this.props.collection[0].longitude}
+      </Text>
         <MapView
           style={styles.map}
           showsUserLocation={true}
           //followUserLocation={true}
-          annotations={this.state.markers}
+          annotations={this.props.collection}
         />
       </View>
     )
