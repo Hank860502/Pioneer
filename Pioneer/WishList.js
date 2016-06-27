@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Separator from './Separator.js';
+import MyMap from './Map.js';
+
 
 import {
   StyleSheet,
@@ -9,7 +12,6 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Separator from './Separator.js'
 
 var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
@@ -35,7 +37,10 @@ class WishList extends Component {
       <ScrollView style={styles.containerWishList}>
         <Text style={styles.welcome}>
           Your Wishlist
+
         </Text>
+
+        <MyMap />
         {list}
       </ScrollView>
     )
