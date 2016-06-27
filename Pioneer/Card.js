@@ -8,8 +8,6 @@ import {
   Navigator,
 } from 'react-native';
 
-var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
-
 class Card extends Component {
   render(){
     var imageLink = this.props.cardInfo.photos[0]
