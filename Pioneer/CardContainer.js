@@ -206,6 +206,16 @@ const styles = StyleSheet.create({
     top: 540,
     left: 75,
    },
+  //  nope: {
+  //    position: 'absolute',
+  //    top: 50,
+  //    left: 30,
+  //  },
+  //  yup: {
+  //    position: 'absolute',
+  //    top: 50,
+  //    left: 230,
+  //  }
 });
 
 export default CardContainer;
