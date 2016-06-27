@@ -95,7 +95,9 @@ class Main extends Component {
           };
           location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
           location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
-          location.types ? rLocation['types'] = location.types : rLocation['types'] = []
+          location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
+          rLocation['lng'] = location.geometry.location.lng;
+          rLocation['lat'] = location.geometry.location.lat;
           return rLocation;
         });
 
