@@ -13,13 +13,14 @@ class Card extends Component {
   render(){
     var imageLink = this.props.cardInfo.photos[0]
 
-
     return(
       <View style={styles.container}>
+      <TouchableOpacity>
       <Image style={styles.image} source={{uri: imageLink}}/>
       <Text style={styles.welcome}>
         {this.props.cardInfo.name}
       </Text>
+      </TouchableOpacity>
       </View>
     )
   }
