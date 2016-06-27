@@ -17,7 +17,7 @@ class Card extends Component {
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: imageLink}}/>
         <Text style={styles.welcome}>
-          {this.props.cardInfo.name}
+          {this.props.cardInfo.title}
         </Text>
       </View>
 
