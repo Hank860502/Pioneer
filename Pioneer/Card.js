@@ -15,12 +15,10 @@ class Card extends Component {
 
     return(
       <View style={styles.container}>
-      <TouchableOpacity>
-      <Image style={styles.image} source={{uri: imageLink}}/>
-      <Text style={styles.welcome}>
-        {this.props.cardInfo.name}
-      </Text>
-      </TouchableOpacity>
+        <Image style={styles.image} source={{uri: imageLink}}/>
+        <Text style={styles.welcome}>
+          {this.props.cardInfo.title}
+        </Text>
       </View>
     )
   }

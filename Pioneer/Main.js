@@ -85,7 +85,7 @@ class Main extends Component {
       } else {
         var formattedCollection = response.results.map(function(location){
           var rLocation = {};
-          rLocation['name'] = location.name;
+          rLocation['title'] = location.name;
           if (location.photos){
             rLocation['photos'] = location.photos.map(function(photo){
               return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
@@ -96,8 +96,8 @@ class Main extends Component {
           location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
           location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
-          rLocation['lng'] = location.geometry.location.lng;
-          rLocation['lat'] = location.geometry.location.lat;
+          rLocation['longitude'] = location.geometry.location.lng;
+          rLocation['latitude'] = location.geometry.location.lat;
           return rLocation;
         });
 

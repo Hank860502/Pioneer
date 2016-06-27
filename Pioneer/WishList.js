@@ -16,14 +16,16 @@ import {
 class WishList extends Component {
   render(){
     var likeCollection = this.props.likeCollection
+    var lat = likeCollection[0].lat
+    var lng = likeCollection[0].lng
     var list = likeCollection.map((place,index) => {
-      var imageLink = place.photos[0]
+    var imageLink = place.photos[0]
 
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
             <Image style={styles.image} source={{uri: imageLink}}/>
-            <Text style={styles.welcome}> {place.name}</Text>
+            <Text style={styles.welcome}> {place.title}</Text>
           </View>
           <Separator />
         </View>
@@ -32,7 +34,7 @@ class WishList extends Component {
 
     return(
       <View>
-      <MyMap />
+      <MyMap collection={likeCollection}/>
       <ScrollView  horizontal={true} style={styles.containerWishList}>
         {list}
       </ScrollView>
