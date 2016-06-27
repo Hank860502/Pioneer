@@ -25,7 +25,7 @@ class WishList extends Component {
         <View key={index}>
           <View style={styles.rowContainer}>
             <Image style={styles.image} source={{uri: imageLink}}/>
-            <Text style={styles.welcome}> {place.name}</Text>
+            <Text style={styles.welcome}> {place.title}</Text>
           </View>
           <Separator />
         </View>
