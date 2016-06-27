@@ -65,7 +65,7 @@ class Main extends Component {
   constructor(){
     super();
     this.state = {
-      currentLocationLoaded: false,
+      // currentLocationLoaded: false,
       error: false,
       travelLocationName: '',
       travelLocationLng: '',
@@ -117,6 +117,7 @@ class Main extends Component {
           travelLocationName: '',
           travelLocationLng: '',
           travelLocationLat: '',
+          // currentLocationLoaded: false
         });
         this.props.navigator.push({
           title: 'CardContainer',
@@ -135,13 +136,15 @@ class Main extends Component {
   }
 
   getCurrentLocation() {
+    console.log("getting currentLocation")
+    console.log(this.state)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           travelLocationLat: position.coords.latitude,
           travelLocationLng: position.coords.longitude,
-        });
-        this.handleAroundMeSubmit()
+          // currentLocationLoaded: false
+        }, () => {this.handleAroundMeSubmit()});
       },
       (error) => {
 

@@ -39,6 +39,7 @@ class CardContainer extends Component {
         index: this.state.index + 1,
       })
     } else {
+      // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
         title: 'Wishlist',
         likeCollection: this.state.likeCollection,
@@ -114,7 +115,13 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    this.state.likeCollection.push(this.state.collection[this.state.index])
+    // Note: Could probably eliminate this. - Jason
+    this.state.likeCollection.push(this.state.collection[this.state.index]);
+
+    /*
+      Note: All this is doing is executing the parent method from Pioneer, and passing the card which will then essentially be pushed.
+    */
+    this.props.updateLikeCollection(this.state.collection[this.state.index]);
     this._goToNextCard();
   }
 
