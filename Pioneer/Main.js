@@ -74,36 +74,7 @@ class Main extends Component {
     }
   }
 
-  handleByLocationSubmit(){
-    api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
-    .then((response) => {
-      if(response.message === 'Not Found'){
-        this.setState({
-          error: 'No places found',
-        })
-      } else {
-        this.setState({
-          cards: response.results,
-          error: false,
-          travelLocationName: '',
-          travelLocationLng: '',
-          travelLocationLat: ''
-        });
-        this.props.navigator.push({
-          title: 'CardContainer',
-          index: 0,
-          collection: this.state.cards
-        });
-      }
-    })
-    // update indicator spinner
-    // Make API call to Google Geocode Service based on address
-    // Set lng/lat
-    // OK Make Google Places API call
-    // reroute to the cards passing the Google Places information
-  }
-
-  handleAroundMeSubmit(){
+  handleDiscoverSubmit(){
     api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
     .then((response) => {
       if(response.message === 'Not Found'){
@@ -144,7 +115,7 @@ class Main extends Component {
           travelLocationLat: position.coords.latitude,
           travelLocationLng: position.coords.longitude,
           // currentLocationLoaded: false
-        }, () => {this.handleAroundMeSubmit()});
+        }, () => {this.handleDiscoverSubmit()});
       },
       (error) => {
 
@@ -217,7 +188,7 @@ class Main extends Component {
         />*/}
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleByLocationSubmit.bind(this)}
+          onPress={this.handleDiscoverSubmit.bind(this)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>
@@ -232,7 +203,5 @@ class Main extends Component {
     )
   }
 }
-
-
 
 export default Main;
