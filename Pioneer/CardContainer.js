@@ -14,7 +14,7 @@ import {
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
 var SWIPE_THRESHOLD = 120;
 
@@ -26,7 +26,9 @@ class CardContainer extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       index: this.props.index,
-      collection: this.props.collection
+      collection: this.props.collection,
+      likeCollection: [],
+      dislikeCollection: []
     }
   }
 
@@ -38,7 +40,9 @@ class CardContainer extends Component {
       })
     } else {
       this.props.navigator.push({
-        title: 'Pioneer'
+        title: 'Wishlist',
+        likeCollection: this.state.likeCollection,
+        dislikeCollection: this.state.dislikeCollection
       });
     }
   }
@@ -110,12 +114,12 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log('like');
+    this.state.likeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
   handleDislike(){
-    console.log('dislike');
+    this.state.dislikeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 

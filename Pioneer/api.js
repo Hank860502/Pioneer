@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
 var api = {
   getPlaces(lng,lat){
