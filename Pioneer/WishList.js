@@ -11,14 +11,11 @@ import {
 
 import Separator from './Separator.js'
 
-var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
-
 class WishList extends Component {
   render(){
     var likeCollection = this.props.likeCollection
     var list = likeCollection.map((place,index) => {
-      var referenceLink = place.photos ? place.photos[0].photo_reference : null
-      var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
+      var imageLink = place.photos[0]
 
       return (
         <View key={index}>
