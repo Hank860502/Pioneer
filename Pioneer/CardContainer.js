@@ -164,11 +164,11 @@ class CardContainer extends Component {
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
+          <Image style={styles.yupText} source={require('./bored.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+          <Image style={styles.yupText} source={require('./plane.png')}/>
 
         </Animated.View>
         <TouchableHighlight
@@ -206,16 +206,16 @@ const styles = StyleSheet.create({
     top: 540,
     left: 75,
    },
-  //  nope: {
-  //    position: 'absolute',
-  //    top: 50,
-  //    left: 30,
-  //  },
-  //  yup: {
-  //    position: 'absolute',
-  //    top: 50,
-  //    left: 230,
-  //  }
+   nope: {
+     position: 'absolute',
+     top: 290,
+     left: 120,
+   },
+   yup: {
+     position: 'absolute',
+     top: 280,
+     left: 120,
+   }
 });
 
 export default CardContainer;
