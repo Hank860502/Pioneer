@@ -10,29 +10,17 @@ import {
 } from 'react-native';
 
 class Card extends Component {
-
-  clickOnImage(){
-    console.log("clicked")
-  }
-
   render(){
     var imageLink = this.props.cardInfo.photos[0]
 
 
     return(
-
       <View style={styles.container}>
-      <TouchableOpacity
-          onPress={this.clickOnImage}
-          underlayColor='white'
-        >
-        <Image style={styles.image} source={{uri: imageLink}}/>
-      </TouchableOpacity>
-        <Text style={styles.welcome}>
-          {this.props.cardInfo.name}
-        </Text>
+      <Image style={styles.image} source={{uri: imageLink}}/>
+      <Text style={styles.welcome}>
+        {this.props.cardInfo.name}
+      </Text>
       </View>
-
     )
   }
 };
