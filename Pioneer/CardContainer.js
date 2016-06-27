@@ -119,7 +119,6 @@ class CardContainer extends Component {
     /*
       Note: All this is doing is executing the parent method from Pioneer, and passing the card which will then essentially be pushed.
     */
-    debugger;
     this.props.updateLikeCollection(this.state.collection[this.state.index]);
     this._goToNextCard();
   }
