@@ -26,7 +26,9 @@ class CardContainer extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       index: this.props.index,
-      collection: this.props.collection
+      collection: this.props.collection,
+      likeCollection: [],
+      dislikeCollection: []
     }
   }
 
@@ -37,6 +39,7 @@ class CardContainer extends Component {
         index: this.state.index + 1,
       })
     } else {
+      debugger;
       this.props.navigator.push({
         title: 'Pioneer'
       });
@@ -110,12 +113,12 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log('like');
+    this.state.likeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
   handleDislike(){
-    console.log('dislike');
+    this.state.dislikeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
