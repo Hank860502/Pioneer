@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     flex: 1,
     //  justifyContent: 'center',
     //  alignItems: 'center',
-    marginTop: 50,
     backgroundColor: 'white',
    },
   welcome: {
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     height:190,
     width:180,
     borderRadius:50,
-    marginTop:100,
+    marginTop: 10,
     alignSelf: 'center'
   },
   rowContainer: {
