@@ -34,27 +34,35 @@ var NavigationBarRouteMapper = {
   RightButton(route, navigator, index, navState) {
     return (
       <TouchableHighlight
-         underlayColor="transparent"
+        underlayColor="transparent"
         // onPress={this.goToWishList.bind(this)}
-         onPress={() => { navigator.push({
-           title: 'Wishlist',
-           likeCollection: likeCollection,
-           dislikeCollection: []
-           })
-         }}
-         >
+        onPress={() => { navigator.push({
+            title: 'Wishlist',
+            likeCollection: likeCollection,
+            dislikeCollection: []
+          })
+        }}
+      >
          <View>
            <Image source={require('./wishlist.png')}/>
          </View>
-        {/*<Text style={ styles.leftNavButtonText }>Back</Text>*/}
       </TouchableHighlight>
   )},
   Title(route, navigator, index, navState) {
-    return <Image
-        style = {styles.image}
-        source={require('./Pioneer.png')}
-      />
-  },
+    return (
+      <TouchableHighlight
+        underlayColor="transparent"
+        onPress={() => { navigator.push({
+            title: 'Pioneer',
+          })
+        }}
+      >
+        <Image
+          style = {styles.image}
+          source={require('./Pioneer.png')}
+        />
+      </TouchableHighlight>
+    )},
 };
 
 class Pioneer extends Component {
