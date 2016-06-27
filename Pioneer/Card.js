@@ -12,9 +12,7 @@ var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
 
 class Card extends Component {
   render(){
-
-    var referenceLink = this.props.cardInfo.photos ? this.props.cardInfo.photos[0].photo_reference : null
-    var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
+    var imageLink = this.props.cardInfo.photos[0]
 
     return(
 

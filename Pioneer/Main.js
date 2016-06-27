@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -82,8 +83,21 @@ class Main extends Component {
           error: 'No places found',
         })
       } else {
+        var formattedCollection = response.results.map(function(location){
+          var rLocation = {};
+          rLocation['name'] = location.name;
+          if (location.photos){
+            rLocation['photos'] = location.photos.map(function(photo){
+              return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+              });
+          } else {
+             rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+          }
+          return rLocation;
+        });
+
         this.setState({
-          cards: response.results,
+          cards: formattedCollection,
           error: false,
           travelLocationName: '',
           travelLocationLng: '',
