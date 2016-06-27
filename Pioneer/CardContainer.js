@@ -14,8 +14,6 @@ import {
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
-
 var SWIPE_THRESHOLD = 120;
 
 class CardContainer extends Component {
@@ -152,9 +150,6 @@ class CardContainer extends Component {
 
     // const { collection, index } = this.props;
     // const currentCard = collection[index];
-    //
-    // var referenceLink = currentCard.photos ? currentCard.photos[0].photo_reference : null
-    // var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
 
     return(
 
