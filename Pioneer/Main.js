@@ -13,7 +13,7 @@ import {
   Geolocation
 } from 'react-native';
 
-var apiKey = 'AIzaSyCj9yUP6BgnHAX-qFkkEQDmgce9hB_vpuo';
+var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 
 const styles = StyleSheet.create({
   mainContainer: {

@@ -30,7 +30,7 @@ class MyMap extends Component {
         <MapView
           style={styles.map}
           showsUserLocation={true}
-          followUserLocation={true}
+          //followUserLocation={true}
           annotations={this.state.markers}
         />
       </View>
