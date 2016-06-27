@@ -6,7 +6,7 @@ import {
   View,
   Image,
   Navigator,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 class Card extends Component {
@@ -22,12 +22,12 @@ class Card extends Component {
     return(
 
       <View style={styles.container}>
-      <TouchableHighlight
+      <TouchableOpacity
           onPress={this.clickOnImage}
           underlayColor='white'
         >
         <Image style={styles.image} source={{uri: imageLink}}/>
-      </TouchableHighlight>
+      </TouchableOpacity>
         <Text style={styles.welcome}>
           {this.props.cardInfo.name}
         </Text>

@@ -13,7 +13,6 @@ import {
   View,
   Image,
   Navigator,
-  TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
 
@@ -33,7 +32,7 @@ var NavigationBarRouteMapper = {
   },
   RightButton(route, navigator, index, navState) {
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         underlayColor="transparent"
         // onPress={this.goToWishList.bind(this)}
         onPress={() => { navigator.push({
@@ -46,11 +45,11 @@ var NavigationBarRouteMapper = {
          <View>
            <Image source={require('./wishlist.png')}/>
          </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
   )},
   Title(route, navigator, index, navState) {
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         underlayColor="transparent"
         onPress={() => { navigator.push({
             title: 'Pioneer',
@@ -61,7 +60,7 @@ var NavigationBarRouteMapper = {
           style = {styles.image}
           source={require('./Pioneer.png')}
         />
-      </TouchableHighlight>
+      </TouchableOpacity>
     )},
 };
 
