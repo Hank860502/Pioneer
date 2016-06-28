@@ -16,8 +16,8 @@ import {
 class WishList extends Component {
   render(){
     var likeCollection = this.props.likeCollection
-    var lat = likeCollection[0].lat
-    var lng = likeCollection[0].lng
+    // var lat = likeCollection[0].lat
+    // var lng = likeCollection[0].lng
     var list = likeCollection.map((place,index) => {
     var imageLink = place.photos[0]
 
