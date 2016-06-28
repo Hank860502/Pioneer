@@ -83,6 +83,7 @@ class Main extends Component {
         var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
+          location.description ? rLocation['description'] = location.description : rLocation['description'] = null;
           if (location.photos){
             rLocation['photos'] = location.photos;
           } else {

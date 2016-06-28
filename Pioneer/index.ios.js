@@ -28,7 +28,15 @@ const likeCollection = [];
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
-     return null
+    if(title='Detail'){
+      return (
+        <TouchableOpacity
+        	 underlayColor="transparent"
+           onPress={() => { if (index > 0) { navigator.pop() } }}>
+          <Text style={ styles.leftNavButtonText }>Back</Text>
+        </TouchableOpacity>
+  	)}
+  	else { return null }
   },
   RightButton(route, navigator, index, navState) {
     return (

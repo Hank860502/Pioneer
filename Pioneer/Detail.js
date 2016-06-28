@@ -17,9 +17,37 @@ class Detail extends Component {
         <Text>
           {this.props.card.title}
         </Text>
+
+        <Image style={styles.image} source={{uri: this.props.card.photos[0]}} />
+        <Text>
+        {this.props.card.description}
+        </Text>
+
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center',
+     backgroundColor: 'white',
+   },
+   welcome: {
+     fontSize: 20,
+     textAlign: 'center',
+     margin: 10,
+   },
+   image:{
+     height:190,
+     width:180,
+     borderRadius:50,
+     marginTop: 10,
+     alignSelf: 'center'
+   },
+});
+
 
 export default Detail;
