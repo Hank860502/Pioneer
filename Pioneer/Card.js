@@ -6,7 +6,7 @@ import {
   View,
   Image,
   Navigator,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 class Card extends Component {
@@ -23,7 +23,7 @@ class Card extends Component {
     var imageLink = this.props.cardInfo.photos[0]
 
     return(
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={this.readMore.bind(this)}
     >
       <View style={styles.container}>
@@ -32,7 +32,7 @@ class Card extends Component {
           {this.props.cardInfo.title}
         </Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
     )
   }
 };
