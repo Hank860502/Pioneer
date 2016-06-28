@@ -40,7 +40,10 @@ var NavigationBarRouteMapper = {
   },
   RightButton(route, navigator, index, navState) {
     if(route.title==='Wishlist') {
-      return null
+      return (
+        <View>
+          <Image source={require('./wishlist.png')}/>
+        </View>)
     } else {
     return (
       <TouchableOpacity
