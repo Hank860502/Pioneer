@@ -33,7 +33,7 @@ var NavigationBarRouteMapper = {
         <TouchableOpacity
         	 underlayColor="transparent"
            onPress={() => { navigator.pop() }}>
-          <Text style={ styles.leftNavButtonText }>Back</Text>
+             <Image style={styles.back} source={require('./back.png')}/>
         </TouchableOpacity>
   	)}
   	else { return null }
@@ -162,6 +162,9 @@ const styles = StyleSheet.create({
     },
     image: {
       top: -5
+    },
+    back: {
+      marginTop: 5,
     }
 });
 
