@@ -77,11 +77,7 @@ class Main extends Component {
 
   handleDiscoverSubmit(){
     if (this.state.travelLocationName == 'San Francisco'){
-      console.log("SF");
-      console.log(this.state.travelLocationLat);
-      console.log(this.state.travelLocationLng);
       api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
-        console.log(response);
         var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
@@ -96,7 +92,6 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
-          // console.log(rLocation);
           return rLocation;
         });
         this.setState({
@@ -114,9 +109,6 @@ class Main extends Component {
         });
       })
     } else {
-      console.log("Google API");
-      console.log(this.state.travelLocationLat);
-      console.log(this.state.travelLocationLng);
       api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng)
       .then((response) => {
         if(response.message === 'Not Found'){
@@ -124,7 +116,6 @@ class Main extends Component {
             error: 'No places found',
           })
         } else {
-          console.log(response);
           var formattedCollection = response.results.map(function(location){
             var rLocation = {};
             rLocation['title'] = location.name;
@@ -167,8 +158,6 @@ class Main extends Component {
   }
 
   getCurrentLocation() {
-    console.log("getting currentLocation")
-    console.log(this.state)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
