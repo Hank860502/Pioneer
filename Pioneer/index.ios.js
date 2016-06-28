@@ -28,12 +28,12 @@ const likeCollection = [];
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
-    if(route.title==='Detail'){
+    if(route.title==='Detail' || route.title==='Wishlist'){
       return (
         <TouchableOpacity
         	 underlayColor="transparent"
            onPress={() => { navigator.pop() }}>
-          <Text style={ styles.leftNavButtonText }>Back</Text>
+             <Image style={styles.back} source={require('./back.png')}/>
         </TouchableOpacity>
   	)}
   	else { return null }
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     nav: {
     	height: 60,
-      backgroundColor: 'white'
+      backgroundColor: '#9EB4BE',
     },
     title: {
     	marginTop:4,
@@ -166,7 +166,10 @@ const styles = StyleSheet.create({
     	fontSize:18
     },
     image: {
-      top: -5
+      top: -2
+    },
+    back: {
+      marginTop: 5,
     }
 });
 
