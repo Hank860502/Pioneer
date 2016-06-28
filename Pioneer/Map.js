@@ -38,8 +38,8 @@ class MyMap extends Component {
 
       this.state.lat = (maxLat+minLat) /2
       this.state.lng = (maxLng+minLng) /2
-      this.state.latitudeDelta = (maxLat - minLat)*1.5 + 0.001
-      this.state.longitudeDelta = (maxLng - minLng)*1.5 + 0.001
+      this.state.latitudeDelta = (maxLat - minLat)*1.2 + 0.001
+      this.state.longitudeDelta = (maxLng - minLng)*1.2 + 0.001
     };
   }
 

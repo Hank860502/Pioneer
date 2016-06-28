@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomplete';
 import api from './api.js'　　　
+import index from './index.ios.js'
 
 import {
   StyleSheet,
@@ -66,7 +67,6 @@ class Main extends Component {
   constructor(){
     super();
     this.state = {
-      // currentLocationLoaded: false,
       error: false,
       travelLocationName: '',
       travelLocationLng: '',
@@ -75,11 +75,12 @@ class Main extends Component {
     }
   }
 
-  handleDiscoverSubmit(){
+  handleDiscoverSubmit(likeCollection){
+    console.log(likeCollection)
     if (this.state.travelLocationName == 'San Francisco'){
-      console.log("Custom Location");
+      // console.log("Custom Location");
       api.getPioneerPlaces().then((response) => {
-        console.log(response);
+        // console.log(response);
         var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
@@ -94,7 +95,7 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
-          console.log(rLocation);
+          // console.log(rLocation);
           return rLocation;
         });
         this.setState({
@@ -108,7 +109,8 @@ class Main extends Component {
         this.props.navigator.push({
           title: 'CardContainer',
           index: 0,
-          collection: this.state.cards
+          collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+          otherLikeCollection: likeCollection
         });
       })
     } else {
@@ -147,7 +149,8 @@ class Main extends Component {
           this.props.navigator.push({
             title: 'CardContainer',
             index: 0,
-            collection: this.state.cards
+            collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+            otherLikeCollection: likeCollection
           });
         }
       })
@@ -160,9 +163,10 @@ class Main extends Component {
     });
   }
 
-  getCurrentLocation() {
-    console.log("getting currentLocation")
-    console.log(this.state)
+  getCurrentLocation(likeCollection) {
+    // console.log("getting currentLocation")
+    // console.log(this.state)
+    console.log(likeCollection)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -170,7 +174,7 @@ class Main extends Component {
           travelLocationLng: position.coords.longitude,
           travelLocationName: 'San Francisco'
           // currentLocationLoaded: false
-        }, () => {this.handleDiscoverSubmit()});
+        }, () => {this.handleDiscoverSubmit(likeCollection)});
       },
       (error) => {
 
@@ -181,12 +185,20 @@ class Main extends Component {
     );
   }
 
+  filterOutLikedCards(collection, likedCollection) {
+    return collection.filter((card) => {
+      return !likedCollection.map(function(likedCard) {return likedCard.title}).includes(card.title)
+    })
+  }
+
 
   render() {
-
+    var likeCollection = this.props.likeCollection
+    console.log(likeCollection)
     return (
 
       <View style={styles.mainContainer}>
+      {/*{console.log(likeCollection)}*/}
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
         placeholder='Search'
@@ -242,13 +254,13 @@ class Main extends Component {
         />*/}
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleDiscoverSubmit.bind(this)}
+          onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.getCurrentLocation.bind(this)}
+          onPress={this.getCurrentLocation.bind(this, likeCollection)}
           underlayColor='white'>
             <Text style={styles.buttonText}> Around me </Text>
         </TouchableHighlight>
