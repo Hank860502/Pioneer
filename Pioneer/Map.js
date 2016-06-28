@@ -64,10 +64,6 @@ class MyMap extends Component {
             //followUserLocation={true}
             annotations={this.props.collection}
           />
-          <Text>{this.state.lat}</Text>
-          <Text>{this.state.lng}</Text>
-          <Text>{this.state.latitudeDelta}</Text>
-          <Text>{this.state.longitudeDelta}</Text>
         </View>
       )
     }else{
