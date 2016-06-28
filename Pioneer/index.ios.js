@@ -39,6 +39,9 @@ var NavigationBarRouteMapper = {
   	else { return null }
   },
   RightButton(route, navigator, index, navState) {
+    if(route.title==='Wishlist') {
+      return null
+    } else {
     return (
       <TouchableOpacity
         underlayColor="transparent"
@@ -54,22 +57,32 @@ var NavigationBarRouteMapper = {
            <Image source={require('./wishlist.png')}/>
          </View>
       </TouchableOpacity>
-  )},
+    )}
+  },
   Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-        underlayColor="transparent"
-        onPress={() => { navigator.push({
-            title: 'Pioneer',
-          })
-        }}
-      >
+    if(route.title==='Pioneer'){
+      return (
         <Image
           style = {styles.image}
           source={require('./Pioneer.png')}
         />
-      </TouchableOpacity>
-    )},
+      )
+    } else{
+      return (
+        <TouchableOpacity
+          underlayColor="transparent"
+          onPress={() => { navigator.push({
+              title: 'Pioneer',
+            })
+          }}
+        >
+          <Image
+            style = {styles.image}
+            source={require('./Pioneer.png')}
+          />
+        </TouchableOpacity>
+      )}
+    }
 };
 
 class Pioneer extends Component {
