@@ -12,8 +12,6 @@ import {
 class Card extends Component {
 
   readMore(){
-    console.log("Readmore: Navigator is...");
-    console.log(this.props.navigator);
     this.props.navigator.push({
       title: 'Detail',
       card: this.props.cardInfo

@@ -94,7 +94,7 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
-          console.log(rLocation);
+          // console.log(rLocation);
           return rLocation;
         });
         this.setState({

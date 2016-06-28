@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import Card from './Card.js'
-console.log(this.props)
 
 class Detail extends Component {
   starRating(){
@@ -30,28 +29,24 @@ class Detail extends Component {
     var stars = this.starRating()
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>
+        <Text style={styles.title}>
           {this.props.card.title}
         </Text>
 
         <Image style={styles.image} source={{uri: this.props.card.photos[0]}} />
 
-        <Text>
+        <Text style={styles.welcome}>
           {this.props.card.description}
         </Text>
 
         {stars}
 
-        <Text>
+        <Text style={styles.welcome}>
           {this.props.card.duration}
         </Text>
 
-        <Text>
+        <Text style={styles.welcome}>
           {this.props.card.price}
-        </Text>
-
-        <Text>
-          {this.props.card.types}
         </Text>
       </View>
     );
@@ -69,6 +64,11 @@ const styles = StyleSheet.create({
      fontSize: 20,
      textAlign: 'center',
      margin: 10,
+   },
+   title: {
+     fontSize: 25,
+     textAlign: 'center',
+     marginTop: 70.
    },
    image:{
      height:380,
