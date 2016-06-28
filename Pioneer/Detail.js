@@ -19,10 +19,26 @@ class Detail extends Component {
         </Text>
 
         <Image style={styles.image} source={{uri: this.props.card.photos[0]}} />
+
         <Text>
-        {this.props.card.description}
+          {this.props.card.description}
         </Text>
 
+        <Text>
+          Rating: {this.props.card.rating}
+        </Text>
+
+        <Text>
+          Time suggested to spend on: {this.props.card.duration}
+        </Text>
+
+        <Text>
+          Price: $ something is wrong here{this.props.card.price}
+        </Text>
+
+        <Text>
+          {this.props.card.types}
+        </Text>
       </View>
     );
   }
