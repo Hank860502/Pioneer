@@ -11,7 +11,23 @@ import Card from './Card.js'
 console.log(this.props)
 
 class Detail extends Component {
+  starRating(){
+    var stars = Math.ceil(parseFloat(this.props.card.rating))
+    if (stars==5){
+      return <Image source={require("./5Stars.png")} />
+    } else if (stars==4){
+      return <Image source={require("./4Stars.png")} />
+    } else if (stars==3){
+      return <Image source={require("./3Stars.png")} />
+    } else if (stars==2){
+      return <Image source={require("./2Stars.png")} />
+    } else if (stars==1){
+      return <Image source={require("./1Star.png")} />
+    }
+  }
+
   render(){
+    var stars = this.starRating()
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>
@@ -24,16 +40,14 @@ class Detail extends Component {
           {this.props.card.description}
         </Text>
 
+        {stars}
+
         <Text>
-          Rating: {this.props.card.rating}
+          {this.props.card.duration}
         </Text>
 
         <Text>
-          Time suggested to spend on: {this.props.card.duration}
-        </Text>
-
-        <Text>
-          Price: $ something is wrong here{this.props.card.price}
+          {this.props.card.price}
         </Text>
 
         <Text>
