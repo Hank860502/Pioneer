@@ -30,8 +30,8 @@ class CardContainer extends Component {
       // newCards: this.props.collection.filter(function(x){
       //   return this.props.otherLikeCollection.indexOf(x) < 0
       // }),
-      likeCollection:[]
-      // dislikeCollection: []
+      likeCollection:[],
+      dislikeCollection: []
     }
   }
   // uniqueCards(){
