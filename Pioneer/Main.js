@@ -79,7 +79,7 @@ class Main extends Component {
     if (this.state.travelLocationName == 'San Francisco'){
       console.log("Custom Location");
       api.getPioneerPlaces().then((response) => {
-        console.log(response);
+        // console.log(response);
         var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
@@ -94,7 +94,7 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
-          console.log(rLocation);
+          // console.log(rLocation);
           return rLocation;
         });
         this.setState({

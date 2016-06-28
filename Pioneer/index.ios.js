@@ -28,7 +28,7 @@ const likeCollection = [];
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
-    if(route.title==='Detail'){
+    if(route.title==='Detail' || route.title==='Wishlist'){
       return (
         <TouchableOpacity
         	 underlayColor="transparent"

@@ -10,21 +10,33 @@ import {
   Image,
   Navigator,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 
 
 class WishList extends Component {
+
+  readMore(place){
+    console.log(place)
+    this.props.navigator.push({
+      title: 'Detail',
+      card: place
+    })
+
+  }
+
   render(){
     var likeCollection = this.props.likeCollection
-    // var lat = likeCollection[0].lat
-    // var lng = likeCollection[0].lng
     var list = likeCollection.map((place,index) => {
     var imageLink = place.photos[0]
 
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
+          <TouchableOpacity
+            onPress={()=>this.readMore(place)}>
             <Image style={styles.image} source={{uri: imageLink}}/>
+          </TouchableOpacity>
             <Text style={styles.welcome}> {place.title}</Text>
           </View>
           <Separator />
