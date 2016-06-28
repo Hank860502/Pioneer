@@ -19,7 +19,7 @@ import {
 import Main from './Main.js';
 import CardContainer from './CardContainer.js';
 import WishList from './WishList.js';
-
+import Detail from './Detail';
 
 /*
   Issue: Because there isn't a shared store sharing the likeCollection  between the NavigationBarRouteMapper and Pioneer component, resorting to a hacky `const likeCollection` with array value would be needed (as below). However this `IS NOT THE PREFERRED` method as React prefers `stores` to manage the state of the application.  I would look into implementing React's Flux or third-party library Redux.  Personally I like Redux better
@@ -81,7 +81,7 @@ class Pioneer extends Component {
           index={route.index}
           collection={route.collection}
           updateLikeCollection={this.updateLikeCollection.bind(this)}
-          
+
         />
       );
     } else if (route.title === 'Wishlist') {
@@ -89,6 +89,13 @@ class Pioneer extends Component {
         <WishList
           navigator={navigator}
           likeCollection={likeCollection}
+        />
+      );
+    } else if (route.title === 'Detail') {
+      return (
+        <Detail
+          navigator={navigator}
+          card={route.card}
         />
       );
     }

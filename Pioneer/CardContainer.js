@@ -153,7 +153,7 @@ class CardContainer extends Component {
 
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-          <Card cardInfo={this.state.collection[this.state.index]}/>
+          <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
