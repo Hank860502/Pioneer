@@ -16,25 +16,21 @@ import {
 
 class WishList extends Component {
 
-  readMore(){
-    console.log(this)
+  readMore(place){
     this.props.navigator.push({
       title: 'Detail',
-      card: this.props
+      card: place
     });
   }
   render(){
     var likeCollection = this.props.likeCollection
-    // var lat = likeCollection[0].lat
-    // var lng = likeCollection[0].lng
     var list = likeCollection.map((place,index) => {
     var imageLink = place.photos[0]
-
       return (
         <View key={index}>
           <View style={styles.rowContainer}>
           <TouchableOpacity
-            onPress={this.readMore.bind(this)}
+            onPress={this.readMore(place)}
           >
             <Image style={styles.image} source={{uri: imageLink}}/>
           </TouchableOpacity>
