@@ -32,7 +32,7 @@ var NavigationBarRouteMapper = {
       return (
         <TouchableOpacity
         	 underlayColor="transparent"
-           onPress={() => { if (route.title==='Detail') { navigator.pop() } }}>
+           onPress={() => { navigator.pop() }}>
           <Text style={ styles.leftNavButtonText }>Back</Text>
         </TouchableOpacity>
   	)}
