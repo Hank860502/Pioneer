@@ -6,20 +6,33 @@ import {
   View,
   Image,
   Navigator,
-  TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 
 class Card extends Component {
+
+  readMore(){
+    console.log("Readmore: Navigator is...");
+    console.log(this.props.navigator);
+    this.props.navigator.push({
+      title: 'Detail',
+      card: this.props.cardInfo
+    });
+  }
   render(){
     var imageLink = this.props.cardInfo.photos[0]
 
     return(
+    <TouchableHighlight
+      onPress={this.readMore.bind(this)}
+    >
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: imageLink}}/>
         <Text style={styles.welcome}>
           {this.props.cardInfo.title}
         </Text>
       </View>
+    </TouchableHighlight>
     )
   }
 };
