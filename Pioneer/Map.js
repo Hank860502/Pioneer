@@ -66,8 +66,6 @@ class MyMap extends Component {
       </View>
     )
   }
-
-
 }
 
 const styles = StyleSheet.create({

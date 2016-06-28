@@ -76,31 +76,26 @@ class Main extends Component {
   }
 
   handleDiscoverSubmit(){
-    api.getPlaces(this.state.travelLocationLng,this.state.travelLocationLat)
-    .then((response) => {
-      if(response.message === 'Not Found'){
-        this.setState({
-          error: 'No places found',
-        })
-      } else {
-        var formattedCollection = response.results.map(function(location){
+    if (this.state.travelLocationName == 'San Francisco'){
+      console.log("Custom Location");
+      api.getPioneerPlaces().then((response) => {
+        console.log(response);
+        var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
           if (location.photos){
-            rLocation['photos'] = location.photos.map(function(photo){
-              return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
-              });
+            rLocation['photos'] = location.photos;
           } else {
              rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
           };
-          location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
+          location.price_level ? rLocation['price_level'] = location.price : rLocation['price_level'] = null;
           location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
-          rLocation['longitude'] = location.geometry.location.lng;
-          rLocation['latitude'] = location.geometry.location.lat;
+          rLocation['longitude'] = location.longitude;
+          rLocation['latitude'] = location.latitude;
+          console.log(rLocation);
           return rLocation;
         });
-
         this.setState({
           cards: formattedCollection,
           error: false,
@@ -114,9 +109,48 @@ class Main extends Component {
           index: 0,
           collection: this.state.cards
         });
-      }
-    })
-
+      })
+    } else {
+      api.getGooglePlaces(this.state.travelLocationLng,this.state.travelLocationLat)
+      .then((response) => {
+        if(response.message === 'Not Found'){
+          this.setState({
+            error: 'No places found',
+          })
+        } else {
+          var formattedCollection = response.results.map(function(location){
+            var rLocation = {};
+            rLocation['title'] = location.name;
+            if (location.photos){
+              rLocation['photos'] = location.photos.map(function(photo){
+                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+                });
+            } else {
+               rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+            };
+            location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
+            location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
+            location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
+            rLocation['longitude'] = location.geometry.location.lng;
+            rLocation['latitude'] = location.geometry.location.lat;
+            return rLocation;
+          });
+          this.setState({
+            cards: formattedCollection,
+            error: false,
+            travelLocationName: '',
+            travelLocationLng: '',
+            travelLocationLat: '',
+            // currentLocationLoaded: false
+          });
+          this.props.navigator.push({
+            title: 'CardContainer',
+            index: 0,
+            collection: this.state.cards
+          });
+        }
+      })
+    }
   }
   updateCoordinates(lng,lat){
     this.setState({
@@ -133,6 +167,7 @@ class Main extends Component {
         this.setState({
           travelLocationLat: position.coords.latitude,
           travelLocationLng: position.coords.longitude,
+          travelLocationName: 'San Francisco'
           // currentLocationLoaded: false
         }, () => {this.handleDiscoverSubmit()});
       },
@@ -193,7 +228,6 @@ class Main extends Component {
           rankby: 'distance',
           types: 'food',
         }}
-
 
         filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
