@@ -25,11 +25,7 @@ class MyMap extends Component {
   componentWillMount(){
     if(this.props.collection.length>0){
       var latitude = this.props.collection.map(function(e){
-        if (e.latitude < 0) {
-          return e.latitude + 360
-        } else {
-          return e.latitude
-        }
+        return e.latitude
       });
       var longitude = this.props.collection.map(function(e){
         if (e.longitude < 0) {
@@ -68,6 +64,10 @@ class MyMap extends Component {
             //followUserLocation={true}
             annotations={this.props.collection}
           />
+          <Text>{this.state.lat}</Text>
+          <Text>{this.state.lng}</Text>
+          <Text>{this.state.latitudeDelta}</Text>
+          <Text>{this.state.longitudeDelta}</Text>
         </View>
       )
     }else{
