@@ -12,12 +12,6 @@ import {
   MapView
 } from 'react-native';
 
-// var region = {
-//   latitude,
-//   longitude,
-//   latitudeDelta,
-//   longitudeDelta,
-// };
 class MyMap extends Component {
   constructor(){
     super();
@@ -29,44 +23,54 @@ class MyMap extends Component {
     }
   }
   componentWillMount(){
-    var latitude = this.props.collection.map(function(e){
-      return e.latitude
-    });
-    var longitude = this.props.collection.map(function(e){
-      return e.longitude
-    });
+    if(this.props.collection.length>0){
+      var latitude = this.props.collection.map(function(e){
+        return e.latitude
+      });
+      var longitude = this.props.collection.map(function(e){
+        return e.longitude
+      });
 
-    var maxLat = Math.max(...latitude);
-    var minLat = Math.min(...latitude);
-    var maxLng = Math.max(...longitude);
-    var minLng = Math.min(...longitude);
+      var maxLat = Math.max(...latitude);
+      var minLat = Math.min(...latitude);
+      var maxLng = Math.max(...longitude);
+      var minLng = Math.min(...longitude);
 
-    this.state.lat = (maxLat+minLat) /2
-    this.state.lng = (maxLng+minLng) /2
+      this.state.lat = (maxLat+minLat) /2
+      this.state.lng = (maxLng+minLng) /2
+      this.state.latitudeDelta = (maxLat - minLat)*1.5 + 0.001
+      this.state.longitudeDelta = (maxLng - minLng)*1.5 + 0.001
+    };
   }
 
   render(){
-    return(
-      <View>
-      <Text>
-      {this.props.collection[0].longitude}
-      </Text>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: this.state.lat,
-            longitude: this.state.lng,
-            latitudeDelta: .04,
-            longitudeDelta: .04,
-          }}
-          //showsUserLocation={true}
-          //followUserLocation={true}
-          annotations={this.props.collection}
-        />
-      </View>
-    )
+    if(this.props.collection.length>0){
+      return(
+        <View>
+          <MapView
+            style={styles.map}
+            region={{
+              latitude: this.state.lat,
+              longitude: this.state.lng,
+              latitudeDelta: this.state.latitudeDelta,
+              longitudeDelta: this.state.longitudeDelta,
+            }}
+            //showsUserLocation={true}
+            //followUserLocation={true}
+            annotations={this.props.collection}
+          />
+        </View>
+      )
+    }else{
+      return(
+        <View style={styles.rowContainer}>
+          <Text style={styles.welcome}>
+            START SWIPING
+          </Text>
+        </View>
+      )
+    }
   }
-
 
 }
 
@@ -96,6 +100,14 @@ const styles = StyleSheet.create({
     padding: 3,
     borderWidth: 0.5,
     borderColor: '#777777',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  rowContainer: {
+    padding: 10
   },
 });
 
