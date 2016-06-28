@@ -28,7 +28,11 @@ class MyMap extends Component {
         return e.latitude
       });
       var longitude = this.props.collection.map(function(e){
-        return e.longitude
+        if (e.longitude < 0) {
+          return e.longitude + 360
+        } else {
+          return e.longitude
+        }
       });
 
       var maxLat = Math.max(...latitude);
@@ -40,6 +44,7 @@ class MyMap extends Component {
       this.state.lng = (maxLng+minLng) /2
       this.state.latitudeDelta = (maxLat - minLat)*1.5 + 0.001
       this.state.longitudeDelta = (maxLng - minLng)*1.5 + 0.001
+      if (this.state.lng > 180) {this.state.lng -= 360}
     };
   }
 

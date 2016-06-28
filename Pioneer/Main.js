@@ -35,9 +35,7 @@ class Main extends Component {
 
   handleDiscoverSubmit(){
     if (this.state.travelLocationName == 'San Francisco'){
-      console.log("Custom Location");
-      api.getPioneerPlaces().then((response) => {
-        // console.log(response);
+      api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
         var formattedCollection = response.map(function(location){
           var rLocation = {};
           rLocation['title'] = location.name;
@@ -52,7 +50,6 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
-          // console.log(rLocation);
           return rLocation;
         });
         this.setState({
@@ -70,7 +67,7 @@ class Main extends Component {
         });
       })
     } else {
-      api.getGooglePlaces(this.state.travelLocationLng,this.state.travelLocationLat)
+      api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng)
       .then((response) => {
         if(response.message === 'Not Found'){
           this.setState({
@@ -111,7 +108,7 @@ class Main extends Component {
       })
     }
   }
-  updateCoordinates(lng,lat){
+  updateCoordinates(lat,lng){
     this.setState({
       travelLocationLat: lat,
       travelLocationLng: lng,
@@ -119,8 +116,6 @@ class Main extends Component {
   }
 
   getCurrentLocation() {
-    console.log("getting currentLocation")
-    console.log(this.state)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -169,7 +164,7 @@ class Main extends Component {
           lng = details.geometry.location.lng;
           desc = data.description;
           // description
-          this.updateCoordinates(lng,lat);
+          this.updateCoordinates(lat,lng);
         }}
         getDefaultValue={() => {
           return ''; // text input default value
