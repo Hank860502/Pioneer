@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   rowContainer: {
-    padding: 10
+    padding: 10,
+    width: 250,
   },
     rowTitle: {
     color: '#48BBEC',
