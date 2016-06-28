@@ -28,11 +28,11 @@ const likeCollection = [];
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
-    if(title='Detail'){
+    if(route.title==='Detail'){
       return (
         <TouchableOpacity
         	 underlayColor="transparent"
-           onPress={() => { if (index > 0) { navigator.pop() } }}>
+           onPress={() => { if (route.title==='Detail') { navigator.pop() } }}>
           <Text style={ styles.leftNavButtonText }>Back</Text>
         </TouchableOpacity>
   	)}
