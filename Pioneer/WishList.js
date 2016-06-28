@@ -15,17 +15,16 @@ import {
 
 
 class WishList extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      place: ""
-    }
+
+  readMore(place){
+    console.log(place)
+    this.props.navigator.push({
+      title: 'Detail',
+      card: place
+    })
+
   }
 
-  readMore(){
-    console.log("hi")
-    console.log(this.state.place)
-  }
   render(){
     var likeCollection = this.props.likeCollection
     var list = likeCollection.map((place,index) => {
@@ -35,7 +34,7 @@ class WishList extends Component {
         <View key={index}>
           <View style={styles.rowContainer}>
           <TouchableOpacity
-            onPress={this.readMore.bind(this)}>
+            onPress={()=>this.readMore(place)}>
             <Image style={styles.image} source={{uri: imageLink}}/>
           </TouchableOpacity>
             <Text style={styles.welcome}> {place.title}</Text>
