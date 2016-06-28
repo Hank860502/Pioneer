@@ -71,7 +71,6 @@ class MyMap extends Component {
       )
     }
   }
-
 }
 
 const styles = StyleSheet.create({
