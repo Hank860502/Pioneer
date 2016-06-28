@@ -27,7 +27,7 @@ class Swipe extends Component {
   }
 }
 
-  _goToNextCard(){
+  _goToNextCard()
     if(this.props.index < (this.props.collection.length - 1)){
       this.props.navigator.push({
         title: 'Card',
@@ -139,7 +139,8 @@ class Swipe extends Component {
 
     const { collection, index } = this.props;
     const currentCard = collection[index];
-
+    // console.log(this);
+    // console.log(this.props);
     if(currentCard.photos){
       var referenceLink = currentCard.photos[0].photo_reference
       var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomplete';
 import api from './api.js'　　　
+import index from './index.ios.js'
 
 import {
   StyleSheet,
@@ -24,7 +25,6 @@ class Main extends Component {
   constructor(){
     super();
     this.state = {
-      // currentLocationLoaded: false,
       error: false,
       travelLocationName: '',
       travelLocationLng: '',
@@ -33,8 +33,10 @@ class Main extends Component {
     }
   }
 
-  handleDiscoverSubmit(){
+  handleDiscoverSubmit(likeCollection){
+    console.log(likeCollection)
     if (this.state.travelLocationName == 'San Francisco'){
+
       api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
         var formattedCollection = response.map(function(location){
           var rLocation = {};
@@ -50,6 +52,7 @@ class Main extends Component {
           location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
           rLocation['longitude'] = location.longitude;
           rLocation['latitude'] = location.latitude;
+
           return rLocation;
         });
         this.setState({
@@ -63,7 +66,8 @@ class Main extends Component {
         this.props.navigator.push({
           title: 'CardContainer',
           index: 0,
-          collection: this.state.cards
+          collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+          otherLikeCollection: likeCollection
         });
       })
     } else {
@@ -102,7 +106,8 @@ class Main extends Component {
           this.props.navigator.push({
             title: 'CardContainer',
             index: 0,
-            collection: this.state.cards
+            collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+            otherLikeCollection: likeCollection
           });
         }
       })
@@ -123,7 +128,7 @@ class Main extends Component {
           travelLocationLng: position.coords.longitude,
           travelLocationName: 'San Francisco'
           // currentLocationLoaded: false
-        }, () => {this.handleDiscoverSubmit()});
+        }, () => {this.handleDiscoverSubmit(likeCollection)});
       },
       (error) => {
 
@@ -134,12 +139,20 @@ class Main extends Component {
     );
   }
 
+  filterOutLikedCards(collection, likedCollection) {
+    return collection.filter((card) => {
+      return !likedCollection.map((likedCard) => {return likedCard.title}).includes(card.title)
+    })
+  }
+
 
   render() {
-
+    var likeCollection = this.props.likeCollection
+    console.log(likeCollection)
     return (
 
       <View style={styles.mainContainer}>
+
       <Image style={styles.background} source={require('./index.jpg')}/>
       <TouchableHighlight
       style={styles.button1}
@@ -149,7 +162,7 @@ class Main extends Component {
       </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
-          onPress={this.handleDiscoverSubmit.bind(this)}
+          onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
           underlayColor= '#1C4A5E'>
             <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>
