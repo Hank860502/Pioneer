@@ -82,12 +82,15 @@ class Pioneer extends Component {
 
   renderScene(route, navigator){
     if(route.title === 'Pioneer'){
-      return <Main navigator={navigator} />
+      return <Main navigator={navigator}
+      likeCollection = {likeCollection}
+      />
     } else if (route.title === 'CardContainer') {
       return (
         <CardContainer navigator={navigator}
           index={route.index}
           collection={route.collection}
+          otherLikeCollection={route.otherLikeCollection}
           updateLikeCollection={this.updateLikeCollection.bind(this)}
 
         />
@@ -110,6 +113,8 @@ class Pioneer extends Component {
   }
 
   render() {
+    console.log("made it to this page")
+    console.log(likeCollection)
     return (
       <Navigator
         style={{flex:1}}

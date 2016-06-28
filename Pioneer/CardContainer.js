@@ -16,6 +16,7 @@ import Card from './Card.js'
 
 var SWIPE_THRESHOLD = 120;
 
+
 class CardContainer extends Component {
 
   constructor(props) {
@@ -25,11 +26,21 @@ class CardContainer extends Component {
       enter: new Animated.Value(0.5),
       index: this.props.index,
       collection: this.props.collection,
-      likeCollection: [],
+      otherLikeCollection: this.props.otherLikeCollection,
+      // newCards: this.props.collection.filter(function(x){
+      //   return this.props.otherLikeCollection.indexOf(x) < 0
+      // }),
+      likeCollection:[],
       dislikeCollection: []
     }
   }
-
+  // uniqueCards(){
+  //   if(this.props.otherLikeCollection > 0){
+  //     // this.props.collection.filter(function(x){
+  //     // return this.props.otherLikeCollection.indexOf(x) < 0
+  //   }
+  //   }),
+  // }
 // TO FIX
   _goToNextCard(){
     if(this.state.index < (this.state.collection.length - 1)){
@@ -111,6 +122,7 @@ class CardContainer extends Component {
   }
 
   handleLike(){
+    console.log(this.state.newCards)
     // Note: Could probably eliminate this. - Jason
     this.state.likeCollection.push(this.state.collection[this.state.index]);
 
@@ -127,6 +139,8 @@ class CardContainer extends Component {
   }
 
   render(){
+    console.log(this.state.collection)
+    console.log(this.state.otherLikeCollection)
 
     let { pan, enter, } = this.state;
 
@@ -146,13 +160,16 @@ class CardContainer extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
-    // const { collection, index } = this.props;
-    // const currentCard = collection[index];
+    const { collection, index } = this.props;
+    const currentCard = collection[index];
+
+    // console.log(this.state.collection)
+    // console.log(this.state.otherLikeCollection)
 
     return(
-
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
+        {/*need to create new array to call on for unique cards*/}
           <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 
