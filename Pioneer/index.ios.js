@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     },
     nav: {
     	height: 60,
-      backgroundColor: 'white'
+      backgroundColor: '#9EB4BE',
     },
     title: {
     	marginTop:4,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     	fontSize:18
     },
     image: {
-      top: -5
+      top: -2
     },
     back: {
       marginTop: 5,
