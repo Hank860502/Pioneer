@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C4A5E',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    marginTop: 100,
+    marginTop: 60,
   },
   backgorund: {
     alignSelf: 'center',
