@@ -80,11 +80,9 @@ class CardContainer extends Component {
             deceleration: 0.98
           }).start(this._resetState.bind(this))
             if (this.state.pan.x._value < 0){
-              console.log('Left-swipe');
               this.handleDislike();
               //this.handleDislike.bind(this)
             }else{
-              console.log('right-swipe');
               this.handleLike();
               //this.handleLike.bind(this)
             }
