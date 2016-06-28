@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 
 var api = {
-  getPlaces(lng,lat){
-    var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=prominence&radius=500&type=point_of_interest&key=${apiKey}`;
+  getGooglePlaces(lng,lat){
+    var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=prominence&radius=500&types=food&key=${apiKey}`;
     return fetch(url).then((response) => response.json()); // promise
   },
+  getPioneerPlaces(){
+    var url = 'https://sheltered-depths-18581.herokuapp.com/places';
+    return fetch(url).then((response) => response.json()); // promise
+  }
 };
 
 export default api;

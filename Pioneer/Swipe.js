@@ -13,7 +13,7 @@ import {
 
 import clamp from 'clamp';
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
+var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 
 var SWIPE_THRESHOLD = 120;
 

@@ -14,8 +14,6 @@ import {
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
-
 var SWIPE_THRESHOLD = 120;
 
 class CardContainer extends Component {
@@ -26,7 +24,9 @@ class CardContainer extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       index: this.props.index,
-      collection: this.props.collection
+      collection: this.props.collection,
+      likeCollection: [],
+      dislikeCollection: []
     }
   }
 
@@ -37,8 +37,11 @@ class CardContainer extends Component {
         index: this.state.index + 1,
       })
     } else {
+      // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
-        title: 'Pioneer'
+        title: 'Wishlist',
+        likeCollection: this.state.likeCollection,
+        dislikeCollection: this.state.dislikeCollection
       });
     }
   }
@@ -77,11 +80,9 @@ class CardContainer extends Component {
             deceleration: 0.98
           }).start(this._resetState.bind(this))
             if (this.state.pan.x._value < 0){
-              console.log('Left-swipe');
               this.handleDislike();
               //this.handleDislike.bind(this)
             }else{
-              console.log('right-swipe');
               this.handleLike();
               //this.handleLike.bind(this)
             }
@@ -110,12 +111,18 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log('like');
+    // Note: Could probably eliminate this. - Jason
+    this.state.likeCollection.push(this.state.collection[this.state.index]);
+
+    /*
+      Note: All this is doing is executing the parent method from Pioneer, and passing the card which will then essentially be pushed.
+    */
+    this.props.updateLikeCollection(this.state.collection[this.state.index]);
     this._goToNextCard();
   }
 
   handleDislike(){
-    console.log('dislike');
+    this.state.dislikeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
@@ -141,23 +148,20 @@ class CardContainer extends Component {
 
     // const { collection, index } = this.props;
     // const currentCard = collection[index];
-    //
-    // var referenceLink = currentCard.photos ? currentCard.photos[0].photo_reference : null
-    // var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
 
     return(
 
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-          <Card cardInfo={this.state.collection[this.state.index]}/>
+          <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
+          <Image style={styles.yupText} source={require('./bored.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+          <Image style={styles.yupText} source={require('./plane.png')}/>
 
         </Animated.View>
         <TouchableHighlight
@@ -195,6 +199,16 @@ const styles = StyleSheet.create({
     top: 540,
     left: 75,
    },
+   nope: {
+     position: 'absolute',
+     top: 290,
+     left: 120,
+   },
+   yup: {
+     position: 'absolute',
+     top: 280,
+     left: 120,
+   }
 });
 
 export default CardContainer;
