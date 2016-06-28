@@ -29,16 +29,12 @@ class Detail extends Component {
     var stars = this.starRating()
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.title}>
-          {this.props.card.title}
-        </Text>
 
         <Image style={styles.image} source={{uri: this.props.card.photos[0]}} />
 
-        <Text style={styles.welcome}>
-          {this.props.card.description}
+        <Text style={styles.title}>
+        {this.props.card.title}
         </Text>
-
         {stars}
 
         <Text style={styles.welcome}>
@@ -66,14 +62,13 @@ const styles = StyleSheet.create({
      margin: 10,
    },
    title: {
-     fontSize: 25,
+     fontSize: 20,
      textAlign: 'center',
-     marginTop: 70.
+     marginTop: 20.
    },
    image:{
-     height:380,
-     width:360,
-     borderRadius:50,
+     height:350,
+     width:375,
    },
 });
 

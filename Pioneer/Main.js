@@ -10,54 +10,12 @@ import {
   TextInput,
   TouchableHighlight,
   ActivityIndicator,
-  Geolocation
+  Geolocation,
+  Image
 } from 'react-native';
 
 var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    padding: 30,
-    marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#48BBEC',
-  },
-  title: {
-    marginBottom: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    color: '#fff',
-  },
-  searchInput: {
-    height: 50,
-    padding: 4,
-    marginRight: 5,
-    fontSize: 23,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    color: 'white',
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#111',
-    alignSelf: 'center',
-  },
-  button: {
-    height: 45,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-});
 // import api from './api.js'
 // import Card from './Card.js'
 // const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
@@ -182,9 +140,22 @@ class Main extends Component {
     return (
 
       <View style={styles.mainContainer}>
+      <Image style={styles.background} source={require('./index.jpg')}/>
+      <TouchableHighlight
+      style={styles.button1}
+      onPress={this.getCurrentLocation.bind(this)}
+      underlayColor= '#1C4A5E' >
+      <Text style={styles.buttonText}> Around me </Text>
+      </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleDiscoverSubmit.bind(this)}
+          underlayColor= '#1C4A5E'>
+            <Text style={styles.buttonText}> Discover Now </Text>
+        </TouchableHighlight>
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
-        placeholder='Search'
+        placeholder='Where do you want to go?'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
@@ -207,9 +178,10 @@ class Main extends Component {
         styles={{
           description: {
             fontWeight: 'bold',
+            color: 'white'
           },
           predefinedPlacesDescription: {
-            color: '#1faadb',
+            color: 'white',
           },
         }}
 
@@ -229,28 +201,55 @@ class Main extends Component {
 
         predefinedPlaces={[]}
       />
-        {/*<Text style={styles.title}> Find your next destination ! </Text>*/}
-        {/*<TextInput
-          style={styles.searchInput}
-          value={this.state.travelLocation}
-          onChangeText={(text) => this.setState({travelLocationName: text})}
-        />*/}
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.handleDiscoverSubmit.bind(this)}
-          underlayColor='white'>
-            <Text style={styles.buttonText}> Discover Now </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          onPress={this.getCurrentLocation.bind(this)}
-          underlayColor='white'>
-            <Text style={styles.buttonText}> Around me </Text>
-        </TouchableHighlight>
 
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#1C4A5E',
+  },
+  title: {
+    marginBottom: 20,
+    fontSize: 25,
+    textAlign: 'center',
+    color: '#fff',
+  },
+  searchInput: {
+    fontSize: 20,
+    color: 'white',
+    alignSelf: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center',
+  },
+  button: {
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: '#1C4A5E',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    marginTop: 5,
+  },
+  button1: {
+    height: 45,
+    flexDirection: 'row',
+    backgroundColor: '#1C4A5E',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    marginTop: 60,
+  },
+  backgorund: {
+    alignSelf: 'center',
+  }
+});
 
 export default Main;
