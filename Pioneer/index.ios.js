@@ -108,6 +108,8 @@ class Pioneer extends Component {
     if(route.title === 'Pioneer'){
       return <Main navigator={navigator}
       likeCollection = {likeCollection}
+      radius = {this.props.radius}
+      category = {this.props.category}
       />
     } else if (route.title === 'CardContainer') {
       return (
@@ -137,6 +139,7 @@ class Pioneer extends Component {
       return (
         <Setting
           navigator={navigator}
+
         />
       );
     }

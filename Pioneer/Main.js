@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomplete';
 import api from './api.js'　　　
 import index from './index.ios.js'
+import Setting from  './Setting'
 
 import {
   StyleSheet,

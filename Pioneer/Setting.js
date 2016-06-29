@@ -23,7 +23,14 @@ class Setting extends Component {
       showCancel2: false,
     }
   }
-
+  submit(){
+    console.log(this.state.radius)
+    this.props.navigator.push({
+      title: 'Pioneer',
+      radius: this.state.radius,
+      category: this.state.category,
+    });
+  }
   // toggleCancel(){
   //   this.setState({
   //     showCancel: !this.state.showCancel,
@@ -102,11 +109,11 @@ class Setting extends Component {
         <Picker
           selectedValue={this.state.radius}
           onValueChange={(radius) => this.setState({radius: radius})}>
-          <Picker.Item label="1 miles" value="10" />
-          <Picker.Item label="5 miles" value="30" />
-          <Picker.Item label="10 miles" value="50" />
+          <Picker.Item label="1 miles" value="1" />
+          <Picker.Item label="5 miles" value="5" />
+          <Picker.Item label="10 miles" value="10" />
           <Picker.Item label="20 miles" value="20" />
-          <Picker.Item label="30 miles" value="80" />
+          <Picker.Item label="30 miles" value="30" />
         </Picker>
         </View>
         <Text style={styles.text1}>Radius</Text>
@@ -126,6 +133,14 @@ class Setting extends Component {
           <Picker.Item label="Attractions" value="place_of_interset" />
         </Picker>
       </View>
+      <TouchableOpacity
+      onPress={()=>this.submit()}
+      style={styles.button}
+      underlayColor= 'white'>
+      <Text style={styles.text}>
+        Submit
+      </Text>
+      </TouchableOpacity>
 
       </View>
     )
@@ -134,6 +149,10 @@ class Setting extends Component {
 
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 23,
+    color: 'white'
+  },
   text1: {
     position: 'absolute',
     top: 98,
@@ -147,6 +166,17 @@ const styles = StyleSheet.create({
     left: 10,
     height: 38,
     fontSize: 23,
+  },
+  button: {
+    position: 'absolute',
+    left: 150,
+    top: 540,
+    padding: 10,
+    flexDirection: 'row',
+    backgroundColor: '#30ABBD',
+    borderRadius: 6,
+    opacity: 0.85,
+    marginTop: 5,
   },
 })
 
