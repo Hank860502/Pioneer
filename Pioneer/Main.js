@@ -257,7 +257,6 @@ const styles = StyleSheet.create({
     marginTop: Navigator.NavigationBar.Styles.General.NavBarHeight,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#1C4A5E',
   },
   title: {
     marginBottom: 20,
@@ -292,7 +291,8 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   backgorund: {
-    alignSelf: 'center',
+    // width: 375,
+    // height: 667
   }
 });
 
