@@ -63,20 +63,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
    },
   welcome: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'center',
     margin: 10,
   },
   image:{
     height:190,
     width:180,
-    borderRadius:50,
+    borderRadius:92,
     marginTop: 10,
     alignSelf: 'center'
   },
   rowContainer: {
     padding: 10,
-    width: 250,
+    width: 200,
   },
     rowTitle: {
     color: '#48BBEC',

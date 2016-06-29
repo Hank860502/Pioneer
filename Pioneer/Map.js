@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop:80,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderRadius:20,
+    borderColor: 'transparent',
   },
   row: {
     flexDirection: 'row',
