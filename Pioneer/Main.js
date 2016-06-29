@@ -120,7 +120,7 @@ class Main extends Component {
     });
   }
 
-  getCurrentLocation() {
+  getCurrentLocation(likeCollection) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -148,7 +148,6 @@ class Main extends Component {
 
   render() {
     var likeCollection = this.props.likeCollection
-    console.log(likeCollection)
     return (
 
       <View style={styles.mainContainer}>
@@ -156,7 +155,7 @@ class Main extends Component {
       <Image style={styles.background} source={require('./index.jpg')}/>
       <TouchableHighlight
       style={styles.button1}
-      onPress={this.getCurrentLocation.bind(this)}
+      onPress={this.getCurrentLocation.bind(this, likeCollection)}
       underlayColor= '#1C4A5E' >
       <Text style={styles.buttonText}> Around me </Text>
       </TouchableHighlight>
