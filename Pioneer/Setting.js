@@ -27,25 +27,12 @@ class Setting extends Component {
        this.setState({
            showCancel: !this.state.showCancel
        });
+       console.log(this.state.showCancel)
    }
-
-   _renderCancel() {
-       if (this.state.showCancel) {
-           return (
-               <TouchableHighlight
-                   onPress={this.toggleCancel()}>
-                   <View>
-                       <Text style={styles.cancelButtonText}>Cancel</Text>
-                   </View>
-               </TouchableHighlight>
-           );
-       } else {
-           return null;
-       }
-   },
 
   appendPicker(){
     console.log("click")
+    if (this.state.showCancel){
     return(
       <View>
         <Picker
@@ -61,21 +48,29 @@ class Setting extends Component {
           <Picker.Item label="Zoo" value="zoo" />
           <Picker.Item label="Attractions" value="place_of_interset" />
         </Picker>
-      </View>
-    )
+      </View>)
+    } else {
+        return null
+      }
   }
   render(){
-    var pickerCategory = this.appendPicker()
+    // var pickerCategory = this.appendPicker()
     return(
       <View>
         <Text style={styles.text}>This is the category: {this.state.category}</Text>
-        <TouchableOpacity
+        {/*<TouchableOpacity
           style={styles.button}
           onPress={pickerCategory}
           underlayColor= '#40B7DB' >
           <Text style={styles.buttonText}>Search By Category</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
         <Text>This is the second: {this.state.category}</Text>
+        <TouchableOpacity
+            onPress={() => this.toggleCancel()}
+            style={styles.button}>
+              <Text style={styles.buttonText}>Choose Category</Text>
+        </TouchableOpacity>
+        {this.appendPicker()}
       </View>
     )
   }
