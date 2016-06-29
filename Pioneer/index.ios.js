@@ -131,6 +131,12 @@ class Pioneer extends Component {
           card={route.card}
         />
       );
+    } else if (route.title === 'Setting') {
+      return (
+        <Setting
+          navigator={navigator}
+        />
+      );
     }
   }
 
