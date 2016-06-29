@@ -184,7 +184,7 @@ class Main extends Component {
 
       <View style={styles.mainContainer}>
         <View>
-          <Image style={styles.background} source={require('./index.jpg')}/>
+          <Image style={styles.background} source={require('./index1.jpg')}/>
         </View>
       <TouchableHighlight
       style={styles.button1}
@@ -198,55 +198,56 @@ class Main extends Component {
           underlayColor= 'white'>
             <Text style={styles.buttonText}> Discover Now </Text>
         </TouchableHighlight>*/}
-      <GooglePlacesAutocomplete
-        enableEmptySections = {true}
-        placeholder='Enter City, State or Zip Code'
-        minLength={2} // minimum length of text to search
-        autoFocus={false}
-        fetchDetails={true}
-        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          lat = details.geometry.location.lat;
-          lng = details.geometry.location.lng;
-          desc = data.description;
-          // description
-          this.updateCoordinates(lat,lng);
-        }}
-        getDefaultValue={() => {
-          return ''; // text input default value
-        }}
-        query={{
-          // available options: https://developers.google.com/places/web-service/autocomplete
-          key: apiKey,
-          language: 'en', // language of the results
-          types: '(cities)', // default: 'geocode'
-        }}
-        styles={{
+      <View style={styles.search}>
+        <GooglePlacesAutocomplete
+          enableEmptySections = {true}
+          placeholder='Enter City, State or Zip Code'
+          minLength={2} // minimum length of text to search
+          autoFocus={false}
+          fetchDetails={true}
+          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+            lat = details.geometry.location.lat;
+            lng = details.geometry.location.lng;
+            desc = data.description;
+            // description
+            this.updateCoordinates(lat,lng);
+          }}
+          getDefaultValue={() => {
+            return ''; // text input default value
+          }}
+          query={{
+            // available options: https://developers.google.com/places/web-service/autocomplete
+            key: apiKey,
+            language: 'en', // language of the results
+            types: '(cities)', // default: 'geocode'
+          }}
+          styles={{
+            description: {
+              fontWeight: 'bold',
+              color: 'black'
+            },
+            predefinedPlacesDescription: {
+              color: 'red',
+            },
+          }}
 
-          description: {
-            fontWeight: 'bold',
-            color: 'black'
-          },
-          predefinedPlacesDescription: {
-            color: 'red',
-          },
-        }}
+          currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
+          currentLocationLabel="Current location"
+          nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+          GoogleReverseGeocodingQuery={{
+            // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+          }}
+          GooglePlacesSearchQuery={{
+            // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+            rankby: 'distance',
+            types: 'food',
+          }}
 
-        currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
-        currentLocationLabel="Current location"
-        nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-        GoogleReverseGeocodingQuery={{
-          // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-        }}
-        GooglePlacesSearchQuery={{
-          // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-          rankby: 'distance',
-          types: 'food',
-        }}
+          filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
-        filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-
-        predefinedPlaces={[]}
-      />
+          predefinedPlaces={[]}
+        />
+      </View>
 
       </View>
     )
@@ -266,13 +267,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
   },
-  searchInput: {
-    fontSize: 20,
-    color: 'white',
-    alignSelf: 'center',
+  // searchInput: {
+  //   fontSize: 20,
+  //   color: 'white',
+  //   alignSelf: 'center',
+  // },
+  search:{
+    position: 'absolute',
+    left: 20,
+    top: 100
   },
   buttonText: {
-    fontSize: 17,
+    fontSize: 16,
     color: 'white',
     alignSelf: 'center',
   },
@@ -290,7 +296,7 @@ const styles = StyleSheet.create({
   button1: {
     position: 'absolute',
     left: 30,
-    top: 400,
+    top: 410,
     height: 45,
     width: 320,
     borderRadius: 10,
