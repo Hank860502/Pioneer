@@ -7,7 +7,6 @@ import {
   View,
   StyleSheet,
   Image,
-  ScrollView,
 } from 'react-native';
 
 class Detail extends Component {
@@ -28,28 +27,23 @@ class Detail extends Component {
 
   render(){
     var stars = this.starRating()
-    var card = this.props.card;
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
         {/*<Image style={styles.image} source={{uri: this.props.card.photos[0]}} />*/}
-        <DetailImages photos={card.photos}/>
-      <ScrollView>
+        <DetailImages photos={this.props.card.photos[0]}/>
         <Text style={styles.title}>
-        {card.title}
+        {this.props.card.title}
         </Text>
         {stars}
 
         <Text style={styles.welcome}>
-          {card.description}
+          {this.props.card.duration}
         </Text>
-        <Text style={styles.welcome}>
-          {card.address}
-        </Text>
+
         <Text style={styles.welcome}>
           {this.props.card.price}
         </Text>
-        </ScrollView>
       </View>
     );
   }
