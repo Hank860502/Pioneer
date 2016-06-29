@@ -109,7 +109,8 @@ class Setting extends Component {
           <Picker.Item label="30 miles" value="80" />
         </Picker>
         </View>
-        <Text style={styles.text}>Radius</Text>
+        <Text style={styles.text1}>Radius</Text>
+        <Text style={styles.text2}>Categories</Text>
       <View>
         <Picker
           selectedValue={this.state.category}
@@ -125,7 +126,6 @@ class Setting extends Component {
           <Picker.Item label="Attractions" value="place_of_interset" />
         </Picker>
       </View>
-      <Text style={styles.text}>Categories</Text>
 
       </View>
     )
@@ -134,16 +134,19 @@ class Setting extends Component {
 
 
 const styles = StyleSheet.create({
-  text: {
-    flex: 1,
-    width: 385,
-    height: 35,
-    borderRadius: 8,
-    paddingLeft: 150,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    fontSize: 20,
-    backgroundColor: '#30ABBD'
+  text1: {
+    position: 'absolute',
+    top: 98,
+    left: 18,
+    height: 38,
+    fontSize: 23,
+  },
+  text2: {
+    position: 'absolute',
+    top: 312,
+    left: 10,
+    height: 38,
+    fontSize: 23,
   },
 })
 
