@@ -44,7 +44,7 @@ var NavigationBarRouteMapper = {
              title: 'Setting'
            })
          }}>
-           <Image style={styles.back} source={require('./sttings.png')}/>
+           <Image style={styles.back} source={require('./settings.png')}/>
       </TouchableOpacity>
     )}
   },
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     },
     back: {
       marginTop: 5,
+      marginLeft: 3,
     },
     empty: {
       backgroundColor: 'lightgray'
