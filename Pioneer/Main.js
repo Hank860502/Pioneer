@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     width: 320,
     borderRadius: 10,
     flexDirection: 'row',
-    backgroundColor: '#40B7DB',
+    backgroundColor: '#36BED2',
     alignSelf: 'stretch',
     justifyContent: 'center',
     marginTop: 60,
