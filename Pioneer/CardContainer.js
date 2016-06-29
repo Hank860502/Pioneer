@@ -122,7 +122,6 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log(this.state.newCards)
     // Note: Could probably eliminate this. - Jason
     this.state.likeCollection.push(this.state.collection[this.state.index]);
 
@@ -139,9 +138,6 @@ class CardContainer extends Component {
   }
 
   render(){
-    console.log(this.state.collection)
-    console.log(this.state.otherLikeCollection)
-
     let { pan, enter, } = this.state;
 
     let [translateX, translateY] = [pan.x, pan.y];
@@ -162,9 +158,6 @@ class CardContainer extends Component {
 
     const { collection, index } = this.props;
     const currentCard = collection[index];
-
-    // console.log(this.state.collection)
-    // console.log(this.state.otherLikeCollection)
 
     return(
       <View style={styles.container}>
