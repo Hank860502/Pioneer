@@ -183,24 +183,22 @@ class Main extends Component {
     return (
 
       <View style={styles.mainContainer}>
-        <View>
-          <Image style={styles.background} source={require('./index.jpg')}/>
-        </View>
+
       <TouchableHighlight
       style={styles.button1}
       onPress={this.getCurrentLocation.bind(this, likeCollection)}
-      underlayColor= '#1C4A5E' >
+      underlayColor= '#40B7DB' >
       <Text style={styles.buttonText}> USE CURRENT LOCATION </Text>
       </TouchableHighlight>
-        <TouchableHighlight
+        {/*<TouchableHighlight
           style={styles.button}
           onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
-          underlayColor= '#1C4A5E'>
+          underlayColor= 'white'>
             <Text style={styles.buttonText}> Discover Now </Text>
-        </TouchableHighlight>
+        </TouchableHighlight>*/}
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
-      placeholder='Enter City, State or Zip Code'
+        placeholder='Enter City, State or Zip Code'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
@@ -221,12 +219,13 @@ class Main extends Component {
           types: '(cities)', // default: 'geocode'
         }}
         styles={{
+
           description: {
             fontWeight: 'bold',
-            color: 'white'
+            color: 'black'
           },
           predefinedPlacesDescription: {
-            color: 'white',
+            color: 'red',
           },
         }}
 
@@ -271,28 +270,30 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 17,
     color: 'white',
     alignSelf: 'center',
   },
-  button: {
-    position: 'absolute',
-    left: 30,
-    top: 30,
-    height: 45,
-    flexDirection: 'row',
-    backgroundColor: '#1C4A5E',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginTop: 5,
-  },
+  // button: {
+  //   position: 'absolute',
+  //   left: 100,
+  //   top: 300,
+  //   height: 45,
+  //   flexDirection: 'row',
+  //   backgroundColor: '#40B7DB',
+  //   alignSelf: 'stretch',
+  //   justifyContent: 'center',
+  //   marginTop: 5,
+  // },
   button1: {
     position: 'absolute',
     left: 30,
-    top: 30,
+    top: 400,
     height: 45,
+    width: 320,
+    borderRadius: 10,
     flexDirection: 'row',
-    backgroundColor: '#1C4A5E',
+    backgroundColor: '#40B7DB',
     alignSelf: 'stretch',
     justifyContent: 'center',
     marginTop: 60,
