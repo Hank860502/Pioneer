@@ -51,6 +51,7 @@ class DetailImages extends Component {
          </View>*/}
       </Swiper>
     )
+    
     }
   }
 }
