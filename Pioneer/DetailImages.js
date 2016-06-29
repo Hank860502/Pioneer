@@ -32,6 +32,11 @@ class DetailImages extends Component {
 
   render(){
     var images = this.showImages()
+    if(images.length == 1){
+      return(
+      <Image style={styles.image} source={{uri: this.props.photos[0]}} />
+      )
+    } else {
     return (
       <Swiper style={styles.wrapper} height={360} showsButtons={true}>
         {images}
@@ -46,7 +51,7 @@ class DetailImages extends Component {
          </View>*/}
       </Swiper>
     )
-
+    }
   }
 }
   const styles = StyleSheet.create({
