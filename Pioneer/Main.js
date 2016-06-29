@@ -192,12 +192,12 @@ class Main extends Component {
       underlayColor= '#40B7DB' >
       <Text style={styles.buttonText}> USE CURRENT LOCATION </Text>
       </TouchableHighlight>
-        {/*<TouchableHighlight
+        <TouchableHighlight
           style={styles.button}
           onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
           underlayColor= 'white'>
-            <Text style={styles.buttonText}> Discover Now </Text>
-        </TouchableHighlight>*/}
+            <Image style={styles.searchIcon} source={require('./search.png')}/>
+        </TouchableHighlight>
       <View style={styles.search}>
         <GooglePlacesAutocomplete
           enableEmptySections = {true}
@@ -282,17 +282,17 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
   },
-  // button: {
-  //   position: 'absolute',
-  //   left: 100,
-  //   top: 300,
-  //   height: 45,
-  //   flexDirection: 'row',
-  //   backgroundColor: '#40B7DB',
-  //   alignSelf: 'stretch',
-  //   justifyContent: 'center',
-  //   marginTop: 5,
-  // },
+  button: {
+    position: 'absolute',
+    left: 310,
+    top: 424,
+    padding: 2,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 6,
+    opacity: 0.85,
+    marginTop: 5,
+  },
   button1: {
     position: 'absolute',
     left: 30,
