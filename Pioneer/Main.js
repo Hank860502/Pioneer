@@ -183,7 +183,9 @@ class Main extends Component {
     return (
 
       <View style={styles.mainContainer}>
-
+        <View>
+          <Image style={styles.background} source={require('./index.jpg')}/>
+        </View>
       <TouchableHighlight
       style={styles.button1}
       onPress={this.getCurrentLocation.bind(this, likeCollection)}

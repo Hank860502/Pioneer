@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     nav: {
     	height: 60,
-      backgroundColor: '#F4F6F7',
+      backgroundColor: '#F6F7F8',
     },
     // title: {
     // 	marginTop:4,
