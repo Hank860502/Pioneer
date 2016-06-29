@@ -39,7 +39,9 @@ var NavigationBarRouteMapper = {
   	else { return null }
   },
   RightButton(route, navigator, index, navState) {
-    if(route.title==='Wishlist') {
+    if(route.title ==='Pioneer'){
+      return null
+    } else if(route.title==='Wishlist') {
       return (
         <View>
           <Image source={require('./wishlist.png')}/>
@@ -63,13 +65,8 @@ var NavigationBarRouteMapper = {
     )}
   },
   Title(route, navigator, index, navState) {
-    if(route.title==='Pioneer'){
-      return (
-        <Image
-          style = {styles.image}
-          source={require('./Pioneer.png')}
-        />
-      )
+    if(route.title ==='Pioneer'){
+      return null
     } else{
       return (
         <TouchableOpacity
@@ -129,8 +126,6 @@ class Pioneer extends Component {
   }
 
   render() {
-    console.log("made it to this page")
-    console.log(likeCollection)
     return (
       <Navigator
         style={{flex:1}}
@@ -165,12 +160,12 @@ const styles = StyleSheet.create({
     },
     nav: {
     	height: 60,
-      backgroundColor: 'lightgray',
+      backgroundColor: '#F6F7F8',
     },
-    title: {
-    	marginTop:4,
-      fontSize:16
-    },
+    // title: {
+    // 	marginTop:4,
+    //   fontSize:16
+    // },
     button: {
     	height:60,
       marginBottom:10,
@@ -186,6 +181,9 @@ const styles = StyleSheet.create({
     },
     back: {
       marginTop: 5,
+    },
+    empty: {
+      backgroundColor: 'lightgray'
     }
 });
 
