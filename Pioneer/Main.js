@@ -183,13 +183,14 @@ class Main extends Component {
     return (
 
       <View style={styles.mainContainer}>
-
-      <Image style={styles.background} source={require('./index.jpg')}/>
+        <View>
+          <Image style={styles.background} source={require('./index.jpg')}/>
+        </View>
       <TouchableHighlight
       style={styles.button1}
       onPress={this.getCurrentLocation.bind(this, likeCollection)}
       underlayColor= '#1C4A5E' >
-      <Text style={styles.buttonText}> Around me </Text>
+      <Text style={styles.buttonText}> USE CURRENT LOCATION </Text>
       </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
@@ -199,7 +200,7 @@ class Main extends Component {
         </TouchableHighlight>
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
-      placeholder='Where do you want to go?'
+      placeholder='Enter City, State or Zip Code'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
@@ -275,6 +276,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
+    position: 'absolute',
+    left: 30,
+    top: 30,
     height: 45,
     flexDirection: 'row',
     backgroundColor: '#1C4A5E',
@@ -283,6 +287,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   button1: {
+    position: 'absolute',
+    left: 30,
+    top: 30,
     height: 45,
     flexDirection: 'row',
     backgroundColor: '#1C4A5E',
@@ -292,8 +299,6 @@ const styles = StyleSheet.create({
   },
   backgorund: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   }
 });
 
