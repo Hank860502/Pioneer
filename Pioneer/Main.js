@@ -199,7 +199,7 @@ class Main extends Component {
         </TouchableHighlight>
       <GooglePlacesAutocomplete
         enableEmptySections = {true}
-        placeholder='Where do you want to go?'
+      placeholder='Where do you want to go?'
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
