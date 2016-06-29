@@ -23,15 +23,17 @@ var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 // const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
 // const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 class Main extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       error: false,
       isloading: false,
       travelLocationName: '',
       travelLocationLng: '',
       travelLocationLat: '',
-      cards: []
+      cards: [],
+      radius: this.props.radius || 20,
+      category: this.props.category || "food"
     }
   }
 
@@ -65,7 +67,8 @@ class Main extends Component {
       }); // Closes setState
 
       if(this.state.cards.length <= 20){
-        api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
+        api.getGooglePlaces(this.state.travelLocationLat, this.state.travelLocationLng,
+        this.state.radius, this.state.category).then((response) => {
           if(response.message === 'Not Found'){
             this.setState({
               error: 'No places found',
