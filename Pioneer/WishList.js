@@ -39,7 +39,7 @@ class WishList extends Component {
           </TouchableOpacity>
             <Text style={styles.welcome}> {place.title}</Text>
           </View>
-          <Separator />
+          {/*<Separator />*/}
         </View>
       )
     });
