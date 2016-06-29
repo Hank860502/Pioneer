@@ -36,8 +36,10 @@ var NavigationBarRouteMapper = {
            onPress={() => { navigator.pop() }}>
              <Image style={styles.back} source={require('./back.png')}/>
         </TouchableOpacity>
-  	)}
-  	else { return (
+  	)} else if (route.title === 'Setting'){
+      return null
+    } else {
+      return (
       <TouchableOpacity
          underlayColor="transparent"
          onPress={() => { navigator.push({
