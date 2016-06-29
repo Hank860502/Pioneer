@@ -26,6 +26,7 @@ class Main extends Component {
     super();
     this.state = {
       error: false,
+      isloading: false,
       travelLocationName: '',
       travelLocationLng: '',
       travelLocationLat: '',
@@ -39,6 +40,7 @@ class Main extends Component {
         var rLocation = {};
         rLocation['title'] = location.name;
         location.description ? rLocation['description'] = location.description : rLocation['description'] = null;
+        location.address ? rLocation['address'] = location.address : rLocation['address'] = null;
         if (location.photos){
           rLocation['photos'] = location.photos;
         } else {
@@ -67,6 +69,7 @@ class Main extends Component {
             var formattedCollection = response.results.map(function(location){
               var rLocation = {};
               rLocation['title'] = location.name;
+              location.vicinity ? rLocation['address'] = location.vicinity : rLocation['address'] = null;
               if (location.photos){
                 rLocation['photos'] = location.photos.map(function(photo){
                   return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
