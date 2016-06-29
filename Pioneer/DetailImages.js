@@ -15,12 +15,11 @@ import {
 
 class DetailImages extends Component {
 
-
   render(){
     return (
       <Swiper style={styles.wrapper} height={360} showsButtons={true}>
            <View style={styles.slide1}>
-             <Image style={styles.image} source={{uri: this.props.photos}} />
+             <Image style={styles.image} source={{uri: this.props.photos[0]}} />
            </View>
            <View style={styles.slide2}>
              <Text style={styles.text}>Addtional photos here</Text>
@@ -57,7 +56,7 @@ class DetailImages extends Component {
        fontWeight: 'bold',
     },
     image:{
-      height:350,
+      height:360,
       width:375,
     },
 });
