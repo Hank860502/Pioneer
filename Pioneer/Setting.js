@@ -25,12 +25,13 @@ class Setting extends Component {
 
   toggleCancel(){
        this.setState({
-           showCancel: !this.state.showCancel
+           showCancel: !this.state.showCancel,
+
        });
        console.log(this.state.showCancel)
    }
 
-  appendPicker(){
+  appendCategoryPicker(){
     console.log("click")
     if (this.state.showCancel){
     return(
@@ -54,23 +55,21 @@ class Setting extends Component {
       }
   }
   render(){
-    // var pickerCategory = this.appendPicker()
     return(
       <View>
-        <Text style={styles.text}>This is the category: {this.state.category}</Text>
-        {/*<TouchableOpacity
-          style={styles.button}
-          onPress={pickerCategory}
-          underlayColor= '#40B7DB' >
-          <Text style={styles.buttonText}>Search By Category</Text>
-        </TouchableOpacity>*/}
-        <Text>This is the second: {this.state.category}</Text>
+        <Text style={styles.text}>Category: {this.state.category}</Text>
         <TouchableOpacity
             onPress={() => this.toggleCancel()}
             style={styles.button}>
               <Text style={styles.buttonText}>Choose Category</Text>
         </TouchableOpacity>
-        {this.appendPicker()}
+        {this.appendCategoryPicker()}
+        <TouchableOpacity
+            onPress={() => this.toggleCancel()}
+            style={styles.button}>
+              <Text style={styles.buttonText}>Choose Radius</Text>
+        </TouchableOpacity>
+        {this.appendRadiusPicker()}
       </View>
     )
   }
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     left: 30,
-    top: 415,
+    top: 290,
     height: 45,
     width: 320,
     borderRadius: 10,
