@@ -20,6 +20,7 @@ import Main from './Main.js';
 import CardContainer from './CardContainer.js';
 import WishList from './WishList.js';
 import Detail from './Detail';
+import Setting from './Setting'
 
 /*
   Issue: Because there isn't a shared store sharing the likeCollection  between the NavigationBarRouteMapper and Pioneer component, resorting to a hacky `const likeCollection` with array value would be needed (as below). However this `IS NOT THE PREFERRED` method as React prefers `stores` to manage the state of the application.  I would look into implementing React's Flux or third-party library Redux.  Personally I like Redux better
@@ -36,7 +37,16 @@ var NavigationBarRouteMapper = {
              <Image style={styles.back} source={require('./back.png')}/>
         </TouchableOpacity>
   	)}
-  	else { return null }
+  	else { return (
+      <TouchableOpacity
+         underlayColor="transparent"
+         onPress={() => { navigator.push({
+             title: 'Setting'
+           })
+         }}>
+           <Image style={styles.back} source={require('./sttings.png')}/>
+      </TouchableOpacity>
+    )}
   },
   RightButton(route, navigator, index, navState) {
     if(route.title ==='Pioneer'){
@@ -56,8 +66,7 @@ var NavigationBarRouteMapper = {
             likeCollection: likeCollection,
             dislikeCollection: []
           })
-        }}
-      >
+        }}>
          <View>
            <Image source={require('./wishlist.png')}/>
          </View>
