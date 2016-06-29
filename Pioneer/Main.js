@@ -291,8 +291,9 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   backgorund: {
-    // width: 375,
-    // height: 667
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 
