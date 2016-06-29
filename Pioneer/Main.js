@@ -34,43 +34,73 @@ class Main extends Component {
   }
 
   handleDiscoverSubmit(likeCollection){
-    console.log(likeCollection)
-    if (this.state.travelLocationName == 'San Francisco'){
+    api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
+      var formattedCollection = response.map(function(location){
+        var rLocation = {};
+        rLocation['title'] = location.name;
+        location.description ? rLocation['description'] = location.description : rLocation['description'] = null;
+        if (location.photos){
+          rLocation['photos'] = location.photos;
+        } else {
+           rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+        };
+        location.price_level ? rLocation['price_level'] = location.price : rLocation['price_level'] = null;
+        location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
+        location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
+        rLocation['longitude'] = location.longitude;
+        rLocation['latitude'] = location.latitude;
+        return rLocation;
+      }); // Closes Pioneer response mapping
 
-      api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
-        var formattedCollection = response.map(function(location){
-          var rLocation = {};
-          rLocation['title'] = location.name;
-          location.description ? rLocation['description'] = location.description : rLocation['description'] = null;
-          if (location.photos){
-            rLocation['photos'] = location.photos;
+      this.setState({
+        cards: formattedCollection,
+        error: false,
+      }); // Closes setState
+
+      if(this.state.cards.length <= 20){
+        api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
+          if(response.message === 'Not Found'){
+            this.setState({
+              error: 'No places found',
+            })
           } else {
-             rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
-          };
-          location.price_level ? rLocation['price_level'] = location.price : rLocation['price_level'] = null;
-          location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
-          location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
-          rLocation['longitude'] = location.longitude;
-          rLocation['latitude'] = location.latitude;
+            var formattedCollection = response.results.map(function(location){
+              var rLocation = {};
+              rLocation['title'] = location.name;
+              if (location.photos){
+                rLocation['photos'] = location.photos.map(function(photo){
+                  return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+                  });
+              } else {
+                 rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+              };
+              location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
+              location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
+              location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
+              rLocation['longitude'] = location.geometry.location.lng;
+              rLocation['latitude'] = location.geometry.location.lat;
+              return rLocation;
+            });
 
-          return rLocation;
-        });
-        this.setState({
-          cards: formattedCollection,
-          error: false,
-          travelLocationName: '',
-          travelLocationLng: '',
-          travelLocationLat: '',
-          // currentLocationLoaded: false
-        });
-        this.props.navigator.push({
-          title: 'CardContainer',
-          index: 0,
-          collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-          otherLikeCollection: likeCollection
-        });
-      })
-    } else {
+            this.state.cards = this.state.cards.concat(formattedCollection);
+
+            this.setState({
+              error: false,
+              travelLocationName: '',
+              travelLocationLng: '',
+              travelLocationLat: '',
+            }); // Closes setState
+
+            this.props.navigator.push({
+              title: 'CardContainer',
+              index: 0,
+              // collection: this.state.cards
+              collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+              otherLikeCollection: likeCollection
+            });
+          } // Closes Successful response
+        }) // closes Google Places response
+      } else{
       api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng)
       .then((response) => {
         if(response.message === 'Not Found'){
@@ -111,8 +141,10 @@ class Main extends Component {
           });
         }
       })
-    }
-  }
+    } //Close else if there is not enough places
+  }); // Closes getPioneerPlaces
+} // Closes handleDiscoverSubmit
+
   updateCoordinates(lat,lng){
     this.setState({
       travelLocationLat: lat,
@@ -217,7 +249,7 @@ class Main extends Component {
       </View>
     )
   }
-}
+} // Closes the Class
 
 const styles = StyleSheet.create({
   mainContainer: {
