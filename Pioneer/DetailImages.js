@@ -15,7 +15,6 @@ import {
 
 class DetailImages extends Component {
 
-
   render(){
     return (
       <Swiper style={styles.wrapper} height={360} showsButtons={true}>
@@ -30,7 +29,6 @@ class DetailImages extends Component {
            </View>
          </Swiper>
     )
-
   }
 }
   const styles = StyleSheet.create({
