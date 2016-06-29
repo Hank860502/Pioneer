@@ -12,7 +12,7 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   Geolocation,
-  Image
+  Image,
 } from 'react-native';
 
 var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
@@ -26,6 +26,7 @@ class Main extends Component {
     super();
     this.state = {
       error: false,
+      isloading: false,
       travelLocationName: '',
       travelLocationLng: '',
       travelLocationLat: '',
@@ -34,11 +35,16 @@ class Main extends Component {
   }
 
   handleDiscoverSubmit(likeCollection){
+    this.setState({
+      isLoading: true
+    });
+
     api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
       var formattedCollection = response.map(function(location){
         var rLocation = {};
         rLocation['title'] = location.name;
         location.description ? rLocation['description'] = location.description : rLocation['description'] = null;
+        location.address ? rLocation['address'] = location.address : rLocation['address'] = null;
         if (location.photos){
           rLocation['photos'] = location.photos;
         } else {
@@ -67,6 +73,7 @@ class Main extends Component {
             var formattedCollection = response.results.map(function(location){
               var rLocation = {};
               rLocation['title'] = location.name;
+              location.vicinity ? rLocation['address'] = location.vicinity : rLocation['address'] = null;
               if (location.photos){
                 rLocation['photos'] = location.photos.map(function(photo){
                   return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
@@ -89,6 +96,7 @@ class Main extends Component {
               travelLocationName: '',
               travelLocationLng: '',
               travelLocationLat: '',
+              isloading: false,
             }); // Closes setState
 
             this.props.navigator.push({
@@ -128,6 +136,7 @@ class Main extends Component {
           this.setState({
             cards: formattedCollection,
             error: false,
+            isloading: false,
             travelLocationName: '',
             travelLocationLng: '',
             travelLocationLat: '',
@@ -180,73 +189,85 @@ class Main extends Component {
 
   render() {
     var likeCollection = this.props.likeCollection
+
+    var spinnerAnimation = <ActivityIndicator
+                              animating={this.state.isLoading}
+                              color='#666'
+                              size='large' style={styles.spinner}>
+                            </ActivityIndicator>
+
+    var showSpinner = (this.state.isLoading ? spinnerAnimation : console.log('Fail'))
+
     return (
 
       <View style={styles.mainContainer}>
         <View>
           <Image style={styles.background} source={require('./index1.jpg')}/>
         </View>
-      <TouchableHighlight
-      style={styles.button1}
-      onPress={this.getCurrentLocation.bind(this, likeCollection)}
-      underlayColor= '#40B7DB' >
-      <Text style={styles.buttonText}> USE CURRENT LOCATION </Text>
-      </TouchableHighlight>
-      <View style={styles.search}>
-        <GooglePlacesAutocomplete
-          enableEmptySections = {true}
-          placeholder='Enter City, State or Zip Code'
-          minLength={2} // minimum length of text to search
-          autoFocus={false}
-          fetchDetails={true}
-          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            lat = details.geometry.location.lat;
-            lng = details.geometry.location.lng;
-            desc = data.description;
-            // description
-            this.updateCoordinates(lat,lng);
-          }}
-          getDefaultValue={() => {
-            return ''; // text input default value
-          }}
-          query={{
-            // available options: https://developers.google.com/places/web-service/autocomplete
-            key: apiKey,
-            language: 'en', // language of the results
-            types: '(cities)', // default: 'geocode'
-          }}
-          styles={{
-            description: {
-              fontWeight: 'bold',
-              color: 'black'
-            },
-            predefinedPlacesDescription: {
-              color: 'red',
-            },
-          }}
+        <TouchableHighlight
+          style={styles.button1}
+          onPress={this.getCurrentLocation.bind(this, likeCollection)}
+          underlayColor= '#40B7DB' >
+          <Text style={styles.buttonText}> USE CURRENT LOCATION </Text>
+        </TouchableHighlight>
+        <View style={styles.search}>
+          <GooglePlacesAutocomplete
+            enableEmptySections = {true}
+            placeholder='Enter City, State or Zip Code'
+            minLength={2} // minimum length of text to search
+            autoFocus={false}
+            fetchDetails={true}
+            onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+              lat = details.geometry.location.lat;
+              lng = details.geometry.location.lng;
+              desc = data.description;
+              // description
+              this.updateCoordinates(lat,lng);
+            }}
+            getDefaultValue={() => {
+              return ''; // text input default value
+            }}
+            query={{
+              // available options: https://developers.google.com/places/web-service/autocomplete
+              key: apiKey,
+              language: 'en', // language of the results
+              types: '(cities)', // default: 'geocode'
+            }}
+            styles={{
+              description: {
+                fontWeight: 'bold',
+                color: 'black'
+              },
+              predefinedPlacesDescription: {
+                color: 'red',
+              },
+            }}
 
-          currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
-          currentLocationLabel="Current location"
-          nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-          GoogleReverseGeocodingQuery={{
-            // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-          }}
-          GooglePlacesSearchQuery={{
-            // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
-            rankby: 'distance',
-            types: 'food',
-          }}
+            currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
+            currentLocationLabel="Current location"
+            nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+            GoogleReverseGeocodingQuery={{
+              // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+            }}
+            GooglePlacesSearchQuery={{
+              // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+              rankby: 'distance',
+              types: 'food',
+            }}
 
-          filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
-          predefinedPlaces={[]}
-        />
+            predefinedPlaces={[]}
+          />
+      <View>
+      {showSpinner}
+      </View>
       </View>
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
           underlayColor= 'white'>
-            <Image style={styles.searchIcon} source={require('./search.png')}/>
+          <Image style={styles.searchIcon} source={require('./search.png')}/>
         </TouchableHighlight>
       </View>
     )
@@ -265,6 +286,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     color: '#fff',
+  },
+  spinner: {
+    position: 'absolute',
+    left: 170,
+    top: -20,
+    justifyContent: 'center',
+
   },
   // searchInput: {
   //   fontSize: 20,
