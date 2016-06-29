@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Card from './Card.js';
+import DetailImages from './DetailImages';
 
 import {
   Text,
@@ -6,8 +8,6 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-
-import Card from './Card.js'
 
 class Detail extends Component {
   starRating(){
@@ -30,8 +30,8 @@ class Detail extends Component {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
-        <Image style={styles.image} source={{uri: this.props.card.photos[0]}} />
-
+        {/*<Image style={styles.image} source={{uri: this.props.card.photos[0]}} />*/}
+        <DetailImages photos={this.props.card.photos[0]}/>
         <Text style={styles.title}>
         {this.props.card.title}
         </Text>

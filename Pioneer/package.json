@@ -10,7 +10,9 @@
     "react": "15.1.0",
     "react-native": "0.28.0",
     "react-native-google-places-autocomplete": "^1.1.7",
+    "react-native-looped-carousel": "0.0.12",
     "react-native-maps": "^0.6.0",
-    "react-native-swipe-cards": "0.0.7"
+    "react-native-swipe-cards": "0.0.7",
+    "react-native-swiper": "^1.4.5"
   }
 }
