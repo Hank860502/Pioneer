@@ -11,12 +11,11 @@ var api = {
     } else {
       googleType = category
     }
-    
     var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=prominence&radius=${meterRadius}&types=${category}&key=${apiKey}`;
     return fetch(url).then((response) => response.json()); // promise
   },
-  getPioneerPlaces(lat,lng){
-    var url = `https://sheltered-depths-18581.herokuapp.com/places?latitude=${lat}&longitude=${lng}`;
+  getPioneerPlaces(lat, lng, radius, category){
+    var url = `https://sheltered-depths-18581.herokuapp.com/places?latitude=${lat}&longitude=${lng}&radius=${radius}&type=${category}`;
     return fetch(url).then((response) => response.json()); // promise
   }
 };

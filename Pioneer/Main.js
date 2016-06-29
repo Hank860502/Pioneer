@@ -42,7 +42,7 @@ class Main extends Component {
       isLoading: true
     });
 
-    api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng).then((response) => {
+    api.getPioneerPlaces(this.state.travelLocationLat,this.state.travelLocationLng,this.state.radius, this.state.category).then((response) => {
       var formattedCollection = response.map(function(location){
         var rLocation = {};
         rLocation['title'] = location.name;
