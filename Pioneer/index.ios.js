@@ -91,7 +91,7 @@ var NavigationBarRouteMapper = {
         >
           <Image
             style = {styles.image}
-            source={require('./Pioneer.png')}
+            source={require('./assets/Pioneer.png')}
           />
         </TouchableOpacity>
       )}
