@@ -6,7 +6,6 @@ Creating possibilities for user's travel experience.
 ##How to use it?
 Open the app and start swiping left or right to arrange your vacation instinctively.
 
+##[Screenshots of the app](./Screenshot.md)
 ## Behind the scene
 [Architecture](./READMORE.md)
-
-[Screenshots of the app](./Screenshot.md)
