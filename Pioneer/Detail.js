@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Card from './Card.js';
 import DetailImages from './DetailImages';
+import Separator from './Separator';
+
 
 import {
   Text,
@@ -34,28 +36,34 @@ class Detail extends Component {
     var url = `http://maps.apple.com/?daddr=${card.latitude},${card.longitude}`;
     console.log(url);
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
 
         {/*<Image style={styles.image} source={{uri: this.props.card.photos[0]}} />*/}
         <DetailImages photos={card.photos}/>
-      <ScrollView>
         <Text style={styles.title}>
         {card.title}
         </Text>
-        {stars}
+        {/*{stars}*/}
+        <Separator />
+
 
         <Text style={styles.welcome}>
           {card.description}
         </Text>
-        <TouchableHighlight onPress={()=>Linking.openURL(url)}>
-          <Text style={styles.welcome}>
-            {card.address}
-          </Text>
-        </TouchableHighlight>
+        <Separator />
+
+        <Text style={styles.welcome}>
+        {card.address}
+        </Text>
+        <Text style={{color:'blue'}}
+        onPress={()=>Linking.openURL(url)}>
+        Take Me There
+        </Text>
+        <Separator />
         <Text style={styles.welcome}>
           {this.props.card.price}
         </Text>
-        </ScrollView>
+
       </View>
     );
   }
@@ -76,7 +84,7 @@ const styles = StyleSheet.create({
    title: {
      fontSize: 20,
      textAlign: 'center',
-     marginTop: 20,
+     marginTop: 10,
    },
    image:{
      height:350,

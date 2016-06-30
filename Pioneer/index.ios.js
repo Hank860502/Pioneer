@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
       marginTop:2
     },
     nav: {
-    	height: 60,
+    	height: 70,
       backgroundColor: '#F6F7F8',
     },
     // title: {

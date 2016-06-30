@@ -78,7 +78,7 @@ class DetailImages extends Component {
        fontWeight: 'bold',
     },
     image:{
-      height:360,
+      height:400,
       width:375,
     },
 });
