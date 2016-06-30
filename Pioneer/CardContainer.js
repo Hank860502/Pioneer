@@ -10,6 +10,7 @@ import {
   Animated,
   PanResponder,
   Alert,
+  Linking,
 } from 'react-native';
 
 import clamp from 'clamp';
@@ -17,6 +18,7 @@ import Card from './Card.js'
 
 var SWIPE_THRESHOLD = 120;
 var alertMessage = "Don't forget to go on the app store to tell us what you think !";
+var url = `http://applestore.com`;
 
 
 class CardContainer extends Component {
@@ -55,7 +57,7 @@ class CardContainer extends Component {
                 alertMessage,
                 [
                   {text:'Cancel'},
-                  {text:'App Store'},
+                  {text:'App Store', onPress:()=>Linking.openURL(url)},
                 ]
         )
       }
