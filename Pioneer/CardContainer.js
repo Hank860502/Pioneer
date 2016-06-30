@@ -215,18 +215,27 @@ const styles = StyleSheet.create({
    },
    buttonLike: {
      position: 'absolute',
-     top: 550,
-     left: 221,
+     top: 545,
+     left: 205,
+     padding: 15,
+     borderRadius: 50,
+     borderWidth: 3,
+     borderColor: '#EEEEEF'
    },
    buttonDislike: {
     position: 'absolute',
-    top: 552,
+    top: 546,
     left: 105,
+    padding: 17,
+    borderColor: '#EEEEEF',
+    borderWidth: 3,
+    borderRadius: 50,
    },
    nope: {
      position: 'absolute',
      top: 290,
      left: 120,
+     borderRadius: 50,
    },
    yup: {
      position: 'absolute',
