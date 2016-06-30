@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
   Geolocation,
   Image,
+  Alert,
 } from 'react-native';
 
 var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
@@ -27,7 +28,7 @@ class Main extends Component {
     super(props);
     this.state = {
       error: false,
-      isloading: false,
+      isLoading: false,
       travelLocationName: '',
       travelLocationLng: '',
       travelLocationLat: '',
@@ -69,10 +70,40 @@ class Main extends Component {
       if(this.state.cards.length <= 20){
         api.getGooglePlaces(this.state.travelLocationLat, this.state.travelLocationLng,
         this.state.radius, this.state.category).then((response) => {
-          if(response.message === 'Not Found'){
-            this.setState({
-              error: 'No places found',
-            })
+          if(response.status === 'ZERO_RESULTS'){
+            // this.setState({
+            //   error: 'No places found',
+            // })
+            if (this.state.cards.length >= 1) {
+              this.setState({
+                error: false,
+                travelLocationName: '',
+                travelLocationLng: '',
+                travelLocationLat: '',
+                isLoading: false,
+              }); // Closes setState
+
+              this.props.navigator.push({
+                title: 'CardContainer',
+                index: 0,
+                // collection: this.state.cards
+                collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+                otherLikeCollection: likeCollection,
+                locationLat: this.state.travelLocationLat,
+                locationLng: this.state.travelLocationLng,
+              });
+            } else {
+              this.setState({
+                error: 'No places found',
+                isLoading: false,
+              }, () => {
+                Alert.alert(
+                  'Error',
+                  this.state.error
+                )
+                this.clearText()
+              })
+            }
           } else {
             var formattedCollection = response.results.map(function(location){
               var rLocation = {};
@@ -114,51 +145,52 @@ class Main extends Component {
             });
           } // Closes Successful response
         }) // closes Google Places response
-      } else{
-      api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng)
-      .then((response) => {
-        if(response.message === 'Not Found'){
-          this.setState({
-            error: 'No places found',
-          })
-        } else {
-          var formattedCollection = response.results.map(function(location){
-            var rLocation = {};
-            rLocation['title'] = location.name;
-            if (location.photos){
-              rLocation['photos'] = location.photos.map(function(photo){
-                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
-                });
-            } else {
-               rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
-            };
-            location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
-            location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
-            location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
-            rLocation['longitude'] = location.geometry.location.lng;
-            rLocation['latitude'] = location.geometry.location.lat;
-            return rLocation;
-          });
-          this.setState({
-            cards: formattedCollection,
-            error: false,
-            isloading: false,
-            travelLocationName: '',
-            travelLocationLng: '',
-            travelLocationLat: '',
-            // currentLocationLoaded: false
-          });
-          this.props.navigator.push({
-            title: 'CardContainer',
-            index: 0,
-            collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-            otherLikeCollection: likeCollection,
-            locationLat: this.state.travelLocationLat,
-            locationLng: this.state.travelLocationLng,
-          });
-        }
-      })
-    } //Close else if there is not enough places
+      } // added this because commented out a } along with the else in line beneath
+    //   } else{
+    //   api.getGooglePlaces(this.state.travelLocationLat,this.state.travelLocationLng)
+    //   .then((response) => {
+    //     if(response.message === 'Not Found'){
+    //       this.setState({
+    //         error: 'No places found',
+    //       })
+    //     } else {
+    //       var formattedCollection = response.results.map(function(location){
+    //         var rLocation = {};
+    //         rLocation['title'] = location.name;
+    //         if (location.photos){
+    //           rLocation['photos'] = location.photos.map(function(photo){
+    //             return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${apiKey}`
+    //             });
+    //         } else {
+    //            rLocation['photos'] = ["https://www.technodoze.com/wp-content/uploads/2016/03/default-placeholder.png"];
+    //         };
+    //         location.price_level ? rLocation['price_level'] = location.price_level : rLocation['price_level'] = null;
+    //         location.rating ? rLocation['rating'] = location.rating : rLocation['rating'] = null;
+    //         location.types ? rLocation['types'] = location.types : rLocation['types'] = [];
+    //         rLocation['longitude'] = location.geometry.location.lng;
+    //         rLocation['latitude'] = location.geometry.location.lat;
+    //         return rLocation;
+    //       });
+    //       this.setState({
+    //         cards: formattedCollection,
+    //         error: false,
+    //         isloading: false,
+    //         travelLocationName: '',
+    //         travelLocationLng: '',
+    //         travelLocationLat: '',
+    //         // currentLocationLoaded: false
+    //       });
+    //       this.props.navigator.push({
+    //         title: 'CardContainer',
+    //         index: 0,
+    //         collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+    //         otherLikeCollection: likeCollection,
+    //         locationLat: this.state.travelLocationLat,
+    //         locationLng: this.state.travelLocationLng,
+    //       });
+    //     }
+    //   })
+    // } //Close else if there is not enough places
   }); // Closes getPioneerPlaces
 } // Closes handleDiscoverSubmit
 
@@ -194,6 +226,10 @@ class Main extends Component {
     })
   }
 
+  clearText() {
+    this.refs.searchBar.state.text = ''
+  }
+
 
   render() {
     var likeCollection = this.props.likeCollection
@@ -220,6 +256,7 @@ class Main extends Component {
         </TouchableHighlight>
         <View style={styles.search}>
           <GooglePlacesAutocomplete
+            ref="searchBar"
             enableEmptySections = {true}
             placeholder='Enter City, State or Zip Code'
             minLength={2} // minimum length of text to search
