@@ -41,7 +41,6 @@ class Detail extends Component {
   }
 
   typeIcon(type,index){
-    console.log(type)
     switch(type) {
       case "aquarium":
         return (
@@ -120,16 +119,13 @@ class Detail extends Component {
           </View>
         )
     }
-    // return <Image source={require("./1Star.png")} />
   }
 
   renderTypes(){
     var types = this.props.card.types
-    console.log(types);
     var typeIcons = types.map((category,index) => {
       return this.typeIcon(category,index)
     });
-    console.log(typeIcons);
     return typeIcons
   }
 
@@ -174,8 +170,6 @@ class Detail extends Component {
           {card.address}
           </Text>
 
-
-
           <TouchableOpacity
             style={styles.button}
             onPress={()=>Linking.openURL(destinationUrl)}
@@ -184,14 +178,6 @@ class Detail extends Component {
               Take Me There
             </Text>
           </TouchableOpacity>
-
-
-
-{/*
-          <Text style={{color:'blue'}}
-          onPress={()=>Linking.openURL(destinationUrl)}>
-          Take Me There
-          </Text>*/}
 
         </View>
 
@@ -236,12 +222,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
      },
    button: {
-    //  position: 'absolute',
-    //  left: 320,
-    //  top: 419,
      padding: 10,
-    //  height: 20,
-    //  width: 100,
      flexDirection: 'row',
      backgroundColor: '#30ABBD',
      borderRadius: 6,
