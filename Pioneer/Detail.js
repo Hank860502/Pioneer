@@ -188,7 +188,7 @@ class Detail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 70,
      backgroundColor: 'white',
    },
    overview: {
