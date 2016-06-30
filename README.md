@@ -7,5 +7,18 @@ Creating possibilities for user's travel experience.
 Open the app and start swiping left or right to arrange your vacation instinctively.
 
 ##[Screenshots of the app](./Screenshot.md)
-## Behind the scene
+
+
+##Stacks
+- React Native
+- Ruby on Rails
+
+##Dependencies
+- Google places API
+- Apple Map
+- Pioneer API
+
+
+
+## Behind the app.
 [Architecture](./READMORE.md)
