@@ -33,7 +33,7 @@ class Main extends Component {
       travelLocationLat: '',
       cards: [],
       radius: this.props.radius || 50,
-      category: this.props.category || "restaurant"
+      category: this.props.category || "tourist_destination"
     }
   }
 
