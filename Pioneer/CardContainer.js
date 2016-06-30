@@ -19,6 +19,7 @@ import Card from './Card.js'
 var SWIPE_THRESHOLD = 120;
 var alertMessage = "Don't forget to go on the app store to tell us what you think !";
 var url = `http://applestore.com`;
+var alertMessage2 = "Looks like you love using our app, don't forget to rate it !";
 
 
 class CardContainer extends Component {
@@ -62,6 +63,14 @@ class CardContainer extends Component {
         )
       }
     } else {
+      Alert.alert(
+              'Love using Pioneer?',
+              alertMessage2,
+              [
+                {text:'Cancel'},
+                {text:'App Store', onPress:()=>Linking.openURL(url)},
+              ]
+      )
       // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
         title: 'Wishlist',
