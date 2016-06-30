@@ -9,12 +9,16 @@ import {
   TouchableHighlight,
   Animated,
   PanResponder,
+  Alert,
+  Linking,
 } from 'react-native';
 
 import clamp from 'clamp';
 import Card from './Card.js'
 
 var SWIPE_THRESHOLD = 120;
+var alertMessage = "Don't forget to go on the app store to tell us what you think !";
+var url = `http://applestore.com`;
 
 
 class CardContainer extends Component {
@@ -47,6 +51,16 @@ class CardContainer extends Component {
       this.setState({
         index: this.state.index + 1,
       })
+      if(this.state.index == 10){
+        Alert.alert(
+                'Thanks for using our app',
+                alertMessage,
+                [
+                  {text:'Cancel'},
+                  {text:'App Store', onPress:()=>Linking.openURL(url)},
+                ]
+        )
+      }
     } else {
       // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
