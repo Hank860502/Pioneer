@@ -305,19 +305,16 @@ class Main extends Component {
               },
             }}
 
-            currentLocation={false} // Will add a 'Current location' button at the top of the predefined places list
+            currentLocation={false}
             currentLocationLabel="Current location"
-            nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-            GoogleReverseGeocodingQuery={{
-              // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-            }}
+            nearbyPlacesAPI='GooglePlacesSearch'
+
             GooglePlacesSearchQuery={{
-              // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
               rankby: 'distance',
               types: 'food',
             }}
 
-            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
 
             predefinedPlaces={[]}
           />
@@ -334,7 +331,7 @@ class Main extends Component {
       </View>
     )
   }
-} // Closes the Class
+} 
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -356,11 +353,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-  // searchInput: {
-  //   fontSize: 20,
-  //   color: 'white',
-  //   alignSelf: 'center',
-  // },
   search:{
     position: 'absolute',
     left: 5,

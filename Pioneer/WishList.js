@@ -39,7 +39,6 @@ class WishList extends Component {
           </TouchableOpacity>
             <Text style={styles.welcome}> {place.title}</Text>
           </View>
-          {/*<Separator />*/}
         </View>
       )
     });
@@ -58,8 +57,6 @@ class WishList extends Component {
 const styles = StyleSheet.create({
   containerWishList: {
     flex: 1,
-    //  justifyContent: 'center',
-    //  alignItems: 'center',
     backgroundColor: 'white',
    },
   welcome: {
