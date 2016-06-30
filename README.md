@@ -9,4 +9,4 @@ Open the app and start swiping left or right to arrange your vacation instinctiv
 ## Behind the scene
 [Architecture](./READMORE.md)
 
-[Screenshots of the app](./Pioneer.md)
+[Screenshots of the app](./Screenshot.md)
