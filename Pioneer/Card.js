@@ -6,25 +6,31 @@ import {
   View,
   Image,
   Navigator,
+  TouchableOpacity,
 } from 'react-native';
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
-
 class Card extends Component {
-  render(){
 
-    var referenceLink = this.props.cardInfo.photos ? this.props.cardInfo.photos[0].photo_reference : null
-    var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
+  readMore(){
+    this.props.navigator.push({
+      title: 'Detail',
+      card: this.props.cardInfo
+    });
+  }
+  render(){
+    var imageLink = this.props.cardInfo.photos[0]
 
     return(
-
+    <TouchableOpacity
+      onPress={this.readMore.bind(this)}
+    >
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: imageLink}}/>
         <Text style={styles.welcome}>
-          {this.props.cardInfo.name}
+          {this.props.cardInfo.title}
         </Text>
       </View>
-
+    </TouchableOpacity>
     )
   }
 };
@@ -37,16 +43,15 @@ const styles = StyleSheet.create({
      backgroundColor: 'white',
    },
    welcome: {
-     fontSize: 20,
+     fontSize: 18,
      textAlign: 'center',
      margin: 10,
    },
    image:{
-     height:380,
+     height:350,
      width:360,
-     borderRadius:50,
-     marginTop:100,
-     alignSelf: 'center'
+     borderRadius:10,
+     marginTop: -50,
    },
 });
 

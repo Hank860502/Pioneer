@@ -9,14 +9,17 @@ import {
   TouchableHighlight,
   Animated,
   PanResponder,
+  Alert,
+  Linking,
 } from 'react-native';
 
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
-
 var SWIPE_THRESHOLD = 120;
+var alertMessage = "Don't forget to go on the app store to tell us what you think !";
+var url = `http://applestore.com`;
+
 
 class CardContainer extends Component {
 
@@ -26,19 +29,44 @@ class CardContainer extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       index: this.props.index,
-      collection: this.props.collection
+      collection: this.props.collection,
+      otherLikeCollection: this.props.otherLikeCollection,
+      // newCards: this.props.collection.filter(function(x){
+      //   return this.props.otherLikeCollection.indexOf(x) < 0
+      // }),
+      likeCollection:[],
+      dislikeCollection: []
     }
   }
-
+  // uniqueCards(){
+  //   if(this.props.otherLikeCollection > 0){
+  //     // this.props.collection.filter(function(x){
+  //     // return this.props.otherLikeCollection.indexOf(x) < 0
+  //   }
+  //   }),
+  // }
 // TO FIX
   _goToNextCard(){
     if(this.state.index < (this.state.collection.length - 1)){
       this.setState({
         index: this.state.index + 1,
       })
+      if(this.state.index == 10){
+        Alert.alert(
+                'Thanks for using our app',
+                alertMessage,
+                [
+                  {text:'Cancel'},
+                  {text:'App Store', onPress:()=>Linking.openURL(url)},
+                ]
+        )
+      }
     } else {
+      // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
-        title: 'Pioneer'
+        title: 'Wishlist',
+        likeCollection: this.state.likeCollection,
+        dislikeCollection: this.state.dislikeCollection
       });
     }
   }
@@ -77,11 +105,9 @@ class CardContainer extends Component {
             deceleration: 0.98
           }).start(this._resetState.bind(this))
             if (this.state.pan.x._value < 0){
-              console.log('Left-swipe');
               this.handleDislike();
               //this.handleDislike.bind(this)
             }else{
-              console.log('right-swipe');
               this.handleLike();
               //this.handleLike.bind(this)
             }
@@ -110,17 +136,22 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log('like');
+    // Note: Could probably eliminate this. - Jason
+    this.state.likeCollection.push(this.state.collection[this.state.index]);
+
+    /*
+      Note: All this is doing is executing the parent method from Pioneer, and passing the card which will then essentially be pushed.
+    */
+    this.props.updateLikeCollection(this.state.collection[this.state.index]);
     this._goToNextCard();
   }
 
   handleDislike(){
-    console.log('dislike');
+    this.state.dislikeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
   render(){
-
     let { pan, enter, } = this.state;
 
     let [translateX, translateY] = [pan.x, pan.y];
@@ -139,38 +170,35 @@ class CardContainer extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
-    // const { collection, index } = this.props;
-    // const currentCard = collection[index];
-    //
-    // var referenceLink = currentCard.photos ? currentCard.photos[0].photo_reference : null
-    // var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
+    const { collection, index } = this.props;
+    const currentCard = collection[index];
 
     return(
-
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-          <Card cardInfo={this.state.collection[this.state.index]}/>
+        {/*need to create new array to call on for unique cards*/}
+          <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
+          <Image style={styles.yupText} source={require('./bored.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+          <Image style={styles.yupText} source={require('./plane.png')}/>
 
         </Animated.View>
         <TouchableHighlight
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-              <Image source={require('./tinder-like.png')}/>
+              <Image source={require('./like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-          <Image source={require('./tinder-nope.png')}/>
+          <Image source={require('./nope.png')}/>
         </TouchableHighlight>
       </View>
 
@@ -187,14 +215,24 @@ const styles = StyleSheet.create({
    },
    buttonLike: {
      position: 'absolute',
-     top: 564,
-     left: 230,
+     top: 550,
+     left: 221,
    },
    buttonDislike: {
     position: 'absolute',
-    top: 540,
-    left: 75,
+    top: 552,
+    left: 105,
    },
+   nope: {
+     position: 'absolute',
+     top: 290,
+     left: 120,
+   },
+   yup: {
+     position: 'absolute',
+     top: 280,
+     left: 120,
+   }
 });
 
 export default CardContainer;
