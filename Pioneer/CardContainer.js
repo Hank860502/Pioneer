@@ -192,13 +192,13 @@ class CardContainer extends Component {
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-              <Image source={require('./tinder-like.png')}/>
+              <Image source={require('./like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-          <Image source={require('./tinder-nope.png')}/>
+          <Image source={require('./nope.png')}/>
         </TouchableHighlight>
       </View>
 
@@ -215,13 +215,13 @@ const styles = StyleSheet.create({
    },
    buttonLike: {
      position: 'absolute',
-     top: 564,
-     left: 230,
+     top: 550,
+     left: 221,
    },
    buttonDislike: {
     position: 'absolute',
-    top: 540,
-    left: 75,
+    top: 552,
+    left: 105,
    },
    nope: {
      position: 'absolute',
