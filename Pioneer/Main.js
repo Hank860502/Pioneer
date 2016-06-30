@@ -244,10 +244,10 @@ class Main extends Component {
             styles={{
               description: {
                 fontWeight: 'bold',
-                color: 'black'
+                color: 'white'
               },
               predefinedPlacesDescription: {
-                color: 'red',
+                color: 'white',
               },
             }}
 
@@ -313,7 +313,8 @@ const styles = StyleSheet.create({
     top: 100
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 17,
+    fontFamily: 'Arial',
     color: 'white',
     alignSelf: 'center',
   },

@@ -109,11 +109,11 @@ class Setting extends Component {
         <Picker
           selectedValue={this.state.radius}
           onValueChange={(radius) => this.setState({radius: radius})}>
-          <Picker.Item label="1 miles" value="1" />
-          <Picker.Item label="5 miles" value="5" />
-          <Picker.Item label="10 miles" value="10" />
-          <Picker.Item label="20 miles" value="20" />
           <Picker.Item label="30 miles" value="30" />
+          <Picker.Item label="20 miles" value="20" />
+          <Picker.Item label="10 miles" value="10" />
+          <Picker.Item label="5 miles" value="5" />
+          <Picker.Item label="1 miles" value="1" />
         </Picker>
         </View>
         <Text style={styles.text1}>Radius</Text>
