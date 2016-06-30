@@ -8,6 +8,8 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  TouchableHighlight,
+  Linking,
 } from 'react-native';
 
 class Detail extends Component {
@@ -29,6 +31,8 @@ class Detail extends Component {
   render(){
     var stars = this.starRating()
     var card = this.props.card;
+    var url = `http://maps.apple.com/?daddr=${card.latitude},${card.longitude}`;
+    console.log(url);
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
@@ -43,9 +47,11 @@ class Detail extends Component {
         <Text style={styles.welcome}>
           {card.description}
         </Text>
-        <Text style={styles.welcome}>
-          {card.address}
-        </Text>
+        <TouchableHighlight onPress={()=>Linking.openURL(url)}>
+          <Text style={styles.welcome}>
+            {card.address}
+          </Text>
+        </TouchableHighlight>
         <Text style={styles.welcome}>
           {this.props.card.price}
         </Text>

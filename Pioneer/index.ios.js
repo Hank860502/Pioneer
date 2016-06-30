@@ -26,6 +26,8 @@ import Setting from './Setting'
   Issue: Because there isn't a shared store sharing the likeCollection  between the NavigationBarRouteMapper and Pioneer component, resorting to a hacky `const likeCollection` with array value would be needed (as below). However this `IS NOT THE PREFERRED` method as React prefers `stores` to manage the state of the application.  I would look into implementing React's Flux or third-party library Redux.  Personally I like Redux better
 */
 const likeCollection = [];
+const locationLat = '';
+const locationLng = '';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -133,6 +135,8 @@ class Pioneer extends Component {
         <Detail
           navigator={navigator}
           card={route.card}
+          locationLat={locationLat}
+          locationLng={locationLng}
         />
       );
     } else if (route.title === 'Setting') {
