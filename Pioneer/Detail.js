@@ -36,7 +36,7 @@ class Detail extends Component {
     var url = `http://maps.apple.com/?daddr=${card.latitude},${card.longitude}`;
     console.log(url);
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
 
         {/*<Image style={styles.image} source={{uri: this.props.card.photos[0]}} />*/}
         <DetailImages photos={card.photos}/>
