@@ -4,4 +4,9 @@
 [Architecture](./READMORE.md)
 #How to use it?
 Open the app and start swiping left or right to arrange your vacation instinctively.
-
+![alt tag]()
+![alt tag]()
+![alt tag]()
+![alt tag]()
+![alt tag]()
+![alt tag]()
