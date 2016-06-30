@@ -18,15 +18,15 @@ class Detail extends Component {
   starRating(){
     var stars = Math.ceil(parseFloat(this.props.card.rating))
     if (stars==5){
-      return <Image source={require("./5Stars.png")} />
+      return <Image source={require("./assets/star_icons/5Stars.png")} />
     } else if (stars==4){
-      return <Image source={require("./4Stars.png")} />
+      return <Image source={require("./assets/star_icons/4Stars.png")} />
     } else if (stars==3){
-      return <Image source={require("./3Stars.png")} />
+      return <Image source={require("./assets/star_icons/3Stars.png")} />
     } else if (stars==2){
-      return <Image source={require("./2Stars.png")} />
+      return <Image source={require("./assets/star_icons/2Stars.png")} />
     } else if (stars==1){
-      return <Image source={require("./1Star.png")} />
+      return <Image source={require("./assets/star_icons/1Star.png")} />
     }
   }
 
@@ -45,77 +45,77 @@ class Detail extends Component {
       case "aquarium":
         return (
           <View key={index}>
-            <Image style={styles.type} source={require("./iconAquarium.png")} />
+            <Image style={styles.type} source={require("./assets/type_icons/iconAquarium.png")} />
           </View>
         )
         break;
       case "bar":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconBar.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconBar.png")} />
           </View>
         )
         break;
       case "casino":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconCasino.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconCasino.png")} />
           </View>
         )
         break;
       case "museum":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconMuseum.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconMuseum.png")} />
           </View>
         )
         break;
       case "night_club":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconNightClub.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconNightClub.png")} />
           </View>
         )
         break;
       case "park":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconPark.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconPark.png")} />
           </View>
         )
         break;
       case "restaurant":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconRestaurant.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconRestaurant.png")} />
           </View>
         )
         break;
       case "zoo":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconZoo.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconZoo.png")} />
           </View>
         )
         break;
       case "place_of_interest":
         return (
           <View key={index}>
-          <Image style={styles.type} source={require("./iconPlaceOfInterest.png")} />
+          <Image style={styles.type} source={require("./assets/type_icons/iconPlaceOfInterest.png")} />
           </View>
         )
         break;
       case "tourist_destination":
         return (
           <View key={index}>
-            <Image style={styles.type} source={require("./iconTourism.png")} />
+            <Image style={styles.type} source={require("./assets/type_icons/iconTourism.png")} />
           </View>
         )
         break;
       default:
         return (
           <View key={index}>
-            <Image style={styles.type} source={require("./iconDefault.png")} />
+            <Image style={styles.type} source={require("./assets/type_icons/iconDefault.png")} />
           </View>
         )
     }

@@ -181,24 +181,24 @@ class CardContainer extends Component {
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Image style={styles.yupText} source={require('./bored.png')}/>
+          <Image style={styles.yupText} source={require('./assets/swipe_icons/bored.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Image style={styles.yupText} source={require('./plane.png')}/>
+          <Image style={styles.yupText} source={require('./assets/swipe_icons/plane.png')}/>
 
         </Animated.View>
         <TouchableHighlight
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-              <Image source={require('./like.png')}/>
+              <Image source={require('./assets/swipe_icons/like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-          <Image source={require('./nope.png')}/>
+          <Image source={require('./assets/swipe_icons/nope.png')}/>
         </TouchableHighlight>
       </View>
 
