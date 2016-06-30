@@ -18,5 +18,4 @@ Open the app and start swiping left or right to arrange your vacation instinctiv
 - Apple Map
 - Pioneer API
 
-## Behind the app.
-[Architecture](./READMORE.md)
+##[Read more about the app](./READMORE.md)
