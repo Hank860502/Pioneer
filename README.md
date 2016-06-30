@@ -3,6 +3,9 @@
 ##What is the app about?
 Creating possibilities for user's travel experience.
 
+## Our Design Philosophy
+Arrange vacation instinctively.
+
 ##Walk through the app
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16507700/a68b8334-3ee0-11e6-8e65-7c159fca8efb.gif)
 
@@ -13,11 +16,6 @@ Creating possibilities for user's travel experience.
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16508020/7995a17c-3ee3-11e6-9b9f-051e645dc2bf.gif)
 
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16507746/380489f0-3ee1-11e6-8e1a-150ea1ce667e.gif)
-
-
-## Pioneer's Philosophy
-Arrange vacation instinctively.
-
 
 
 ##Stacks
