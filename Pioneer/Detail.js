@@ -138,11 +138,8 @@ class Detail extends Component {
     var stars = this.starRating()
     var card = this.props.card;
     var priceIndication = this.priceIndication()
-    var url = `http://maps.apple.com/?daddr=${card.latitude},${card.longitude}`;
+    var destinationUrl = `http://maps.apple.com/?daddr=${card.latitude},${card.longitude}`;
     return (
-
-      // <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
-
       <ScrollView style={styles.container}>
         <DetailImages photos={card.photos}/>
 
@@ -165,32 +162,40 @@ class Detail extends Component {
         </View>
 
         <View style={styles.overview}>
-
-
           <Text style={styles.description}>
             {priceIndication}
           </Text>
         </View>
-          {/*<Separator />*/}
 
+        <Separator />
+
+        <View style={styles.overview}>
           <Text style={styles.description}>
           {card.address}
           </Text>
+
+
+
+          <TouchableHighlight
+            style={styles.button}
+            onPress={()=>Linking.openURL(destinationUrl)}
+            underlayColor= 'white'>
+            <Text style={{color:'white'}}>
+              Take Me There
+            </Text>
+          </TouchableHighlight>
+
+
+
+{/*
           <Text style={{color:'blue'}}
-          onPress={()=>Linking.openURL(url)}>
+          onPress={()=>Linking.openURL(destinationUrl)}>
           Take Me There
-          </Text>
+          </Text>*/}
 
-          <Separator />
-          <Text style={styles.welcome}>
-            {this.props.card.price}
-          </Text>
-
+        </View>
 
       </ScrollView>
-
-      // </View>
-
     );
   }
 }
@@ -212,7 +217,7 @@ const styles = StyleSheet.create({
    description: {
      fontSize: 16,
      textAlign: 'center',
-     margin: 10,
+    //  margin: 10,
    },
    image:{
      height:350,
@@ -224,18 +229,25 @@ const styles = StyleSheet.create({
       marginLeft: 5,
       marginRight: 5,
       marginTop: 10,
-      // flexDirection: 'row',
-      // -webkit-flex-direction: row,
-      // flex-direction: row,
+
     },
     flexed: {
-      //  height: 25,
-      //  width: 25,
       flexDirection: 'row',
       alignSelf: 'center',
-       // -webkit-flex-direction: row,
-       // flex-direction: row,
      },
+   button: {
+    //  position: 'absolute',
+    //  left: 320,
+    //  top: 419,
+     padding: 10,
+    //  height: 20,
+    //  width: 100,
+     flexDirection: 'row',
+     backgroundColor: '#30ABBD',
+     borderRadius: 6,
+     opacity: 0.85,
+     marginTop: 5,
+   },
 });
 
 
