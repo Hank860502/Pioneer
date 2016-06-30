@@ -262,7 +262,7 @@ class Main extends Component {
 
       <View style={styles.mainContainer}>
         <View>
-          <Image style={styles.background} source={require('./index1.jpg')}/>
+          <Image style={styles.background} source={require('./assets/index1.jpg')}/>
         </View>
         <TouchableHighlight
           style={styles.button1}
@@ -326,7 +326,7 @@ class Main extends Component {
           style={styles.button}
           onPress={this.handleDiscoverSubmit.bind(this, likeCollection)}
           underlayColor= 'white'>
-          <Image style={styles.searchIcon} source={require('./search.png')}/>
+          <Image style={styles.searchIcon} source={require('./assets/search.png')}/>
         </TouchableHighlight>
       </View>
     )
