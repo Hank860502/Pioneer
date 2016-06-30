@@ -39,6 +39,19 @@ class Main extends Component {
   }
 
   handleDiscoverSubmit(likeCollection){
+    if (this.state.travelLocationLng === "" || this.state.travelLocationLat === "") {
+      this.setState({
+        error: 'Coordinates not specified',
+        isLoading: false,
+      }, () => {
+        Alert.alert(
+          'Error',
+          this.state.error + ". Please enter an address."
+        )
+      })
+      return
+    }
+
     this.setState({
       isLoading: true
     });
@@ -82,6 +95,8 @@ class Main extends Component {
                 travelLocationLat: '',
                 isLoading: false,
               }); // Closes setState
+
+              this.clearText()
 
               this.props.navigator.push({
                 title: 'CardContainer',
@@ -131,8 +146,10 @@ class Main extends Component {
               travelLocationName: '',
               travelLocationLng: '',
               travelLocationLat: '',
-              isloading: false,
+              isLoading: false,
             }); // Closes setState
+
+            this.clearText()
 
             this.props.navigator.push({
               title: 'CardContainer',
