@@ -98,8 +98,8 @@ class Main extends Component {
             this.setState({
               error: false,
               travelLocationName: '',
-              travelLocationLng: '',
-              travelLocationLat: '',
+              // travelLocationLng: '',
+              // travelLocationLat: '',
               isloading: false,
             }); // Closes setState
 
@@ -108,7 +108,9 @@ class Main extends Component {
               index: 0,
               // collection: this.state.cards
               collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-              otherLikeCollection: likeCollection
+              otherLikeCollection: likeCollection,
+              locationLat: this.state.travelLocationLat,
+              locationLng: this.state.travelLocationLng,
             });
           } // Closes Successful response
         }) // closes Google Places response
@@ -142,15 +144,17 @@ class Main extends Component {
             error: false,
             isloading: false,
             travelLocationName: '',
-            travelLocationLng: '',
-            travelLocationLat: '',
+            // travelLocationLng: '',
+            // travelLocationLat: '',
             // currentLocationLoaded: false
           });
           this.props.navigator.push({
             title: 'CardContainer',
             index: 0,
             collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-            otherLikeCollection: likeCollection
+            otherLikeCollection: likeCollection,
+            locationLat: this.state.travelLocationLat,
+            locationLng: this.state.travelLocationLng,
           });
         }
       })
