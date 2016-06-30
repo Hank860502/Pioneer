@@ -244,7 +244,8 @@ class Main extends Component {
             styles={{
               description: {
                 fontWeight: 'bold',
-                color: 'white'
+                color: 'black',
+                paddingLeft: 40,
               },
               predefinedPlacesDescription: {
                 color: 'white',
@@ -309,7 +310,7 @@ const styles = StyleSheet.create({
   // },
   search:{
     position: 'absolute',
-    left: 20,
+    left: 5,
     top: 100
   },
   buttonText: {
@@ -320,11 +321,10 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    left: 320,
-    top: 419,
-    padding: 3,
+    left: 300,
+    top: 106,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#B6DEEC',
     borderRadius: 6,
     opacity: 0.85,
     marginTop: 5,
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
   button1: {
     position: 'absolute',
     left: 30,
-    top: 415,
+    top: 455,
     height: 45,
     width: 320,
     borderRadius: 10,
