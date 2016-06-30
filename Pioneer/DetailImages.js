@@ -10,13 +10,9 @@ import {
   Image,
 } from 'react-native';
 
-
-
-
 class DetailImages extends Component {
 
   showImages() {
-    console.log(this.props.photos)
     var components = this.props.photos.map((photo,index)=>{
     var photo = photo.replace(/^http:\/\//i, 'https://');
       console.log(photo)
@@ -28,7 +24,6 @@ class DetailImages extends Component {
     })
     return components
   }
-
 
   render(){
     var images = this.showImages()
