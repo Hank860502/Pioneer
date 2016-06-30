@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
       top: -2
     },
     back: {
-      marginTop: 5,
+      marginTop: 10,
       marginLeft: 3,
     },
     empty: {
