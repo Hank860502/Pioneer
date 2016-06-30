@@ -1,6 +1,6 @@
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16355636/d1eee11a-3a71-11e6-8ed1-a875c65a88c1.png)
 # A app that helps you to schedule your vacation.
-[Architecture](./READMORE.md)
+
 ##How to use it?
 Open the app and start swiping left or right to arrange your vacation instinctively.
 
@@ -15,3 +15,6 @@ Open the app and start swiping left or right to arrange your vacation instinctiv
 
 ### See more Detail of the place
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16505562/84c4fad6-3ed2-11e6-8a76-7fa69b101af4.png)
+
+## Behind the scene
+[Architecture](./READMORE.md)
