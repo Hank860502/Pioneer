@@ -12,6 +12,7 @@ import {
   Picker,
 } from 'react-native';
 
+
 class Setting extends Component {
   constructor(props){
     super(props);
@@ -24,7 +25,6 @@ class Setting extends Component {
     }
   }
   submit(){
-    console.log(this.state.radius)
     this.props.navigator.push({
       title: 'Pioneer',
       radius: this.state.radius,
@@ -88,7 +88,7 @@ class Setting extends Component {
   // }
   render(){
     return(
-      <View style={{backgroundColor: 'white'}}>
+      <View style={styles.container}>
         {/*<Text style={styles.text}>Category: {this.state.category}</Text>
           <TouchableOpacity
               onPress={() => this.toggleCancel()}
@@ -149,6 +149,11 @@ class Setting extends Component {
 
 
 const styles = StyleSheet.create({
+  container: {
+     flex: 1,
+     height: 300,
+     backgroundColor: 'white',
+   },
   text: {
     fontSize: 23,
     color: 'white'
