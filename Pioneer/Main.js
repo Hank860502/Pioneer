@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
   Geolocation,
   Image,
+  Alert,
 } from 'react-native';
 
 var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
@@ -38,6 +39,19 @@ class Main extends Component {
   }
 
   handleDiscoverSubmit(likeCollection){
+    if (this.state.travelLocationLng === "" || this.state.travelLocationLat === "") {
+      this.setState({
+        error: 'Coordinates not specified',
+        isLoading: false,
+      }, () => {
+        Alert.alert(
+          'Error',
+          this.state.error + ". Please enter an address."
+        )
+      })
+      return
+    }
+
     this.setState({
       isLoading: true
     });
@@ -69,10 +83,42 @@ class Main extends Component {
       if(this.state.cards.length <= 20){
         api.getGooglePlaces(this.state.travelLocationLat, this.state.travelLocationLng,
         this.state.radius, this.state.category).then((response) => {
-          if(response.message === 'Not Found'){
-            this.setState({
-              error: 'No places found',
-            })
+          if(response.status === 'ZERO_RESULTS'){
+            // this.setState({
+            //   error: 'No places found',
+            // })
+            if (this.state.cards.length >= 1) {
+              this.setState({
+                error: false,
+                travelLocationName: '',
+                travelLocationLng: '',
+                travelLocationLat: '',
+                isLoading: false,
+              }); // Closes setState
+
+              this.clearText()
+
+              this.props.navigator.push({
+                title: 'CardContainer',
+                index: 0,
+                // collection: this.state.cards
+                collection: this.filterOutLikedCards(this.state.cards,likeCollection),
+                otherLikeCollection: likeCollection,
+                locationLat: this.state.travelLocationLat,
+                locationLng: this.state.travelLocationLng,
+              });
+            } else {
+              this.setState({
+                error: 'No places found',
+                isLoading: false,
+              }, () => {
+                Alert.alert(
+                  'Error',
+                  this.state.error
+                )
+                this.clearText()
+              })
+            }
           } else {
             var formattedCollection = response.results.map(function(location){
               var rLocation = {};
@@ -100,8 +146,10 @@ class Main extends Component {
               travelLocationName: '',
               travelLocationLng: '',
               travelLocationLat: '',
-              isloading: false,
+              isLoading: false,
             }); // Closes setState
+
+            this.clearText()
 
             this.props.navigator.push({
               title: 'CardContainer',
@@ -194,13 +242,17 @@ class Main extends Component {
     })
   }
 
+  clearText() {
+    this.refs.searchBar.state.text = ''
+  }
+
 
   render() {
     var likeCollection = this.props.likeCollection
 
     var spinnerAnimation = <ActivityIndicator
                               animating={this.state.isLoading}
-                              color='#666'
+                              color='white'
                               size='large' style={styles.spinner}>
                             </ActivityIndicator>
 
@@ -220,6 +272,7 @@ class Main extends Component {
         </TouchableHighlight>
         <View style={styles.search}>
           <GooglePlacesAutocomplete
+            ref="searchBar"
             enableEmptySections = {true}
             placeholder='Enter City, State or Zip Code'
             minLength={2} // minimum length of text to search
@@ -244,7 +297,8 @@ class Main extends Component {
             styles={{
               description: {
                 fontWeight: 'bold',
-                color: 'white'
+                color: 'black',
+                paddingLeft: 40,
               },
               predefinedPlacesDescription: {
                 color: 'white',
@@ -297,8 +351,8 @@ const styles = StyleSheet.create({
   },
   spinner: {
     position: 'absolute',
-    left: 170,
-    top: -20,
+    left: 183,
+    top: 270,
     justifyContent: 'center',
 
   },
@@ -309,7 +363,7 @@ const styles = StyleSheet.create({
   // },
   search:{
     position: 'absolute',
-    left: 20,
+    left: 5,
     top: 100
   },
   buttonText: {
@@ -320,11 +374,10 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    left: 320,
-    top: 419,
-    padding: 3,
+    left: 300,
+    top: 106,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#B6DEEC',
     borderRadius: 6,
     opacity: 0.85,
     marginTop: 5,
@@ -332,7 +385,7 @@ const styles = StyleSheet.create({
   button1: {
     position: 'absolute',
     left: 30,
-    top: 415,
+    top: 455,
     height: 45,
     width: 320,
     borderRadius: 10,
