@@ -108,7 +108,9 @@ class Main extends Component {
               index: 0,
               // collection: this.state.cards
               collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-              otherLikeCollection: likeCollection
+              otherLikeCollection: likeCollection,
+              locationLat: this.state.travelLocationLat,
+              locationLng: this.state.travelLocationLng,
             });
           } // Closes Successful response
         }) // closes Google Places response
@@ -150,7 +152,9 @@ class Main extends Component {
             title: 'CardContainer',
             index: 0,
             collection: this.filterOutLikedCards(this.state.cards,likeCollection),
-            otherLikeCollection: likeCollection
+            otherLikeCollection: likeCollection,
+            locationLat: this.state.travelLocationLat,
+            locationLng: this.state.travelLocationLng,
           });
         }
       })
