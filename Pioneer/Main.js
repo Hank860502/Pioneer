@@ -200,7 +200,7 @@ class Main extends Component {
 
     var spinnerAnimation = <ActivityIndicator
                               animating={this.state.isLoading}
-                              color='#666'
+                              color='white'
                               size='large' style={styles.spinner}>
                             </ActivityIndicator>
 
@@ -298,8 +298,8 @@ const styles = StyleSheet.create({
   },
   spinner: {
     position: 'absolute',
-    left: 170,
-    top: -20,
+    left: 183,
+    top: 270,
     justifyContent: 'center',
 
   },
