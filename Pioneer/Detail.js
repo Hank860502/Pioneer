@@ -10,7 +10,7 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   Linking,
 } from 'react-native';
 
@@ -176,14 +176,14 @@ class Detail extends Component {
 
 
 
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.button}
             onPress={()=>Linking.openURL(destinationUrl)}
             underlayColor= 'white'>
             <Text style={{color:'white'}}>
               Take Me There
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
 
 
