@@ -88,7 +88,7 @@ class Setting extends Component {
   // }
   render(){
     return(
-      <View>
+      <View style={{backgroundColor: 'white'}}>
         {/*<Text style={styles.text}>Category: {this.state.category}</Text>
           <TouchableOpacity
               onPress={() => this.toggleCancel()}
