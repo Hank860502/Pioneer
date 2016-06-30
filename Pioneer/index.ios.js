@@ -36,7 +36,7 @@ var NavigationBarRouteMapper = {
         <TouchableOpacity
         	 underlayColor="transparent"
            onPress={() => { navigator.pop() }}>
-             <Image style={styles.back} source={require('./back.png')}/>
+             <Image style={styles.back} source={require('./assets/navbar_icons/back.png')}/>
         </TouchableOpacity>
   	)} else if (route.title === 'Setting'){
       return null
@@ -48,7 +48,7 @@ var NavigationBarRouteMapper = {
              title: 'Setting'
            })
          }}>
-           <Image style={styles.back} source={require('./settings.png')}/>
+           <Image style={styles.back} source={require('./assets/navbar_icons/settings.png')}/>
       </TouchableOpacity>
     )}
   },
@@ -58,7 +58,7 @@ var NavigationBarRouteMapper = {
     } else if(route.title==='Wishlist') {
       return (
         <View>
-          <Image source={require('./wishlist.png')}/>
+          <Image source={require('./assets/navbar_icons/wishlist.png')}/>
         </View>)
     } else {
     return (
@@ -72,7 +72,7 @@ var NavigationBarRouteMapper = {
           })
         }}>
          <View>
-           <Image source={require('./wishlist.png')}/>
+           <Image source={require('./assets/navbar_icons/wishlist.png')}/>
          </View>
       </TouchableOpacity>
     )}
