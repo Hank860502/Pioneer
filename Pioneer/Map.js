@@ -51,7 +51,7 @@ class MyMap extends Component {
   render(){
     if(this.props.collection.length>0){
       return(
-        <View>
+        <View style={{backgroundColor: 'white'}}>
           <MapView
             style={styles.map}
             region={{

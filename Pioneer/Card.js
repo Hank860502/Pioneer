@@ -43,14 +43,15 @@ const styles = StyleSheet.create({
      backgroundColor: 'white',
    },
    welcome: {
-     fontSize: 20,
+     fontSize: 18,
      textAlign: 'center',
      margin: 10,
    },
    image:{
-     height:380,
+     height:350,
      width:360,
      borderRadius:10,
+     marginTop: -50,
    },
 });
 
