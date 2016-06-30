@@ -15,7 +15,6 @@ class DetailImages extends Component {
   showImages() {
     var components = this.props.photos.map((photo,index)=>{
     var photo = photo.replace(/^http:\/\//i, 'https://');
-      console.log(photo)
       return (
         <View key={index} style={styles.slide2}>
          <Image style={styles.image} source={{uri: photo}} />
@@ -35,15 +34,6 @@ class DetailImages extends Component {
     return (
       <Swiper style={styles.wrapper} height={360} showsButtons={true}>
         {images}
-         {/*<View style={styles.slide1}>
-           <Image style={styles.image} source={{uri: this.props.photos[0]}} />
-         </View>
-         <View style={styles.slide2}>
-          <Image style={styles.image} source={{uri: this.props.photos[1]}} />
-         </View>
-         <View style={styles.slide3}>
-          <Image style={styles.image} source={{uri: this.props.photos[2]}} />
-         </View>*/}
       </Swiper>
     )
     }

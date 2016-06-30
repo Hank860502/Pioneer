@@ -32,21 +32,10 @@ class CardContainer extends Component {
       index: this.props.index,
       collection: this.props.collection,
       otherLikeCollection: this.props.otherLikeCollection,
-      // newCards: this.props.collection.filter(function(x){
-      //   return this.props.otherLikeCollection.indexOf(x) < 0
-      // }),
       likeCollection:[],
       dislikeCollection: []
     }
   }
-  // uniqueCards(){
-  //   if(this.props.otherLikeCollection > 0){
-  //     // this.props.collection.filter(function(x){
-  //     // return this.props.otherLikeCollection.indexOf(x) < 0
-  //   }
-  //   }),
-  // }
-// TO FIX
   _goToNextCard(){
     if(this.state.index < (this.state.collection.length - 1)){
       this.setState({
@@ -54,22 +43,22 @@ class CardContainer extends Component {
       })
       if(this.state.index == 10){
         Alert.alert(
-                'Thanks for using our app',
-                alertMessage,
-                [
-                  {text:'Cancel'},
-                  {text:'App Store', onPress:()=>Linking.openURL(url)},
-                ]
+          'Thanks for using our app',
+          alertMessage,
+          [
+            {text:'Cancel'},
+            {text:'App Store', onPress:()=>Linking.openURL(url)},
+          ]
         )
       }
     } else {
       Alert.alert(
-              'Love using Pioneer?',
-              alertMessage2,
-              [
-                {text:'Cancel'},
-                {text:'App Store', onPress:()=>Linking.openURL(url)},
-              ]
+      'Love using Pioneer?',
+      alertMessage2,
+      [
+        {text:'Cancel'},
+        {text:'App Store', onPress:()=>Linking.openURL(url)},
+      ]
       )
       // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
@@ -107,7 +96,6 @@ class CardContainer extends Component {
         } else if (vx < 0) {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
-            // let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
@@ -115,10 +103,8 @@ class CardContainer extends Component {
           }).start(this._resetState.bind(this))
             if (this.state.pan.x._value < 0){
               this.handleDislike();
-              //this.handleDislike.bind(this)
             }else{
               this.handleLike();
-              //this.handleLike.bind(this)
             }
         } else {
           Animated.spring(this.state.pan, {
@@ -133,7 +119,6 @@ class CardContainer extends Component {
   _resetState() {
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
-    // this._goToNextCard();
     this._animateEntrance();
   }
 
@@ -185,7 +170,6 @@ class CardContainer extends Component {
     return(
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-        {/*need to create new array to call on for unique cards*/}
           <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 

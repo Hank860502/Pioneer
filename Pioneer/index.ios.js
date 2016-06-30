@@ -186,10 +186,6 @@ const styles = StyleSheet.create({
     	height: 70,
       backgroundColor: '#F6F7F8',
     },
-    // title: {
-    // 	marginTop:4,
-    //   fontSize:16
-    // },
     button: {
     	height:60,
       marginBottom:10,
