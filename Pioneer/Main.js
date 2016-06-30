@@ -98,8 +98,8 @@ class Main extends Component {
             this.setState({
               error: false,
               travelLocationName: '',
-              // travelLocationLng: '',
-              // travelLocationLat: '',
+              travelLocationLng: '',
+              travelLocationLat: '',
               isloading: false,
             }); // Closes setState
 
@@ -144,8 +144,8 @@ class Main extends Component {
             error: false,
             isloading: false,
             travelLocationName: '',
-            // travelLocationLng: '',
-            // travelLocationLat: '',
+            travelLocationLng: '',
+            travelLocationLat: '',
             // currentLocationLoaded: false
           });
           this.props.navigator.push({
