@@ -9,14 +9,18 @@ import {
   TouchableHighlight,
   Animated,
   PanResponder,
+  Alert,
+  Linking,
 } from 'react-native';
 
 import clamp from 'clamp';
 import Card from './Card.js'
 
-var apiKey = 'AIzaSyDO4ikGkFBkBem1VzMZuFYJil43jPcVz_8';
-
 var SWIPE_THRESHOLD = 120;
+var alertMessage = "Don't forget to go on the app store to tell us what you think !";
+var url = `http://applestore.com`;
+var alertMessage2 = "Looks like you love using our app, don't forget to rate it !";
+
 
 class CardContainer extends Component {
 
@@ -26,19 +30,41 @@ class CardContainer extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       index: this.props.index,
-      collection: this.props.collection
+      collection: this.props.collection,
+      otherLikeCollection: this.props.otherLikeCollection,
+      likeCollection:[],
+      dislikeCollection: []
     }
   }
-
-// TO FIX
   _goToNextCard(){
     if(this.state.index < (this.state.collection.length - 1)){
       this.setState({
         index: this.state.index + 1,
       })
+      if(this.state.index == 10){
+        Alert.alert(
+          'Thanks for using our app',
+          alertMessage,
+          [
+            {text:'Cancel'},
+            {text:'App Store', onPress:()=>Linking.openURL(url)},
+          ]
+        )
+      }
     } else {
+      Alert.alert(
+      'Love using Pioneer?',
+      alertMessage2,
+      [
+        {text:'Cancel'},
+        {text:'App Store', onPress:()=>Linking.openURL(url)},
+      ]
+      )
+      // NOTE: This could probably be eliminated now with the new refactor. - Jason
       this.props.navigator.push({
-        title: 'Pioneer'
+        title: 'Wishlist',
+        likeCollection: this.state.likeCollection,
+        dislikeCollection: this.state.dislikeCollection
       });
     }
   }
@@ -70,20 +96,15 @@ class CardContainer extends Component {
         } else if (vx < 0) {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
-            // let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
           }).start(this._resetState.bind(this))
             if (this.state.pan.x._value < 0){
-              console.log('Left-swipe');
               this.handleDislike();
-              //this.handleDislike.bind(this)
             }else{
-              console.log('right-swipe');
               this.handleLike();
-              //this.handleLike.bind(this)
             }
         } else {
           Animated.spring(this.state.pan, {
@@ -98,7 +119,6 @@ class CardContainer extends Component {
   _resetState() {
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
-    // this._goToNextCard();
     this._animateEntrance();
   }
 
@@ -110,17 +130,22 @@ class CardContainer extends Component {
   }
 
   handleLike(){
-    console.log('like');
+    // Note: Could probably eliminate this. - Jason
+    this.state.likeCollection.push(this.state.collection[this.state.index]);
+
+    /*
+      Note: All this is doing is executing the parent method from Pioneer, and passing the card which will then essentially be pushed.
+    */
+    this.props.updateLikeCollection(this.state.collection[this.state.index]);
     this._goToNextCard();
   }
 
   handleDislike(){
-    console.log('dislike');
+    this.state.dislikeCollection.push(this.state.collection[this.state.index])
     this._goToNextCard();
   }
 
   render(){
-
     let { pan, enter, } = this.state;
 
     let [translateX, translateY] = [pan.x, pan.y];
@@ -139,38 +164,34 @@ class CardContainer extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
-    // const { collection, index } = this.props;
-    // const currentCard = collection[index];
-    //
-    // var referenceLink = currentCard.photos ? currentCard.photos[0].photo_reference : null
-    // var imageLink = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${referenceLink}&key=${apiKey}`
+    const { collection, index } = this.props;
+    const currentCard = collection[index];
 
     return(
-
       <View style={styles.container}>
         <Animated.View style={[styles.card, animatedCardStyles]} {...this._panResponder.panHandlers}>
-          <Card cardInfo={this.state.collection[this.state.index]}/>
+          <Card navigator={this.props.navigator} cardInfo={this.state.collection[this.state.index]}/>
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-nope.png')}/>
+          <Image style={styles.yupText} source={require('./assets/swipe_icons/bored.png')}/>
         </Animated.View>
 
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Image style={styles.yupText} source={require('./tinder-like.png')}/>
+          <Image style={styles.yupText} source={require('./assets/swipe_icons/plane.png')}/>
 
         </Animated.View>
         <TouchableHighlight
           style={styles.buttonLike}
           onPress={this.handleLike.bind(this)}
           underlayColor='white'>
-              <Image source={require('./tinder-like.png')}/>
+              <Image source={require('./assets/swipe_icons/like.png')}/>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.buttonDislike}
           onPress={this.handleDislike.bind(this)}
           underlayColor='white'>
-          <Image source={require('./tinder-nope.png')}/>
+          <Image source={require('./assets/swipe_icons/nope.png')}/>
         </TouchableHighlight>
       </View>
 
@@ -187,14 +208,33 @@ const styles = StyleSheet.create({
    },
    buttonLike: {
      position: 'absolute',
-     top: 564,
-     left: 230,
+     top: 545,
+     left: 205,
+     padding: 15,
+     borderRadius: 50,
+     borderWidth: 3,
+     borderColor: '#EEEEEF'
    },
    buttonDislike: {
     position: 'absolute',
-    top: 540,
-    left: 75,
+    top: 546,
+    left: 105,
+    padding: 17,
+    borderColor: '#EEEEEF',
+    borderWidth: 3,
+    borderRadius: 50,
    },
+   nope: {
+     position: 'absolute',
+     top: 290,
+     left: 120,
+     borderRadius: 50,
+   },
+   yup: {
+     position: 'absolute',
+     top: 280,
+     left: 120,
+   }
 });
 
 export default CardContainer;
