@@ -30,3 +30,5 @@ Arrange vacation instinctively.
 ##[Screenshots of the app](./Screenshot.md)
 
 ##[Read more about the app](./READMORE.md)
+
+##[Our slides](https://docs.google.com/presentation/d/1fLPxqMBmRjEmX8lNtpbxrzMtN2v5FyxpJvi0Euov_s8/edit?ts=5774aefa#slide=id.gc6f8badac_0_47)
