@@ -33,3 +33,9 @@ Arrange vacation instinctively.
 ##[Read more about the app](./READMORE.md)
 
 ##[Our slides](https://docs.google.com/presentation/d/1fLPxqMBmRjEmX8lNtpbxrzMtN2v5FyxpJvi0Euov_s8/edit?ts=5774aefa#slide=id.gc6f8badac_0_47)
+
+##Our team
+- [Chen Han-yu](https://www.linkedin.com/in/chen-han-yu-752863b3)
+- [Chung Brian Jay](https://www.linkedin.com/in/brianjaychung)
+- [Lee Andrew](https://www.linkedin.com/in/andrewlee00)
+- [Soubry Robin](https://www.linkedin.com/in/robinsoubry)
