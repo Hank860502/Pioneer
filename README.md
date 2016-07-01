@@ -1,9 +1,10 @@
 ![alt tag](https://cloud.githubusercontent.com/assets/17296898/16355636/d1eee11a-3a71-11e6-8ed1-a875c65a88c1.png)
 
 ##What is the app about?
-Creating possibilities for user's travel experience.
+Pioneer is a travel & discovery application that helps people on the road to explore new places.
+This mobile application has been created in 7 days as a final project with DevBootcamp.
 
-## Our Design Philosophy
+## Our design philosophy
 Arrange vacation instinctively.
 
 ##Walk through the app
