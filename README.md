@@ -24,9 +24,9 @@ Arrange vacation instinctively.
 - Ruby on Rails
 
 ##Dependencies
-- ####Google places API
-- ####Apple Map
-- ####Pioneer API
+####Google places API
+####Apple Map
+####Pioneer API
 
 ##[Screenshots of the app](./Screenshot.md)
 
