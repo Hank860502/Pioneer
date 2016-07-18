@@ -3,7 +3,7 @@ import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomple
 import api from './api.js'　　　
 import index from './index.ios.js'
 import Setting from  './Setting'
-import apiKey from './apiKey.js'
+import apiKey from './api_key.js'
 
 import {
   StyleSheet,

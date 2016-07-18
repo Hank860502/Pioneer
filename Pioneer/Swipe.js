@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import clamp from 'clamp';
-import apiKey from './apiKey.js'
+import apiKey from './api_key.js'
 
 var SWIPE_THRESHOLD = 120;
 
