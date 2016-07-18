@@ -3,6 +3,7 @@ import { GooglePlacesAutocomplete } from  'react-native-google-places-autocomple
 import api from './api.js'　　　
 import index from './index.ios.js'
 import Setting from  './Setting'
+import apiKey from './api_key.js'
 
 import {
   StyleSheet,
@@ -16,8 +17,6 @@ import {
   Image,
   Alert,
 } from 'react-native';
-
-var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
 
 // import api from './api.js'
 // import Card from './Card.js'
@@ -331,7 +330,7 @@ class Main extends Component {
       </View>
     )
   }
-} 
+}
 
 const styles = StyleSheet.create({
   mainContainer: {

@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 
 import clamp from 'clamp';
-
-var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
+import apiKey from './api_key.js'
 
 var SWIPE_THRESHOLD = 120;
 
@@ -68,7 +67,7 @@ class Swipe extends Component {
         } else if (vx < 0) {
           velocity = clamp(vx * -1, 3, 5) * -1;
         }
-          
+
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
