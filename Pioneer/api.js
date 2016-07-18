@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-var apiKey = 'AIzaSyDYWDEGapBa4gIQBtafipikpKs1kXYbOgg';
+import apiKey from './apiKey.js'
 
 var api = {
   getGooglePlaces(lat,lng, radius, category){
