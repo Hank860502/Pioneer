@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
      borderRadius:10,
      marginTop: -50,
    },
+   
 });
 
 export default Card;
